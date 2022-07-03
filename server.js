@@ -2,8 +2,14 @@ import { serve } from "https://deno.land/std@0.138.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
 let firstWord = ["りす", "すいか", "かい", "いえ", "えび"];
-let previousWord = firstWord[Math.floor(Math.random() * firstWord.length)];
-let wordLog = [];
+let previousWord, wordLog;
+
+function shiritoriReset() {
+  previousWord = firstWord[Math.floor(Math.random() * firstWord.length)];
+  wordLog = [];
+}
+
+shiritoriReset();
 
 console.log("Listening on http://localhost:8000");
 serve(async (req) => {
@@ -25,6 +31,10 @@ serve(async (req) => {
     }
     else if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
       errorLog = "前の単語に続いていません。";
+    }
+    else if (nextWord.charAt(nextWord.length - 1) !== 'ん') {
+      shiritoriReset();
+      errorLog = "「ん」が最後についているのでリセットします。";
     }
     
     if (errorLog !== null) {
