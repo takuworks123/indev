@@ -60,6 +60,15 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
+      const previousWord = await response.text();
+
+      const para = document.querySelector("#previousWord");
+      para.innerText = `前の単語：${previousWord}`;
+      
+      const log = document.querySelector("#wordLog");
+      log.innerText = "しりとりの履歴:";
+      const logs = document.querySelector("#wordLogs");
+      logs.innerText += previousWord + "\n";
     };
   </script>
 </body>
