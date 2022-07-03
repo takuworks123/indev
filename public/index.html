@@ -32,6 +32,7 @@
         alert(await response.text());
         if (response.status / 100 !== 3) {
           return;
+        }
       }
       
       const previousWord = await response.text();
