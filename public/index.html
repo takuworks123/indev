@@ -14,6 +14,7 @@
   <button id="nextWordSendButton">送信</button>
   <br>
   <log id="wordLog"></log>
+  <logs id="wordLogs"></logs>
 
   <script type="module">
     window.onload = async (event) => {
@@ -44,7 +45,9 @@
       para.innerText = `前の単語：${previousWord}`;
       
       const log = document.querySelector("#wordLog");
-      log.innerText += previousWord + "\n";
+      log.innerText = "しりとりの履歴:";
+      const logs = document.querySelector("#wordLog");
+      logs.innerText += previousWord + "\n";
     };
   </script>
 </body>
