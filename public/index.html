@@ -12,10 +12,10 @@
   <br>
   <br>
   <input id="nextWordInput" type="text" />
-  <button id="nextWordSendButton">送信</button>
+  //<button id="nextWordSendButton">送信</button>
   
   <a class="btn btn-custom01">
-    <span class="btn-custom01-front">PUSH</span>
+    <span class="btn-custom01-front">送信</span>
     <i class="fas fa-angle-right fa-position-right"></i>
   </a>
 
@@ -28,7 +28,7 @@
       para.innerText = `前の単語：${previousWord}`;
     };
 
-    document.querySelector("#nextWordSendButton").onclick = async (event) => {
+    document.querySelector("#btn btn-custom01").onclick = async (event) => {
       const nextWord = document.querySelector("#nextWordInput").value;
       const response = await fetch("/shiritori", {
         method: "POST",
