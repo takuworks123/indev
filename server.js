@@ -1,7 +1,8 @@
 import { serve } from "https://deno.land/std@0.138.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
-let previousWord = "しりとり";
+let firstWord = ["りす", "すいか", "かい", "いえ", "えび"];
+let previousWord = Math.floor(Math.random() * firstWord.length);
 let wordLog = [];
 
 console.log("Listening on http://localhost:8000");
