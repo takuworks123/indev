@@ -13,13 +13,11 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/shiritori") {
     const requestJson = await req.json();
     const nextWord = requestJson.nextWord;
-    let flg = 0, nextlen;
-    
-    nextlen = nextWord.length;
+    let flg = 0;
     
     //return new Response(`${nextWord.length}`, { status: 400 });
     
-    if ( nextlen <= 1 ) {
+    if ( nextWord.length <= 1 ) {
       flg = 1;
     }
     if ( previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
