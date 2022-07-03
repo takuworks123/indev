@@ -17,7 +17,7 @@ serve(async (req) => {
   const pathname = new URL(req.url).pathname;
 
   if (req.method === "GET" && pathname === "/shiritori") {
-    return new Response(previousWord, wordLog);
+    return new Response(wordLog);
   }
   if (req.method === "POST" && pathname === "/shiritori") {
     const requestJson = await req.json();
