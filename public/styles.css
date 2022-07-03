@@ -49,5 +49,5 @@ p:after {
     content: '';
     border-width: 20px;
     border-style: solid;
-    border-color: #ffffff transparent transparent transparent;
+    border-color: skyblue transparent transparent transparent;
 }
