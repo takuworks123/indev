@@ -13,6 +13,8 @@
   <br>
   <button id="nextWordSendButton">送信</button>
   <br>
+  <resetbutton id="resetButton">リセット</resetbutton>
+  <br>
   <log id="wordLog"></log>
   <br><br>
   <logs id="wordLogs"></logs>
@@ -50,6 +52,13 @@
       const logs = document.querySelector("#wordLogs");
       logs.innerText += previousWord + "\n";
     };
+    
+    document.querySelector("#resetButton").onclick = async (event) => {
+      const response = await fetch("/shiritori", {
+        method: "RESET",
+        headers: { "Content-Type": "application/json" },
+        //body: JSON.stringify({ nextWord })
+      });
   </script>
 </body>
 
