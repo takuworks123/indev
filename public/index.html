@@ -25,7 +25,7 @@
       const responseLog = await response.text();
 
       const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${responseLog[responseLog.length - 1]}`;
+      para.innerText = `前の単語：${responseLog}`;
       
       const log = document.querySelector("#wordLog");
       log.innerText = "しりとりの履歴:";
