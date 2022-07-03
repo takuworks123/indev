@@ -14,8 +14,8 @@ serve(async (req) => {
     const requestJson = await req.json();
     const nextWord = requestJson.nextWord;
     
-    return new Response(previousWord);
-    return new Response(nextWord);
+    return new Response(previousWord, { status: 400 });
+    return new Response(nextWord, { status: 400 });
     
     if (
       nextWord.length > 1 &&
