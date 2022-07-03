@@ -13,11 +13,13 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/shiritori") {
     const requestJson = await req.json();
     const nextWord = requestJson.nextWord;
-    let flg = 0;
+    let flg = 0, nextlen;
+    
+    nextlen = nextWord.length;
     
     //return new Response(`${nextWord.length}`, { status: 400 });
     
-    if ( nextWord.length > 1 ) {
+    if ( nextlen > 1 ) {
       flg++;
     }
     if ( previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
@@ -25,7 +27,7 @@ serve(async (req) => {
     }
     
     if ( flg == 2 ) {
-      return new Response("前の単語に続いていません。" + nextWord.length, { status: 400 });
+      return new Response("前の単語に続いていません。" + nextlen, { status: 400 });
     }
     
     previousWord = nextWord;
