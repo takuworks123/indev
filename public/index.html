@@ -12,15 +12,9 @@
   <br>
   <br>
   <input id="nextWordInput" type="text" />
-  
-  <a class="btn btn-custom01">
-    <span class="btn-custom01-front">送信</span>
-    <i class="fas fa-angle-right fa-position-right"></i>
-  </a>
+  <button id="nextWordSendButton">送信</button>
 
   <script type="module">
-    //<button id="nextWordSendButton">送信</button>
-    
     window.onload = async (event) => {
       const response = await fetch("/shiritori");
       const previousWord = await response.text();
