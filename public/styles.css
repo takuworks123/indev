@@ -53,13 +53,16 @@ p:after {
 }
 
 input{
-    align-items: center;
-    width: 75%; /*親要素いっぱい広げる*/
-    padding: 10px 15px; /*ボックスを大きくする*/
-    font-size: 20px;
-    border-radius: 3px; /*ボックス角の丸み*/
-    border: 2px solid #ddd; /*枠線*/
-    box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+  position: relative;
+  display: block;
+  width: 500px;
+  margin-top: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #a0a0a0;
+  outline: none;
 }
 
 button {
