@@ -29,7 +29,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
-      if (response.status / 100 == 2) {
+      if (response.status / 100 == 2 || response.status / 100 == 3) {
         const previousWord = await response.text();
 
         const para = document.querySelector("#previousWord");
@@ -38,7 +38,6 @@
       
       if (response.status / 100 !== 2) {
         alert(await response.text());
-        return;
       }
     };
   </script>
