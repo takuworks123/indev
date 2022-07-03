@@ -32,10 +32,14 @@
         alert(await response.text());
         return;
       }
+      if (response.status / 100 !== 3) {
+        alert(await response.text());
+      }
+      
       const previousWord = await response.text();
 
       const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語a：${previousWord}`;
+      para.innerText = `前の単語：${previousWord}`;
     };
   </script>
 </body>
