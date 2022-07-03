@@ -6,7 +6,8 @@ let previousWord, wordLog;
 
 function shiritoriReset() {
   previousWord = firstWord[Math.floor(Math.random() * firstWord.length)];
-  wordLog = previousWord;
+  wordLog = [];
+  wordLog.push(previousWord);
 }
 
 shiritoriReset();
