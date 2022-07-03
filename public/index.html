@@ -43,7 +43,8 @@
       const para = document.querySelector("#previousWord");
       para.innerText = `前の単語：${previousWord}`;
       
-      document.getElementById("wordLog").innerHTML += previousWord;
+      const log = document.querySelector("#wordLog");
+      log.innerText += previousWord;
     };
   </script>
 </body>
