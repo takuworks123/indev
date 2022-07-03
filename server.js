@@ -19,7 +19,7 @@ serve(async (req) => {
     
     //return new Response(`${nextWord.length}`, { status: 400 });
     
-    if ( nextlen < 1 ) {
+    if ( nextlen <= 1 ) {
       flg = 1;
     }
     if ( previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
