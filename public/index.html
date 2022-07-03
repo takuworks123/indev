@@ -26,10 +26,11 @@
       let nextWord;
       
       for (let i = responseLog.length, j = 0; i >= 0; i--, j++){
-        if (responseLog !== ',') {
+        if (responseLog[i] !== ',') {
           nextWord[j] = responseLog[i];
         }else{
           break;
+        }
       }
       const para = document.querySelector("#previousWord");
       para.innerText = `前の単語：${nextWord}`;
