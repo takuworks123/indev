@@ -22,7 +22,7 @@ serve(async (req) => {
     if ( nextlen > 1 ) {
       flg++;
     }
-    if ( previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
+    if ( previousWord.charAt(previousWord.length - 1) == nextWord.charAt(0) ) {
       flg++;
     }
     
