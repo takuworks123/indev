@@ -28,14 +28,15 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
-      if (response.status / 100 !== 2) {
-        alert(await response.text());
-      }
-      
       const previousWord = await response.text();
 
       const para = document.querySelector("#previousWord");
       para.innerText = `前の単語：${previousWord}`;
+      
+      if (response.status / 100 !== 2) {
+        alert(await response.text());
+        return;
+      }
     };
   </script>
 </body>
