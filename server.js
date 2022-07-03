@@ -35,6 +35,7 @@ serve(async (req) => {
     }
     else if (nextWord.charAt(nextWord.length - 1) == 'ん') {
       shiritoriReset();
+      return new Response(previousWord);
       //errorLog = "「ん」が最後についているのでリセットします。";
     }
     
