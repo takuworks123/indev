@@ -41,6 +41,7 @@
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語：${previousWord}`;
         alert("「ん」が最後についているのでリセットします。");
+        return;
       }
       
       if (response.status / 100 !== 2) {
