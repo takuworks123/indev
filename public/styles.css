@@ -23,3 +23,31 @@ h1:before {
 h1:after {
   right: 7px;
 }
+
+p{
+    position: relative;
+    padding: 15px 20px;
+    border-bottom: 3px solid #000;
+    width:80%;
+    margin: 0 auto;
+}
+
+p:before {
+    position: absolute;
+    left: 50px;
+    bottom: -40px;
+    content: '';
+    border-width: 20px;
+    border-style: solid;
+    border-color: #000000 transparent transparent transparent;
+}
+
+p:after {
+    position: absolute;
+    left: 50px;
+    bottom: -36px;
+    content: '';
+    border-width: 20px;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+}
