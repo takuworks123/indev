@@ -33,6 +33,9 @@ serve(async (req) => {
     else if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
       errorLog = "前の単語に続いていません。";
     }
+    else if (str.match(/^[ぁ-んー　]*$/) == false) {
+      errorLog = "ひらがなのみを入力してください。";
+    }
     else if (nextWord.charAt(nextWord.length - 1) == 'ん') {
       shiritoriReset();
       return new Response(previousWord, { status: 300 });
