@@ -22,24 +22,15 @@
   <script type="module">
     window.onload = async (event) => {
       const response = await fetch("/shiritori");
-      const responseLog = await response.text();
-      let nextWord;
+      const previousWord = await response.text();
       
-      for (let i = responseLog.length, j = 0; i <= 0; i--){
-        if (responseLog[i] !== ',') {
-          nextWord[j] = responseLog[i];
-          j++;
-        }else{
-          break;
-        }
-      }
       const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${nextWord}`;
+      para.innerText = `前の単語：${previousWord}`;
       
       const log = document.querySelector("#wordLog");
       log.innerText = "しりとりの履歴:";
       const logs = document.querySelector("#wordLogs");
-      logs.innerText = responseLog + "\n";
+      logs.innerText = previousWord + "\n";
     };
 
     document.querySelector("#nextWordSendButton").onclick = async (event) => {
