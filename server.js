@@ -14,11 +14,20 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/shiritori") {
     const requestJson = await req.json();
     const nextWord = requestJson.nextWord;
+    let errorLog;
     
-    //return new Response(`${nextWord.length}`, { status: 400 });
+    if (wordLog.includes(nextWord)) {
+      errorLog = "同じ単語がすでに送信されています。";
+    }
+    if (nextWord.length < 1) {
+      errorLog = "文字を入力してください。";
+    }
+    if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
+      errorLog = "前の単語に続いていません。";
+    }
     
-    if (wordLog.includes(nextWord) || nextWord.length <= 1 || previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
-      return new Response("前の単語に続いていません。", { status: 400 });
+    if (errorLog.length > 0) {
+      return new Response(errorLog, { status: 400 });
     }
     
     wordLog.push(nextWord);
