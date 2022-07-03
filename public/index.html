@@ -25,12 +25,12 @@
       const responseLog = await response.text();
 
       const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${responseLog}`;
+      para.innerText = `前の単語：${responseLog[0]}`;
       
       const log = document.querySelector("#wordLog");
       log.innerText = "しりとりの履歴:";
       const logs = document.querySelector("#wordLogs");
-      logs.innerText = responseLog + "\n";
+      logs.innerText = responseLog[1] + "\n";
     };
 
     document.querySelector("#nextWordSendButton").onclick = async (event) => {
