@@ -19,10 +19,10 @@ serve(async (req) => {
     if (wordLog.includes(nextWord)) {
       errorLog = "同じ単語がすでに送信されています。";
     }
-    if (nextWord.length < 1) {
+    else if (nextWord.length < 1) {
       errorLog = "文字を入力してください。";
     }
-    if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
+    else if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
       errorLog = "前の単語に続いていません。";
     }
     
