@@ -25,7 +25,7 @@
       const responseLog = await response.text();
       let nextWord;
       
-      for (let i = responseLog.length, j = 0; i >= 0; i--, j++){
+      for (let i = responseLog.length, j = 0; i <= 0; i--, j++){
         if (responseLog[i] !== ',') {
           nextWord[j] = responseLog[i];
         }else{
