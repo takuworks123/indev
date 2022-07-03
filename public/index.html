@@ -29,7 +29,7 @@
         body: JSON.stringify({ nextWord })
       });
       if (response.status / 100 !== 2) {
-        alert(await response.status + response.text());
+        alert(await response.text());
         if (response.status / 100 !== 3) {
           return;
         }
