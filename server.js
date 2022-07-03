@@ -30,7 +30,7 @@ serve(async (req) => {
       return new Response("前の単語に続いていません。" + nextlen, { status: 400 });
     }
     
-    previousWord = nextWord;
+    //previousWord = nextWord;
     return new Response(previousWord);
   }
 
