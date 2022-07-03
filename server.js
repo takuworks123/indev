@@ -32,7 +32,7 @@ serve(async (req) => {
     else if (previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
       errorLog = "前の単語に続いていません。";
     }
-    else if (nextWord.charAt(nextWord.length - 1) !== 'ん') {
+    else if (nextWord.charAt(nextWord.length - 1) == 'ん') {
       shiritoriReset();
       errorLog = "「ん」が最後についているのでリセットします。";
     }
