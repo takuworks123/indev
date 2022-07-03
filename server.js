@@ -46,7 +46,11 @@ serve(async (req) => {
     previousWord = nextWord;
     return new Response(previousWord);
   }
-
+  
+  if (req.method === "RESET" && pathname === "/shiritori") {
+    shiritoriReset();
+  }
+  
   return serveDir(req, {
     fsRoot: "public",
     urlRoot: "",
