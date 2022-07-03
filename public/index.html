@@ -29,11 +29,18 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
-      if (response.status / 100 == 2 || response.status / 100 == 3) {
+      if (response.status / 100 == 2) {
         const previousWord = await response.text();
 
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語：${previousWord}`;
+      }
+      if response.status / 100 == 3) {
+        const previousWord = await response.text();
+
+        const para = document.querySelector("#previousWord");
+        para.innerText = `前の単語：${previousWord}`;
+        alert("「ん」が最後についているのでリセットします。");
       }
       
       if (response.status / 100 !== 2) {
