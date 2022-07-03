@@ -35,16 +35,14 @@
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語：${previousWord}`;
       }
-      if response.status / 100 == 3) {
+      else if response.status / 100 == 3) {
         const previousWord = await response.text();
 
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語：${previousWord}`;
         alert("「ん」が最後についているのでリセットします。");
-        return;
       }
-      
-      if (response.status / 100 !== 2) {
+      else {
         alert(await response.text());
       }
     };
