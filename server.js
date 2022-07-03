@@ -14,7 +14,7 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/shiritori") {
     const requestJson = await req.json();
     const nextWord = requestJson.nextWord;
-    let errorLog;
+    let errorLog = null;
     
     if (wordLog.includes(nextWord)) {
       errorLog = "同じ単語がすでに送信されています。";
@@ -26,7 +26,7 @@ serve(async (req) => {
       errorLog = "前の単語に続いていません。";
     }
     
-    if (errorLog.length > 0) {
+    if (errorLog.length !== null) {
       return new Response(errorLog, { status: 400 });
     }
     
