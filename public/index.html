@@ -56,8 +56,8 @@
     document.querySelector("#resetButton").onclick = async (event) => {
       const response = await fetch("/shiritori", {
         method: "RESET",
-        headers: { "Content-Type": "application/json" }
-        //body: JSON.stringify({ nextWord })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nextWord })
       });
     };
   </script>
