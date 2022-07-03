@@ -23,7 +23,7 @@
       para.innerText = `前の単語：${previousWord}`;
     };
 
-    document.querySelector("#btn-custom01").onclick = async (event) => {
+    document.querySelector("#nextWordSendButton").onclick = async (event) => {
       const nextWord = document.querySelector("#nextWordInput").value;
       const response = await fetch("/shiritori", {
         method: "POST",
