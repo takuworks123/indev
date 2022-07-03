@@ -47,8 +47,9 @@ serve(async (req) => {
     return new Response(previousWord);
   }
   
-  if (req.method === "RESET" && pathname === "/shiritori") {
+  else if (req.method === "RESET" && pathname === "/shiritori") {
     shiritoriReset();
+    return new Response(previousWord);
   }
   
   return serveDir(req, {
