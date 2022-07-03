@@ -43,6 +43,10 @@
         alert("「ん」が最後についているのでリセットします。");
       }
       else {
+        const previousWord = await response.text();
+
+        const para = document.querySelector("#previousWord");
+        para.innerText = `前の単語：${previousWord}`;
         alert(await response.text());
       }
     };
