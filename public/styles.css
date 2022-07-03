@@ -3,7 +3,6 @@ body {
 }
 
 h1 {
-  margin: 0 auto;
   position: relative;
   padding: 0.25em 1em;
   border-top: solid 2px black;
@@ -26,7 +25,6 @@ h1:after {
 }
 
 p{
-    margin: 0 auto;
     position: relative;
     padding: 15px 20px;
     border-bottom: 3px solid #000;
