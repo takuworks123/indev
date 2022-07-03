@@ -53,6 +53,7 @@ p:after {
 }
 
 input{
+    align-items: center;
     width: 75%; /*親要素いっぱい広げる*/
     padding: 10px 15px; /*ボックスを大きくする*/
     font-size: 20px;
