@@ -28,9 +28,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
-      if (response.status / 100 !== 2) {
+      if (response.status !== 200) {
         alert(await response.text());
-        if (response.status / 100 !== 2) {
+        if (response.status !== 201) {
           return;
         }
       }
