@@ -26,7 +26,7 @@ serve(async (req) => {
       errorLog = "前の単語に続いていません。";
     }
     
-    if (errorLog.length !== null) {
+    if (errorLog !== null) {
       return new Response(errorLog, { status: 400 });
     }
     
