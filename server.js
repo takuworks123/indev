@@ -17,7 +17,7 @@ serve(async (req) => {
     
     //return new Response(`${nextWord.length}`, { status: 400 });
     
-    if (wordLog.includes(nextWord) == true || nextWord.length <= 1 || previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
+    if (wordLog.includes(nextWord) || nextWord.length <= 1 || previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) ) {
       return new Response("前の単語に続いていません。", { status: 400 });
     }
     
