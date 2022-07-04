@@ -40,8 +40,12 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nextWord })
       });
+      
+      const logs = document.querySelector("#wordLogs");
+      
       if (response.status / 100 == 3) {
         alert("「ん」が最後についているのでリセットします。");
+        logs.innerText = "";
       }
       else if (response.status / 100 == 4) {
         alert(await response.text());
@@ -54,7 +58,7 @@
       
       const log = document.querySelector("#wordLog");
       log.innerText = "しりとりの履歴:";
-      const logs = document.querySelector("#wordLogs");
+      
       logs.innerText += previousWord + "\n";
     };
     
