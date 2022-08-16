@@ -2,25 +2,35 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Step2.地図にスケール・ズームコントロールを追加|Lefletの基本|埼玉大学谷謙二研究室</title>
+  <title>Step7.地図をクリックしてマーカー表示とマーカー削除|Lefletの基本|埼玉大学谷謙二研究室</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
   <script>
+    //地図オブジェクトを入れる変数をグローバルにする
+    var map;
     function init() {
-      //ズームコントロールを非表示で地図を作成
-      var map = L.map('mapcontainer', { zoomControl: false });
-      map.setView([35.40, 136], 5);
+      map = L.map('mapcontainer', { zoomControl: false });
+      var mpoint = [35.8627, 139.6072];
+      map.setView(mpoint, 15);
       L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
-        attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+          attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
       }).addTo(map);
-      //スケールコントロールを最大幅200px、右下、m単位で地図に追加
-      L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(map);
-      //ズームコントロールを左下で地図に追加
-      L.control.zoom({ position: 'bottomleft' }).addTo(map);
+      //地図のclickイベントでonMapClick関数を呼び出し
+      map.on('click', onMapClick);
+    }
+    function onMapClick(e) {
+      //地図のclickイベント呼び出される
+      //クリック地点の座標にマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
+      var mk = L.marker(e.latlng).on('click', onMarkerClick).addTo(map);
+    }
+    function onMarkerClick(e) {
+      //マーカーのclickイベント呼び出される
+      //クリックされたマーカーを地図のレイヤから削除する
+      map.removeLayer(e.target);
     }
   </script>
 </head>
 <body onload="init()">
-  <div id="mapcontainer" style="width:600px;height:600px"></div>
+  <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
 </body>
 </html>
