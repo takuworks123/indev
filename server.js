@@ -26,14 +26,6 @@ serve(async (req) => {
     return new Response(tips[Math.floor(Math.random() * tips.length)]);
   }
 
-  function initMap() {
-    var opts = {
-      zoom: 15,
-      center: new google.maps.LatLng(35.6807527,139.7670716)
-    };
-    var map = new google.maps.Map(document.getElementById("map"), opts);
-  }
-
   return serveDir(req, {
     fsRoot: "public",
     urlRoot: "",
