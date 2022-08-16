@@ -13,12 +13,12 @@
       //座標の指定
       var mpoint = [35.8627, 139.6072];
 
-      map.setView([35.40, 136], 8);
+      map.setView(mpoint, 13);
       L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
         attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
       }).addTo(map);
 
-      //埼玉大学の位置にドラッグ可能なマーカーを地図に追加
+      //地図にマーカーを設置
       L.marker(mpoint,{title:"埼玉大学",draggable:true}).addTo(map);
       //桜区役所のマーカーを追加
       L.marker([35.8561,139.6098],{title:"桜区役所"}).addTo(map);
