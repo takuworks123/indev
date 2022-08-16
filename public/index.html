@@ -3,81 +3,15 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <h1>しりとり</h1>
-  <p id="previousWord"></p>
-  <input id="nextWordInput" type="text" />
-  <br>
-  <button id="nextWordSendButton">送信</button>
-  <br>
-  <button id="resetButton">リセット</button>
-  <br>
-  <log id="wordLog"></log>
-  <br><br>
-  <logs id="wordLogs"></logs>
+  <h1 id="welcomeMessage"></h1>
 
   <script type="module">
     window.onload = async (event) => {
-      const response = await fetch("/shiritori");
-      const previousWord = await response.text();
-      
-      const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${previousWord}`;
-      
-      const log = document.querySelector("#wordLog");
-      log.innerText = "しりとりの履歴:";
-      const logs = document.querySelector("#wordLogs");
-      logs.innerText = previousWord + "\n";
-    };
-
-    document.querySelector("#nextWordSendButton").onclick = async (event) => {
-      const nextWord = document.querySelector("#nextWordInput").value;
-      const response = await fetch("/shiritori", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nextWord })
-      });
-      
-      const logs = document.querySelector("#wordLogs");
-      
-      if (response.status / 100 == 3) {
-        alert("「ん」が最後についているのでリセットします。");
-        logs.innerText = "";
-      }
-      else if (response.status / 100 == 4) {
-        alert(await response.text());
-        return;
-      }
-      const previousWord = await response.text();
-
-      const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${previousWord}`;
-      
-      const log = document.querySelector("#wordLog");
-      log.innerText = "しりとりの履歴:";
-      
-      logs.innerText += previousWord + "\n";
-    };
-    
-    document.querySelector("#resetButton").onclick = async (event) => {
-      const nextWord = document.querySelector("#nextWordInput").value;
-      const response = await fetch("/shiritori", {
-        method: "RESET",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nextWord })
-      });
-      const previousWord = await response.text();
-
-      const para = document.querySelector("#previousWord");
-      para.innerText = `前の単語：${previousWord}`;
-      
-      const log = document.querySelector("#wordLog");
-      log.innerText = "しりとりの履歴:";
-      const logs = document.querySelector("#wordLogs");
-      logs.innerText = previousWord + "\n";
+      const response = await fetch("/tips");
+      document.querySelector("#welcomeMessage").innerText = await response.text();
     };
   </script>
 </body>
