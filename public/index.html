@@ -3,20 +3,34 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <title>Google Maps API サンプル</title>
 </head>
 
 <body>
-<button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
-<button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
+  <p>東京駅はこちらです。</p>
+  <div id="map" style="width:600px; height:400px"></div>
+  <p>分からない場合はご連絡下さい。</p>
 
-  <h1 id="tips"></h1>
+  <script type="text/javascript" src="code1_1.js">
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=APIKey&callback=initMap">
+  </script>
+
+
+  <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
+  <button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
+
+  <h1 id="welcomeMessage"></h1>
 
 
   <script type="module">
     window.onload = async (event) => {
       
-      const response = await fetch("/tips");
-      document.querySelector("#tips").innerText = await response.text();
+      const response = await fetch("/welcome-message");
+      document.querySelector("#welcomeMessage").innerText = await response.text();
       alert(await tips.text());//お役立ち情報を表示
     };
   </script>
