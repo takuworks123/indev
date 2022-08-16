@@ -1,39 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja" dir="ltr">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Leafletデモ</title>
+  <meta charset="UTF-8">
+  <title>Step1.Leafletで地理院地図を表示する最も基本的なコード|Lefletの基本|埼玉大学谷謙二研究室</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+  <script>
+    function init() {
+      //地図を表示するdiv要素のidを設定
+      var map = L.map('mapcontainer');
+      //地図の中心とズームレベルを指定
+      map.setView([35.40, 136], 5);
+      //表示するタイルレイヤのURLとAttributionコントロールの記述を設定して、地図に追加する
+      L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+          attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+      }).addTo(map);
+    }
+  </script>
 </head>
-<body>
-    <div id="mapid"></div>
+<body onload="init()">
+  <div id="mapcontainer" style="width:600px;height:600px"></div>
 </body>
 </html>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-
-<style media="screen">
-    #mapid {
-        height: 500px;
-    }
-</style>
-
-<script type="text/javascript">
-    //地図の中心地を定義
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-    
-    //タイルレイヤーを取得
-    /*L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: 'eyJ1IjoidS10YWt1dG8iLCJhIjoiY2w2dnJzNjU2MmJhczNscjNhZjF6cXFyNyJ9.UwCC78uoanHUpJjjK2m1fw' //ここにaccess tokenを挿入
-    }).addTo(mymap);*/
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mymap);
-    
-    // Marker（ピン）を追加する
-    var marker = L.marker([51.5, -0.09]).addTo(mymap);
-    marker.bindPopup("<b>Hello</b>").openPopup();
-</script>
