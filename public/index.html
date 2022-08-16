@@ -38,21 +38,5 @@
 
 
 
-<body>
-  <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
-  <button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
-
-  <h1 id="welcomeMessage"></h1>
-
-  <script type="module">
-    window.onload = async (event) => {
-      
-      const response = await fetch("/welcome-message");
-      document.querySelector("#welcomeMessage").innerText = await response.text();
-      alert(await tips.text());//お役立ち情報を表示
-    };
-  </script>
-</body>
-
 </html>
   
