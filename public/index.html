@@ -3,6 +3,8 @@
  
 <head>
   <meta charset="UTF-8">
+
+
   <title></title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
   <style>
@@ -11,24 +13,65 @@
 </head>
  
 <body>
+  <h1>☀熱中症対策アプリ☀</h1>
+  <h2 style="display:inline;">クールマップ</h2> 
+  <input id="mitei" type="text"/>
+  <button id="search">検索</button>
+  <div><button id = home>ホーム</button>
+  <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
+  <button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
+
+  <p>イイ感じの施設にピンが刺さった近くの地図でも表示?</p>
+
   <div id="mapid"></div>
- 
+
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script type="text/javascript">
-var mymap = L.map('mapid',{
-  center: [35.710063, 139.8107],
-  zoom: 16
-});
- 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-  attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
-}).addTo(mymap);
- 
-L.marker([35.710063, 139.8107])
-  .addTo(mymap)
-  .bindPopup("スカイツリーはここ！")
-  .openPopup();
+    var mymap = L.map('mapid',{
+      center: [35.710063, 139.8107],
+      zoom: 16
+    });
+    
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
+    }).addTo(mymap);
+    
+    L.marker([35.710063, 139.8107])
+      .addTo(mymap)
+      .bindPopup("スカイツリーはここ！")
+      .openPopup();
   </script>
+
+  <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
+
+  <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><!--参考元-->
+  <a href="https://tenki.jp/">tenki.jp/ </a>
+  <h1 id="welcomeMessage"></h1>
+
+  <script type="module">
+    window.onload = async (event) => {
+    };
+    
+    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+      location.href = 'index.html';//homeのページに移動
+    }
+
+    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
+      location.href = 'coordination.html';//コーディネートのページに移動
+    }
+
+  </script>
+
+<style>
+  h1{
+    color: red
+  }
+  h2{
+    color:cyan
+  }
+
+</style>
+
 </body>
- 
+
 </html>
