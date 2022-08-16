@@ -3,21 +3,27 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
   <title>Google Maps API サンプル</title>
 </head>
 
 <body>
-  <p>東京駅はこちらです。</p>
-  <div id="map" style="width:600px; height:400px"></div>
-  <p>分からない場合はご連絡下さい。</p>
+  <div id="map"></div>
+  <script>
+    var map = L.map('map');
 
-  <script type="text/javascript" src="server.js">
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+      attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+    }).addTo(map);
+
+    map.setView([35.3622222, 138.7313889], 5);
   </script>
 
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=APIKey&callback=initMap">
-  </script>
 
 
   <button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
