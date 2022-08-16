@@ -19,7 +19,7 @@
   <script type="module">
     window.onload = async (event) => {
       
-      const response = await fetch("/welcome-message");
+      const response = await fetch("/tips");
       document.querySelector("#welcomeMessage").innerText = await response.text();
       alert(await tips.text());//お役立ち情報を表示
     };
