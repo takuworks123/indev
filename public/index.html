@@ -22,18 +22,6 @@
     }
   </style>
   <script>
-    const getCurrentPosition = () => {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
-    };
-
-    const pos = await getCurrentPosition();
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    const acc = pos.coords.accuracy;
-    console.log(pos.coords);
-
     function onLocationFound(e) {
       var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
       L.marker(e.latlng, {icon: centerIcon}).addTo(map);
