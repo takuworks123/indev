@@ -344,32 +344,9 @@ function currentWatchReset() {
 
 
   <title></title>
-  <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leaflet：現在地＆住所検索</title>
-  <link rel="stylesheet" href="//unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-  <script src="//unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.6.3/css/all.css"/>
-  <link rel="stylesheet" href="css/easy-button.css"/>
-  <script src="js/easy-button.js"></script>
-  <link rel="stylesheet" href="css/leaflet.fullscreen.css"/>
-  <script src="js/Leaflet.fullscreen.min.js"></script>
-  <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
-  <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
   <style>
     #mapid { height: 400px; width:400px; }
-  </style>
-
-  <style>
-    .center-icon {
-      width: 12px !important;
-      height: 12px !important;
-      border-radius: 12px;
-      border: 3px solid #fdfdfd;
-      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-      background-color: #1E90FF;
-    }
   </style>
 </head>
  
@@ -382,7 +359,7 @@ function currentWatchReset() {
   <button id = wear>コーディネート</button>
   <button id = map>クールマップ</button>
 
-  <p>イイ感じの施設にピンが刺さった近くの地図でも表示?</p>
+
 
   <div id="mapid"></div>
 
@@ -401,19 +378,10 @@ function currentWatchReset() {
       .addTo(mymap)
       .bindPopup("スカイツリーはここ！")
       .openPopup();
-
-
-    function onLocationFound(e) {
-      var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-      L.marker(e.latlng, {icon: centerIcon}).addTo(map);
-    }
-    function onLocationError(e) {
-      alert('位置情報を取得できませんでした。' + e.message);
-    }
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-    map.locate({setView: true, maxZoom: 16, timeout: 20000});
   </script>
+
+
+
 
   <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
 
