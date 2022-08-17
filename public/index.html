@@ -424,12 +424,12 @@ function currentWatchReset() {
 		callback: function (results) {
 			var coords = L.latLng(results[0].lat,results[0].lon);
 			var foundIcon = L.divIcon({ className: 'found-icon', iconAnchor: [8, 8] });
-			L.marker(coords, {icon: foundIcon}).addTo(map);
-			map.setView(coords,17);
+			L.marker(coords, {icon: foundIcon}).addTo(mymap);
+			mymap.setView(coords,17);
 		}
 	});
-	map.addControl(osmGeocoder);
-	
+	mymap.addControl(osmGeocoder);
+
   </script>
 
 
