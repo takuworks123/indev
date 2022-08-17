@@ -345,9 +345,20 @@ function currentWatchReset() {
 
   <title></title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+  <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
+  <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
   <style>
     #mapid { height: 400px; width:400px; }
-  </style>
+
+	.center-icon {
+		width: 12px !important;
+		height: 12px !important;
+		border-radius: 12px;
+		border: 3px solid #fdfdfd;
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+		background-color: #1E90FF;
+	}
+	</style>
 </head>
  
 <body>
@@ -381,6 +392,19 @@ function currentWatchReset() {
       .addTo(mymap)
       .bindPopup("スカイツリーはここ！")
       .openPopup();
+	
+
+
+	function onLocationFound(e) {
+		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
+	}
+	function onLocationError(e) {
+		alert('位置情報を取得できませんでした。' + e.message);
+	}
+	mymap.on('locationfound', onLocationFound);
+	mymap.on('locationerror', onLocationError);
+	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
   </script>
 
 
