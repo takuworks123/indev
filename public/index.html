@@ -417,18 +417,19 @@ function currentWatchReset() {
 
 
 
-
 	var osmGeocoder = new L.Control.OSMGeocoder({
-	collapsed: false,
-	text: '検索',
-	placeholder: '住所を入力してください。',
-	callback: function (results) {
-		var coords = L.latLng(results[0].lat,results[0].lon);
-		var foundIcon = L.divIcon({ className: 'found-icon', iconAnchor: [8, 8] });
-		L.marker(coords, {icon: foundIcon}).addTo(mymap);
-		mymap.setView(coords,17);
-	}
-});
+		collapsed: false,
+		text: '検索',
+		placeholder: '地点名を入力してください。',
+		callback: function (results) {
+			var coords = L.latLng(results[0].lat,results[0].lon);
+			var foundIcon = L.divIcon({ className: 'found-icon', iconAnchor: [8, 8] });
+			L.marker(coords, {icon: foundIcon}).addTo(map);
+			map.setView(coords,17);
+		}
+	});
+	map.addControl(osmGeocoder);
+	
   </script>
 
 
