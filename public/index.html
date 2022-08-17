@@ -352,12 +352,15 @@ function currentWatchReset() {
  
 <body>
   <h1>☀熱中症対策アプリ☀</h1>
-  <h2 style="display:inline;">クールマップ</h2> 
-  <input id="mitei" type="text"/>
+  <h2 style="display:inline;">クールマップ</h2>
+  <input id="mitei" type="text" />
   <button id="search">検索</button>
-  <div><button id = home>ホーム</button>
-  <button id = wear>コーディネート</button>
-  <button id = map>クールマップ</button>
+  <div>
+    <button id=home>ホーム</button>
+    <button id=wear>コーディネート</button>
+    <!--服装共有用SNS(?)に移動-->
+    <button id=map>クールマップ</button>
+    <!--涼が取れる施設を表示するマップに移動-->
 
 
 
@@ -383,36 +386,35 @@ function currentWatchReset() {
 
 
 
-  <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
+<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
+<!--参考元-->
+<a href="https://tenki.jp/">tenki.jp/ </a>
+<h1 id="welcomeMessage"></h1>
 
-  <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-  <a href="https://tenki.jp/">tenki.jp/ </a>
-  <h1 id="welcomeMessage"></h1>
+<script type="module">
+  window.onload = async (event) => {
+  };
 
-  <script type="module">
-    window.onload = async (event) => {
-    };
-    
-    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-      location.href = 'index.html';//homeのページに移動
-    }
+  document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+    location.href = 'index.html';//homeのページに移動
+  }
 
-    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
-      location.href = 'coordination.html';//コーディネートのページに移動
-    }
+  document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
+    location.href = 'coordination.html';//コーディネートのページに移動
+  }
 
-  </script>
+</script>
 
 <style>
-  h1{
+  h1 {
     color: red
   }
-  h2{
-    color:cyan
+
+  h2 {
+    color: cyan
   }
-
 </style>
-
+</div>
 </body>
 
 </html>
