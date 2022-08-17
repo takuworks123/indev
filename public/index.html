@@ -358,6 +358,15 @@ function currentWatchReset() {
 		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 		background-color: #1E90FF;
 	}
+
+	.found-icon {
+		width: 12px !important;
+		height: 12px !important;
+		border-radius: 12px;
+		border: 3px solid #fdfdfd;
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+		background-color: #FF8C00;
+	}
 	</style>
 </head>
  
@@ -405,6 +414,21 @@ function currentWatchReset() {
 	mymap.on('locationfound', onLocationFound);
 	mymap.on('locationerror', onLocationError);
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+
+
+
+
+	var osmGeocoder = new L.Control.OSMGeocoder({
+	collapsed: false,
+	text: '検索',
+	placeholder: '住所を入力してください。',
+	callback: function (results) {
+		var coords = L.latLng(results[0].lat,results[0].lon);
+		var foundIcon = L.divIcon({ className: 'found-icon', iconAnchor: [8, 8] });
+		L.marker(coords, {icon: foundIcon}).addTo(mymap);
+		mymap.setView(coords,17);
+	}
+});
   </script>
 
 
