@@ -47,8 +47,8 @@
       <td><div id="mapid"></div></td>
 
       <td>
-		<p id="result"></p>
-		<img id="loading" src="loading.gif" height="40" width="40" />
+        <p id="result"></p>
+        <img id="loading" src="map_icon/loading.gif" height="40" width="40" />
         <button id = "one" style="display:inline;">施設</button>
         <button id = "two" style="display:inline;">飲食</button>
         <button id = "three" style="display:inline;">ショップ</button>
@@ -93,6 +93,20 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 	
+	var currentWatchBtn = null;
+	L.easyButton({		// 現在地表示ボタン
+	states: [{
+		stateName: 'current-watch',
+		icon:	'fas fa-map-marker-alt',
+		title:	 '現在地',
+		onClick: function(btn, map) {
+			currentWatch();
+			btn.state('current-watch-reset');
+			currentWatchBtn = btn;
+		}
+	}]
+	}).addTo( mymap );
+
 	var lat = 35;
 	var lon = 135;
 
