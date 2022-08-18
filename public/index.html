@@ -71,9 +71,9 @@
 		});
 		
 		const values = await response.text(); //場所をサーバー側から取得
-		var shop_lat = values.split('\n')[0];
-		var shop_lon = values.split('\n')[1];
-		var shop_name = values.split('\n')[2];
+		var shop_lat = values.split('|')[0];
+		var shop_lon = values.split('|')[1];
+		var shop_name = values.split('|')[2];
 		//shop_lat = "34.68665";
 		//shop_lon = "135.13742";
 		//shop_name = "テストな店"
