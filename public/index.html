@@ -2,67 +2,117 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+
+
+  <title></title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+  <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
+  <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
+  <style>
+    #mapid { height: 400px; width:400px; }
+
+	.center-icon {
+		width: 12px !important;
+		height: 12px !important;
+		border-radius: 12px;
+		border: 3px solid #fdfdfd;
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+		background-color: #1E90FF;
+	}
+	</style>
 </head>
 
 <body>
-  <h1>☀熱中症対策アプリ1☀</h1>
-  <div>
-    <button class="click" id="home">ホーム</button>
-    <button class="click" id="wear">コーディネート</button>
-    <!--服装共有用SNS(?)に移動-->
-    <button class="click" id="map">クールマップ</button>
-    <!--涼が取れる施設を表示するマップに移動-->
+  <h1>☀熱中症対策アプリ☀</h1>
+  <h2 style="display:inline;">クールマップ</h2>
+  <input id="mitei" type="text" />
+  <button id="search">検索</button>
 
-    <p>
-      <button id="wbgt">現在地の暑さ指数は？</button>
-    <div id="wbgt_val"></div>
-    </p>
+<div><button id = home>ホーム</button>
+<button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
+<button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
 
-    <p>
-      <nobr id="wbgt_message"></nobr>
-    </p>
+<div id="mapid"></div>
 
-    <p>
-      <div id="heatstroke"></div>
-    </p>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <script type="text/javascript">
 
-    <p>
-      <a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a>
-      <a href="https://tenki.jp/">tenki.jp/ </a>
-    </p>
+    var mymap = L.map('mapid',{
+      center: [35.710063, 139.8107],
+      zoom: 16
+    });
+    
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
+    }).addTo(mymap);
 
-	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script type="module">
+	function onLocationFound(e) {
+		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 
-      document.querySelector("#wbgt").onclick = async (event) => {
-        //位置情報を取得
-        navigator.geolocation.getCurrentPosition(success, error);
+		const lat = e.latlng.lat;
+		const lon = e.latlng.lng;
 
-        //位置情報の取得に成功したら
-        async function success(position) {
-          var lat = position.coords.latitude; //緯度
-          var lon = position.coords.longitude; //経度
+		//場所を取得
+		const response = await fetch("/search_shop", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({lat, lon})
+		});
 
-          //位置情報をPOSTでサーバーに送信
-          const response = await fetch("/loc", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({lat, lon})
-          });
-		  alert(lat);
-		  alert(lon);
-          
-        }
+		const values = await response.text(); //場所をサーバー側から取得
+		const shop_lat = values.split('\n')[0];
+		const shop_lon = values.split('\n')[1];
+		const shop_name = values.split('\n')[2];
+		//shop_lat = 34.1316;
+		//shop_lon = 136.3006;
+		//shop_name = "テストな店"
 
-        //位置情報の取得に失敗したら
-        function error() {
-          alert("位置情報が取得できませんでした");
-        }
-      }
-    </script>
-  </div>
+		L.marker([shop_lat, shop_lon])
+			.addTo(mymap)
+			.bindPopup(shop_name)
+			.openPopup();
+	}
+
+	function onLocationError(e) {
+		alert('位置情報を取得できませんでした。' + e.message);
+	}
+	mymap.on('locationfound', onLocationFound);
+	mymap.on('locationerror', onLocationError);
+	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+  </script>
+  
+<p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
+
+
+<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><!--参考元-->
+<a href="https://tenki.jp/">tenki.jp/ </a>
+ 
+  <script type="module">
+    window.onload = async (event) => {
+    };
+    
+    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+      location.href = 'index.html';//homeのページに移動
+    }
+
+    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
+      location.href = 'coordination.html';//コーディネートのページに移動
+    }
+
+  </script>
+
+<style>
+  h1{
+    color: red
+  }
+  h2{
+    color:cyan
+  }
+
+</style>
+
 </body>
 
 </html>
