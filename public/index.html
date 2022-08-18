@@ -37,7 +37,6 @@
 
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script type="text/javascript">
-
     var mymap = L.map('mapid',{
       center: [35.710063, 139.8107],
       zoom: 16
@@ -46,35 +45,18 @@
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
     }).addTo(mymap);
+    
+    L.marker([35.710063, 139.8107])
+      .addTo(mymap)
+      .bindPopup("スカイツリーはここ！")
+      .openPopup();
+	
+
 
 	function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
-
-		const lat = e.latlng.lat;
-		const lon = e.latlng.lng;
-
-		//場所を取得
-		const response = await fetch("/search_shop", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon})
-		});
-
-		const values = await response.text(); //場所をサーバー側から取得
-		const shop_lat = values.split('\n')[0];
-		const shop_lon = values.split('\n')[1];
-		const shop_name = values.split('\n')[2];
-		//shop_lat = 34.1316;
-		//shop_lon = 136.3006;
-		//shop_name = "テストな店"
-
-		L.marker([shop_lat, shop_lon])
-			.addTo(mymap)
-			.bindPopup(shop_name)
-			.openPopup();
 	}
-
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
 	}
