@@ -111,6 +111,18 @@
 	}
 	L.control.locate({ position: 'topleft' }).addTo(mymap);
 
+	var option = {
+		position: 'topright',
+		strings: {
+			title: "現在地を表示",
+			popup: "いまここ"
+		},
+		locateOptions: {
+			maxZoom: 16
+		}
+    }
+    var lc = L.control.locate(option).addTo(map);
+
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
