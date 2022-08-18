@@ -72,6 +72,8 @@
 	let lat = 35;
 	let lon = 135;
 
+	console.log(lat);
+
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
@@ -79,6 +81,9 @@
 		lat = e.latlng.lat; //緯度
 		lon = e.latlng.lng; //経度
 	}
+
+	console.log(lat);
+
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
 	}
