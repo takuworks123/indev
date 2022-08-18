@@ -85,9 +85,12 @@
 
 	mymap.on('locationfound', onLocationFound);
 	mymap.on('locationerror', onLocationError);
-	//mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+
+	var makerList = [];
 
 	async function set_point(point_name){
+		mymap.removeLayer(makerList);
 		console.log(point_name);
 
 		const response = await fetch("/search_shop", {
@@ -113,10 +116,11 @@
 					var shop_lon = shop_lon_list.split(splitstr)[i];
 					var shop_name = shop_name_list.split(splitstr)[i];
 					
-					L.marker([shop_lat, shop_lon])
+					var maker = L.marker([shop_lat, shop_lon])
 						.addTo(mymap)
 						.bindPopup(shop_name)
 						.openPopup();
+					makerList.push(maker);
 				}
 			} else {
 				console.log("場所情報のエラー");
