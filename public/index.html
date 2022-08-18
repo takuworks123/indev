@@ -92,13 +92,6 @@
 	
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
-	
-	// 現在地のマーカーを設定
-	var myMarker;
-	mymap.locate({setView:true})
-	//mymap.on('locationfound', (e)=>{
-	//myMarker = L.marker([e.latitude, e.longitude]).addTo(mymap);
-	//})
 
 	//マップ上にボタンを設置
 	L.Control.Locate = L.Control.extend({
@@ -107,7 +100,7 @@
 		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
-			mymap.flyTo(myMarker._latlng);
+			mymap.flyTo(nowLocMaker._latlng);
 		}
 		this._div.append(icon)
 		return this._div;
@@ -123,8 +116,7 @@
 
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
-		console.log("^^");
+		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 		lat = e.latlng.lat; //緯度
 		lon = e.latlng.lng; //経度
 	}
