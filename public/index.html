@@ -97,8 +97,8 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
-		icon.style='center-icon'
+		const icon = L.DomUtil.create('a','fa-solid fa-location-dot');
+		icon.style='cursor:pointer'
 		icon.onclick=()=>{
 			mymap.flyTo(nowLocMaker._latlng);
 		}
@@ -111,7 +111,8 @@
 	}
 	L.control.locate({ position: 'topleft' }).addTo(mymap);
 
-
+	var lat = 35;
+	var lon = 135;
 
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
