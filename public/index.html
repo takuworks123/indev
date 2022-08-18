@@ -84,11 +84,12 @@
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
 	}
-	console.log(lat);
 
 	mymap.on('locationfound', onLocationFound);
 	mymap.on('locationerror', onLocationError);
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
+
+	console.log(lat);
 
 	async function set_point(point_name){
 
