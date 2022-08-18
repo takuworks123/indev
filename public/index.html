@@ -93,19 +93,30 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 	
-	var currentWatchBtn = null;
-	L.easyButton({		// 現在地表示ボタン
-	states: [{
-		stateName: 'current-watch',
-		icon:	'fas fa-map-marker-alt',
-		title:	 '現在地',
-		onClick: function(btn, map) {
-			currentWatch();
-			btn.state('current-watch-reset');
-			currentWatchBtn = btn;
+	// 現在地のマーカーを設定
+	var myMarker;
+	mymap.locate({setView:true})
+	mymap.on('locationfound', (e)=>{
+	myMarker = L.marker([e.latitude, e.longitude]).addTo(mymap);
+	})
+
+	//マップ上にボタンを設置
+	L.Control.Locate = L.Control.extend({
+	onAdd: function(mymap) {
+		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
+		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
+		icon.style='cursor:pointer'
+		icon.onclick=()=>{
+			mymap.flyTo(myMarker._latlng);
 		}
-	}]
-	}).addTo( mymap );
+		this._div.append(icon)
+		return this._div;
+	}
+	})
+	L.control.locate = function(opts){
+	return new L.Control.Locate(opts);
+	}
+	L.control.locate({ position: 'topleft' }).addTo(mymap);
 
 	var lat = 35;
 	var lon = 135;
