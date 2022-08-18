@@ -99,7 +99,7 @@
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon, point_name})
+			body: JSON.stringify({lat, lon})
 		});
 
 		const values = await response.text(); //場所をサーバー側から取得
