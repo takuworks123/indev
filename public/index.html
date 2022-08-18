@@ -88,8 +88,12 @@
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 
 	async function set_point(point_name){
-		map.removeLayer(markerList);
 		console.log(point_name);
+		mymap = L.map('mapid',{
+			center: [lat, lon],
+			zoom: 16
+		});
+
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
