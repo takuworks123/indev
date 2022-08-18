@@ -107,7 +107,7 @@
 		var shop_lon_list = values.split('\n')[1];
 		var shop_name_list = values.split('\n')[2];
 
-		if (shop_lat_list != null){
+		if (shop_lat_list != ""){
 			var splitstr = "@@@";
 			var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 			var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
