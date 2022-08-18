@@ -93,21 +93,23 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 
-
-
-
-
-	var option = {
-		position: 'topright',
-		strings: {
-			title: "現在地を表示",
-			popup: "いまここ"
-		},
-		locateOptions: {
-			maxZoom: 16
+	//マップ上にボタンを設置
+	L.Control.Locate = L.Control.extend({
+	onAdd: function(mymap) {
+		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
+		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
+		icon.style='center-icon'
+		icon.onclick=()=>{
+			mymap.flyTo(nowLocMaker._latlng);
 		}
-    }
-    var lc = L.control.locate(option).addTo(mymap);
+		this._div.append(icon)
+		return this._div;
+	}
+	})
+	L.control.locate = function(opts){
+	return new L.Control.Locate(opts);
+	}
+	L.control.locate({ position: 'topleft' }).addTo(mymap);
 
 
 
