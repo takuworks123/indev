@@ -57,11 +57,14 @@
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 
+		var lat = e.latlng.lat; //緯度
+        var lon = e.latlng.lng; //経度
+
 		//場所を取得
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({e.latlng.lat, e.latlng.lng})
+			body: JSON.stringify({lat, lon})
 		});
 		
 	}
