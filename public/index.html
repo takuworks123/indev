@@ -111,6 +111,8 @@
 	}
 	L.control.locate({ position: 'topleft' }).addTo(mymap);
 
+
+	
 	var option = {
 		position: 'topright',
 		strings: {
@@ -121,7 +123,9 @@
 			maxZoom: 16
 		}
     }
-    var lc = L.control.locate(option).addTo(map);
+    var lc = L.control.locate(option).addTo(mymap);
+
+
 
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
