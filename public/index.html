@@ -92,14 +92,13 @@
 	mymap.on('locationerror', onLocationError);
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 
-	function set_point(point){
-		var point_name = point;
+	async function set_point(point_name){
 
 		console.log(point_name);
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon})
+			body: JSON.stringify({lat, lon, point_name})
 		});
 
 		const values = await response.text(); //場所をサーバー側から取得
