@@ -156,11 +156,10 @@
 			}
 
 			const result = document.querySelector("#result");
-			result.innerText = "${previousWord}件見つかりました！";
+			result.innerText = makerList.length + "件見つかりました！";
 		} else {
 			const result = document.querySelector("#result");
 			result.innerText = "該当する場所は見つかりませんでした";
-			alert("該当する場所は見つかりませんでした");
 		}
 	}
 </script>
