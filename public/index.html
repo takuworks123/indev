@@ -76,9 +76,7 @@
 		var shop_lat_list = values.split('|||')[0];
 		var shop_lon_list = values.split('|||')[1];
 		var shop_name_list = values.split('|||')[2];
-		console.log(values);
-		console.log(shop_lat_list);
-		console.log(shop_lon_list);
+		
 		var splitstr = "@@@";
 		var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 		var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
