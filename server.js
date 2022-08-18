@@ -181,7 +181,7 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["building"="train_station"];out;';
     callApi_overpass(url_overpass);
 
     // データ取得までsleep
