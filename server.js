@@ -12,9 +12,12 @@ let url = 'https://akeajtagrjjhododqhpi.supabase.co';
 let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWFqdGFncmpqaG9kb2RxaHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA2NTA2MjIsImV4cCI6MTk3NjIyNjYyMn0.QyhEX0CaRWChJpqsfvogNWmGGYB-yNJt7XcKbE825yQ';
 const supabase = createClient(url, anon_key);
 let obj; // Jsonobj, select(),insert()で使用
+let main_obj = await supabase.from('items').select();
 let lat;
 let lon;
 
+let post_key = 0;
+let post_flg = 0;
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -72,7 +75,6 @@ serve(async (req) => {
     let people_val;
 
     async function callApi_wbgt(url_wbgt) {
-      // CSV各行読み込み
       const data = CSV.toJSON(await CSV.fetch(url_wbgt))[0];
       let keys = Object.keys(data);
       let time = data[""].substr(0, 10).replace(/\//g, "");
@@ -108,10 +110,16 @@ serve(async (req) => {
     return new Response(String(wbgt_val) + ',' + String(people_val));
   }
 
+  //　コーディネート初期化
+  if (req.method === "GET" && pathname === "/reset_obj") {
+    main_obj = await supabase.from('items').select();
+  }
+
   // コーディネートの投稿
   if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
     obj = await supabase.from('items').insert(requestJson); // itemsへデータ挿入
+    post_flg++;
     if (obj.error == null) {
       return new Response("finished");
     } else {
@@ -119,16 +127,26 @@ serve(async (req) => {
     }
   }
 
+  // データベース更新確認
+  async function base_select() {
+    if (post_key != post_flg) {
+      post_key = post_flg;
+      main_obj = await supabase.from('items').select();
+    }
+    return main_obj;
+  };
+
   // コーディネートの呼び出し（タイトル，コメント，画像データを返す）
   if (req.method === "POST" && pathname === "/code_info2") {
     const requestJson = await req.json();
     let id = Number(requestJson.id);
-    obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let title = obj.data[id].title;
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
-      return new Response(title + '@' + comment + '@' + photo_data);
+      let name = obj.data[id].name;
+      return new Response(name + '@' + title + '@' + comment + '@' + photo_data);
     } else {
       return new Response(obj.error.message);
     }
@@ -136,7 +154,7 @@ serve(async (req) => {
 
   // 現在の投稿数を確認
   if (req.method === "GET" && pathname === "/code_info") {
-    let obj = await supabase.from('items').select();
+    obj = await base_select();
     if (obj.error == null) {
       let max_id = obj.data.length-1;
       return new Response(max_id);
@@ -151,6 +169,7 @@ serve(async (req) => {
     if (obj.error == null) {
       let id = obj.data[id_del].id;
       obj = await supabase.from('items').delete().match({ id });
+      post_flg++;
       return new Response(id_del-1);
     }
   };
@@ -161,17 +180,15 @@ serve(async (req) => {
     const requestJson = await req.json();
     lat = requestJson.lat; // 緯度
     lon = requestJson.lon; // 経度
+    let type_name = requestJson.point_name; //
+    let type = type_name.split('@')[0];
+    let place = type_name.split('@')[1];
     //lat = 35;
     //lon = 135;
     let dist = 1; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
-      await fetch(url_overpass)
-        .then(response => response.json())
-        .then(d => {
-          shop_info = d;
-        });
       await fetch(url_overpass)
         .then(function(response){
           return response.json();
@@ -181,18 +198,12 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*1000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
-    callApi_overpass(url_overpass);
-
-    // データ取得までsleep
-    while (String(shop_info)=="undefined") {
-      const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await _sleep(500);
-    }
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["' + type + '"="' + place + '"];out;';
+    await callApi_overpass(url_overpass);
 
     let elements = shop_info.elements;
     let shop_lat = "", shop_lon = "", shop_name = "";
-    let sp_key = "@@@"
+    let sp_key = "@@@";
     for (let i in elements) {
       if (String(elements[i].lat) != "undefined" && String(elements[i].lon) != "undefined" && String(elements[i].tags.name) != "undefined") {
         if (i == elements.length - 1) { sp_key = "" }
@@ -211,7 +222,6 @@ serve(async (req) => {
     console.log(return_text);
     return new Response(return_text);
   };
-
 
   return serveDir(req, {
     fsRoot: "public",

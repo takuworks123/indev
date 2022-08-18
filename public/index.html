@@ -45,68 +45,63 @@
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
     }).addTo(mymap);
-    
-    L.marker([35.710063, 139.8107])
-      .addTo(mymap)
-      .bindPopup("スカイツリーはここ！")
-      .openPopup();
 	
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 	
 
+	function set_point(point_name){
+		async function onLocationFound(e) {
+			var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+			L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 
-	async function onLocationFound(e) {
-		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
+			var lat = e.latlng.lat; //緯度
+			var lon = e.latlng.lng; //経度
+			
+			const response = await fetch("/search_shop", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({lat, lon, point_name})
+			});
 
-		var lat = e.latlng.lat; //緯度
-        var lon = e.latlng.lng; //経度
+			const values = await response.text(); //場所をサーバー側から取得
+			var shop_lat_list = values.split('\n')[0];
+			var shop_lon_list = values.split('\n')[1];
+			var shop_name_list = values.split('\n')[2];
 
-		//場所を取得
-		const response = await fetch("/search_shop", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon})
-		});
+			var splitstr = "@@@";
+			var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+			var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+			var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 
-		const values = await response.text(); //場所をサーバー側から取得
-		var shop_lat_list = values.split('\n')[0];
-		var shop_lon_list = values.split('\n')[1];
-		var shop_name_list = values.split('\n')[2];
-
-		var splitstr = "@@@";
-		var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-		var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-		var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-
-		if (shop_lat_list_length === shop_lon_list_length){
-			if (shop_lon_list_length === shop_name_list_length){
-				for (i = 0; i < shop_lat_list_length; i++){
-					var shop_lat = shop_lat_list.split(splitstr)[i];
-					var shop_lon = shop_lon_list.split(splitstr)[i];
-					var shop_name = shop_name_list.split(splitstr)[i];
-					
-					L.marker([shop_lat, shop_lon])
-						.addTo(mymap)
-						.bindPopup(shop_name)
-						.openPopup();
+			if (shop_lat_list_length === shop_lon_list_length){
+				if (shop_lon_list_length === shop_name_list_length){
+					for (i = 0; i < shop_lat_list_length; i++){
+						var shop_lat = shop_lat_list.split(splitstr)[i];
+						var shop_lon = shop_lon_list.split(splitstr)[i];
+						var shop_name = shop_name_list.split(splitstr)[i];
+						
+						L.marker([shop_lat, shop_lon])
+							.addTo(mymap)
+							.bindPopup(shop_name)
+							.openPopup();
+					}
+				} else {
+					console.log("場所情報のエラー");
 				}
 			} else {
 				console.log("場所情報のエラー");
 			}
-		} else {
-			console.log("場所情報のエラー");
-		}
-		
 			
+				
+		}
+		function onLocationError(e) {
+			alert('位置情報を取得できませんでした。' + e.message);
+		}
+		mymap.on('locationfound', onLocationFound);
+		mymap.on('locationerror', onLocationError);
+		mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 	}
-	function onLocationError(e) {
-		alert('位置情報を取得できませんでした。' + e.message);
-	}
-	mymap.on('locationfound', onLocationFound);
-	mymap.on('locationerror', onLocationError);
-	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
   </script>
   
 <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
