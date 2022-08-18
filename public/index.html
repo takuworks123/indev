@@ -92,20 +92,13 @@
 	
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
-
-	var greenIcon= L.icon({
-		iconUrl:'loading.gif',
-		iconSize:[75,75],
-		iconAnchor:[37,75],
-		popupAnchor:[0,-70]
-	});
-
+	
 	//マップ上にボタンを設置
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
 		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
-		icon.style=greenIcon
+		icon.style='cursor:pointer'
 		icon.onclick=()=>{
 			mymap.flyTo(nowLocMaker._latlng);
 		}
@@ -116,7 +109,7 @@
 	L.control.locate = function(opts){
 	return new L.Control.Locate(opts);
 	}
-	L.control.locate({ position: 'topleft' }).addTo(mymap);
+	L.control.locate({ position: 'topleft', icon: 'loading.gif' }).addTo(mymap);
 
 	var lat = 35;
 	var lon = 135;
