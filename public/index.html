@@ -1,218 +1,204 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-
-
-  <title></title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
-  <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
-  <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
-  <style>
-    #mapid {
-      height: 500px;
-      width: 500px;
-      margin: auto;
-    }
-
-    .center-icon {
-      width: 12px !important;
-      height: 12px !important;
-      border-radius: 12px;
-      border: 3px solid #fdfdfd;
-      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-      background-color: #1E90FF;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>東京タワー(6)：Leaflet(Google Map,OpenStreetMap,国土地理院,Esri World Topo Map)</title>
+<link rel="stylesheet" href="//unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="//unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<!-- Font Awesome アイコン -->
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+<!-- メニューボタン（現在地表示、マーカーすべて表示） -->
+<link rel="stylesheet" href="css/easy-button.css"/>
+<script src="js/easy-button.js"></script>
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; right:0; left:0; }
+.divicon {	/* 文字ラベル */
+	display: table-cell;
+	color: #f00;
+	background-color: #ff4;
+	opacity: 0.7;
+	white-space: nowrap;
+	font-size: 12px;
+	font-weight: bold;
+}
+</style>
 </head>
-
 <body>
-  <h1>☀熱中症対策アプリ☀</h1>
-  <div>
-    <h2 style="display:inline;">クールマップ</h2>
-    <input id="mitei" type="text" />
-    <button id="search">検索</button>
-  </div>
-
-  <div>
-    <button class="click" id=home>ホーム</button>
-    <button class="click" id="wear">コーディネート</button>
-    <!--服装共有用SNS(?)に移動-->
-    <button class="click" id="map">クールマップ</button>
-    <!--涼が取れる施設を表示するマップに移動-->
-
-    <table><tr>
-      <td><div id="mapid"></div></td>
-
-      <td>
-        <p id="result"></p>
-        <img id="loading" src="map_icon/loading.gif" height="40" width="40" />
-        <button id = "one" style="display:inline;">施設</button>
-        <button id = "two" style="display:inline;">飲食</button>
-        <button id = "three" style="display:inline;">ショップ</button>
-        <table><tr>
-        
-      <table><tr>
-        <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
-      </tr></table>
-      <table><tr>
-        <td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
-      </tr></table>
-      <table><tr>
-        <td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
-      </tr></table>
-        <table><tr>
-        <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
-        <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
-      </tr></table>
-    </td>
-
-    </tr></table>
-
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<script type="text/javascript">
-	document.getElementById("loading").style.display ="none";
-
-	var mymap = L.map('mapid',{
-	center: [35.710063, 139.8107],
-	zoom: 16
+<div class="container"><div id="map"></div></div>
+<script>
+var map = L.map('map');
+var tileLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+	attribution: "<a href='https://developers.google.com/maps/documentation' target='_blank'>Google Map</a>"
+});
+tileLayer.addTo(map);
+// ---------------------------
+var place = [
+	{
+		'name': '東京タワー',
+		'lat': '35.6585753263022',
+		'lng': '139.7454324609718'
+	},{
+		'name': '増上寺',
+		'lat': '35.65737629074171',
+		'lng': '139.7482751425744'
+	},{
+		'name': '芝公園',
+		'lat': '35.65548717662271',
+		'lng': '139.74843437145282'
+	},{
+		'name': '赤羽橋駅',
+		'lat': '35.65496610534149',
+		'lng': '139.74394970889855'
+	},{
+		'name': '神谷町駅',
+		'lat': '35.66307981284523',
+		'lng': '139.7451975472575'
+	}
+]
+// ---------------------------
+var myIcon = L.icon({	/* アイコン */
+	iconUrl: 'icon/marker-small.png',
+	iconRetinaUrl: 'icon/marker-small.png',
+	iconSize: [16, 27],
+	iconAnchor: [7, 27],
+	popupAnchor: [1, -22],
+});
+iconMarkers = L.featureGroup();		// 全マーカーを画面内に収めるため
+for (var i = 0; i < place.length; i++) {
+	// 文字ラベルを表示
+	var divIcon = L.divIcon({
+		html: '<div class="divicon">' + place[i].name + '</div>',
+		iconSize: [0,0]
 	});
-	
-	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-	attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
-	}).addTo(mymap);
-	
-	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
-	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
-	
-	//マップ上にボタンを設置
-	L.Control.Locate = L.Control.extend({
-	onAdd: function(mymap) {
-		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
-		icon.style='cursor:pointer'
-		icon.onclick=()=>{
-			mymap.flyTo(nowLocMaker._latlng);
+	iconMarkers.addLayer( L.marker([place[i].lat, place[i].lng], {icon: myIcon}).addTo(map).bindPopup(place[i].name) );
+	L.marker([place[i].lat, place[i].lng], {icon: divIcon}).addTo(map);
+}
+map.fitBounds(iconMarkers.getBounds());	// 全マーカーを画面内に収める
+var Basic_Map = new Array();
+Basic_Map[ 0 ] = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+	attribution: "<a href='https://developers.google.com/maps/documentation' target='_blank'>Google Map</a>"
+});
+Basic_Map[ 1 ] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	continuousWorld: false
+});
+Basic_Map[ 2 ] = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+	attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+});
+Basic_Map[ 3 ] = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', {
+	attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+});
+Basic_Map[ 4 ] = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles © <a href="http://www.esrij.com/"> Esri Japan </a>'
+});
+var baseMap = {
+	"Google マップ": Basic_Map[ 0 ],
+	"OpenStreetMap": Basic_Map[ 1 ],
+	"国土地理院 標準地図": Basic_Map[ 2 ],
+	"国土地理院 写真": Basic_Map[ 3 ],
+	"Esri World Topo Map": Basic_Map[ 4 ]
+};
+L.control.layers(baseMap).addTo(map);
+// 現在地表示ボタン
+var watch_id = 0;
+var curMarker = null;	// 現在地マーカー
+var currentWatchBtn = null;
+L.easyButton({		// 現在地表示ボタン
+	states: [{
+		stateName: 'current-watch',
+		icon:	'fas fa-map-marker-alt',
+		title:	 '現在地',
+		onClick: function(btn, map) {
+			currentWatch();
+			btn.state('current-watch-reset');
+			currentWatchBtn = btn;
 		}
-		this._div.append(icon)
-		return this._div;
+	}, {
+		stateName: 'current-watch-reset',
+		icon:	'fa fa-user',
+		title:	 '現在地オフ',
+		onClick: function(btn, map) {
+			currentWatchReset();
+			btn.state('current-watch');
+		}
+	}]
+}).addTo( map );
+// マーカーすべて表示画面に戻るボタン
+L.easyButton('fa fa-reply-all', function(btn, easyMap) {
+	currentWatchReset();
+	if (currentWatchBtn) {
+		currentWatchBtn.state('current-watch');
+		currentWatchBtn = null;
 	}
+	map.fitBounds(iconMarkers.getBounds());	// 全マーカー画面に戻る
+}).addTo(map);
+// クリックした地点の緯度・経度、標高を表示
+map.on('click', onMapClick);
+var clickMarker = null;
+function onMapClick(e) {
+	if (clickMarker) {
+		map.removeLayer(clickMarker);
+	}
+	var lat = e.latlng.lat;
+	var lng = e.latlng.lng;
+	// 地理院地図サーバから標高を求める
+	// http://maps.gsi.go.jp/development/elevation_s.html
+	var src = 'https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=' + lng + '&lat=' + lat;
+	fetch(src)
+	.then((response) => {
+		return response.text();
 	})
-	L.control.locate = function(opts){
-	return new L.Control.Locate(opts);
-	}
-	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
-
-	var lat = 35;
-	var lon = 135;
-
-	async function onLocationFound(e) {
-		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
-		lat = e.latlng.lat; //緯度
-		lon = e.latlng.lng; //経度
-	}
-	function onLocationError(e) {
-		alert('位置情報を取得できませんでした。' + e.message);
-	}
-
-	mymap.on('locationfound', onLocationFound);
-	mymap.on('locationerror', onLocationError);
-	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
-
-	var makerList = [];
-
-	async function set_point(point_name){
-		document.getElementById("result").style.display ="none";
-		document.getElementById("loading").style.display ="block";
-
-		for (i = 0; i < makerList.length; i++){
-			mymap.removeLayer(makerList[i]);
+	.then((text) => {
+		var results = JSON.parse(text);
+		var popStr = '緯度：' + lat + '<br>経度：' + lng + '<br>標高：' + results.elevation + 'm';
+		clickMarker = L.marker(e.latlng).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
+	})
+	req.open("GET", src, false);
+	req.send(null)
+}
+function onMarkerClick(e) {
+	map.removeLayer(clickMarker);
+}
+function currentWatch() {
+	function success(pos) {
+		var lat = pos.coords.latitude;
+		var lng = pos.coords.longitude;
+		map.setView([ lat,lng ]);
+		// 現在地に表示するマーカー
+		if (curMarker) {
+			map.removeLayer(curMarker);
 		}
-		makerList = [];
-		console.log(point_name);
-
-		const response = await fetch("/search_shop", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon, point_name})
+		var curIcon = L.icon({	/* アイコン */
+			iconUrl: 'icon/hiking.png',
+			iconRetinaUrl: 'icon/hiking.png',
+			iconAnchor: [15, 34]
 		});
-
-		const values = await response.text(); //場所をサーバー側から取得
-		var shop_lat_list = values.split('\n')[0];
-		var shop_lon_list = values.split('\n')[1];
-		var shop_name_list = values.split('\n')[2];
-
-		if (shop_lat_list.length != 0){ //場所がある場合
-			var splitstr = "@@@";
-			var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-			var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-			var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-
-			if (shop_lat_list_length === shop_lon_list_length){
-				if (shop_lon_list_length === shop_name_list_length){
-					for (i = 0; i < shop_lat_list_length; i++){
-						var shop_lat = shop_lat_list.split(splitstr)[i];
-						var shop_lon = shop_lon_list.split(splitstr)[i];
-						var shop_name = shop_name_list.split(splitstr)[i];
-						
-						var maker = L.marker([shop_lat, shop_lon])
-							.addTo(mymap)
-							.bindPopup(shop_name)
-							//.openPopup();
-						makerList.push(maker);
-					}
-
-				} else {
-					console.log("場所情報のエラー");
-				}
-			} else {
-				console.log("場所情報のエラー");
-			}
-			
-			const result = document.querySelector("#result");
-			result.innerText = makerList.length + "件見つかりました！";
-		} else {
-			const result = document.querySelector("#result");
-			result.innerText = "該当する場所は見つかりませんでした";
-		}
-
-		document.getElementById("result").style.display ="block";
-		document.getElementById("loading").style.display ="none";
+		curMarker = L.marker([lat, lng], {icon: curIcon}).addTo(map);
 	}
+	function error(err) {
+		alert('位置情報を取得できませんでした。');
+	}
+	var options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0
+	};
+	if (watch_id == 0) {
+		watch_id = navigator.geolocation.watchPosition(success, error, options); // 現在地情報を定期的に
+	}
+}
+function currentWatchReset() {
+	if (watch_id > 0) {
+		navigator.geolocation.clearWatch(watch_id);
+		watch_id = 0;
+	}
+	if (curMarker) {
+		map.removeLayer(curMarker);
+		curMarker = null;
+	}
+}
 </script>
-
-  <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
-
-    <script type="module">
-      window.onload = async (event) => {
-      };
-
-      document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-        location.href = 'index.html';//homeのページに移動
-      }
-
-      document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
-        location.href = 'coordination.html';//コーディネートのページに移動
-      }
-
-    </script>
-
-    <style>
-      h2 {
-        color: cyan
-      }
-    </style>
-  </div>
 </body>
-
 </html>
