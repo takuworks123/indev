@@ -68,14 +68,14 @@
 		});
 		
 		const values = await response.text(); //場所をサーバー側から取得
-		const shop_lat = values.split('\n')[0];
-		const shop_lon = values.split('\n')[1];
-		const shop_name = values.split('\n')[2];
+		var shop_lat = values.split('\n')[0];
+		var shop_lon = values.split('\n')[1];
+		var shop_name = values.split('\n')[2];
 		shop_lat = 34.68665;
 		shop_lon = 135.13742;
 		shop_name = "テストな店"
 
-		L.marker([shop_lat, shop_lon])
+		L.marker(shop_lat, shop_lon)
 			.addTo(mymap)
 			.bindPopup(shop_name)
 			.openPopup();
