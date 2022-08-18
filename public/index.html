@@ -67,6 +67,16 @@
 			body: JSON.stringify({lat, lon})
 		});
 		
+		const values = await response.text(); //場所をサーバー側から取得
+		const shop_lat = values.split('\n')[0];
+		const shop_lon = values.split('\n')[1];
+		const shop_name = values.split('\n')[2];
+
+		L.marker([shop_lat, shop_lon])
+			.addTo(mymap)
+			.bindPopup(shop_name)
+			.openPopup();
+		
 	}
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
