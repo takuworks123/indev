@@ -131,16 +131,19 @@
 	var makerList = [];
 
   mymap.on('click', onMapClick);
-
+  var clickedLoc = null;
   function onMapClick(e) {
       //地図のclickイベント呼び出される
       //クリック地点の座標にマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
-      clickedLoc = L.marker(e.latlng).on('click', onMarkerClick).addTo(mymap);
+      if (clickedLoc == null){
+        clickedLoc = L.marker(e.latlng).on('click', onMarkerClick).addTo(mymap);
+      }
     }
   function onMarkerClick(e) {
     //マーカーのclickイベント呼び出される
     //クリックされたマーカーを地図のレイヤから削除する
     map.removeLayer(clickedLoc)
+    clickedLoc = null;
   }
 
 	async function set_point(point_name){
