@@ -42,15 +42,6 @@
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script type="text/javascript">
-	  var mymap = L.map('mapid', {
-        center: [shop_lat, shop_lon],
-        zoom: 16
-      });
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
-      }).addTo(mymap);
-
 	  //位置情報を取得
 	  navigator.geolocation.getCurrentPosition(success, error);
 
@@ -72,14 +63,16 @@
 		const shop_name = values.split('\n')[2];
 		shop_lat = 34.1316;
 		shop_lon = 136.3006;
+		shop_name = "テストな店"
 
-		L.marker([shop_lat, shop_lon]).addTo(mymap).on('click', function (e) {
-			popup
-			.setLatLng(e.latlng)
-			.setContent(shop_name)
-			.openOn(mymap)
+		var mymap = L.map('mapid', {
+			center: [shop_lat, shop_lon],
+			zoom: 16
+		});
 
-
+		L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+			attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
+		}).addTo(mymap);
 
 		function onLocationFound(e) {
 			var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
@@ -91,6 +84,13 @@
 		mymap.on('locationfound', onLocationFound);
 		mymap.on('locationerror', onLocationError);
 		mymap.locate({ setView: true, maxZoom: 16, timeout: 20000 });
+
+		L.marker([shop_lat, shop_lon]).addTo(mymap).on('click', function (e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent(shop_name)
+				.openOn(mymap)
+
     </script>
 
     <p>右に施設の選択画面があってクリックすると詳細がみれる?</p>
