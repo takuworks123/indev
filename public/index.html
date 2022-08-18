@@ -92,7 +92,9 @@
 	mymap.on('locationerror', onLocationError);
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 
-	function set_point(point_name){
+	function set_point(point){
+		var point_name = point;
+
 		console.log(point_name);
 		const response = await fetch("/search_shop", {
 			method: "POST",
