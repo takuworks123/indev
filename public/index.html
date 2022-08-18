@@ -61,7 +61,8 @@
       const shop_lat = values.split('\n')[0];
       const shop_lon = values.split('\n')[1];
       const shop_name = values.split('\n')[2];
-
+	  shop_lat = 34.1316;
+	  shop_lon = 136.3006;
 
       var mymap = L.map('mapid', {
         center: [shop_lat, shop_lon],
