@@ -109,7 +109,8 @@
 	L.control.locate = function(opts){
 	return new L.Control.Locate(opts);
 	}
-	L.control.locate({ position: 'topleft', icon: 'loading.gif' }).addTo(mymap);
+	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
 
 	var lat = 35;
 	var lon = 135;
