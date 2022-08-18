@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h1>☀熱中症対策アプリ☀</h1>
+  <h1>☀熱中症対策アプリ1☀</h1>
   <div>
     <button class="click" id="home">ホーム</button>
     <button class="click" id="wear">コーディネート</button>
@@ -35,18 +35,6 @@
 
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script type="module">
-      window.onload = async (event) => {
-        const tips = await (await fetch("/tips")).text();//サーバーからtipsをもらってくる
-        alert(tips);//お役立ち情報を表示
-      };
-
-      document.querySelector("#wear").onclick = async (event) => {
-        location.href = 'coordination.html';//コーディネートのページに移動
-      }
-
-      document.querySelector("#map").onclick = async (event) => {//マップボタンが押されたときの挙動
-        location.href = 'map.html';//マップのページに移動
-      }
 
       document.querySelector("#wbgt").onclick = async (event) => {
         //位置情報を取得
@@ -63,7 +51,8 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({lat, lon})
           });
-
+		  alert(lat);
+		  alert(lon);
           const values = await response.text(); //暑さ指数をサーバー側から取得
           const wbgt = values.split(',')[0];
           const people = values.split(',')[1];
