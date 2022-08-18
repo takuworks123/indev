@@ -56,6 +56,7 @@
 	function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
+		alert(e.latlng.lat, e.latlng.lng);
 	}
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
