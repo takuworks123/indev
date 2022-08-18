@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
   <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
   <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <style>
     #mapid {
       height: 500px;
@@ -114,12 +115,6 @@
 	}
 	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
-
-
-	var popup = L.popup().setContent('ポップアップメッセージ');
-      L.easyButton('fas fa-comment-alt', function(btn, easyMap){
-        popup.setLatLng(easyMap.getCenter()).openOn(easyMap);
-      }).addTo(map);
 
 
 
