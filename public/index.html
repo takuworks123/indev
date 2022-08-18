@@ -53,10 +53,10 @@
           <p id="result"></p>
           <img id="loading" src="map_icon/loading.gif" height="40" width="40" />
 
-		  <select name="example">
-			<option value="サンプル1">サンプル1</option>
-			<option value="サンプル2">サンプル2</option>
-			<option value="サンプル3">サンプル3</option>
+		  <select id="range">
+			<option value="1">1km</option>
+			<option value="5">5km</option>
+			<option value="10">10km</option>
 		  </select>
 
           <button id = "one" style="display:inline;">施設</button>
@@ -125,6 +125,7 @@
 	async function set_point(point_name){
 		document.getElementById("result").style.display ="none";
 		document.getElementById("loading").style.display ="block";
+		var range = document.getElementById("range").value;
 
 		for (i = 0; i < makerList.length; i++){
 			mymap.removeLayer(makerList[i]);
@@ -135,7 +136,7 @@
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon, point_name})
+			body: JSON.stringify({lat, lon, point_name, range})
 		});
 
 		const values = await response.text(); //場所をサーバー側から取得
@@ -170,7 +171,7 @@
 			}
 			
 			const result = document.querySelector("#result");
-			result.innerText = makerList.length + "件見つかりました！";
+			result.innerText = range + "km圏内で" + makerList.length + "件見つかりました！";
 		} else {
 			const result = document.querySelector("#result");
 			result.innerText = "該当する場所は見つかりませんでした";

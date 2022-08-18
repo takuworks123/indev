@@ -185,7 +185,7 @@ serve(async (req) => {
     let place = type_name.split('@')[1];
     //lat = 35;
     //lon = 135;
-    let dist = 1; //km
+    let dist = requestJson.range; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
