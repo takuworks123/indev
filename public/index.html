@@ -48,7 +48,7 @@
 
       <td>
 		<p id="result"></p>
-		<img id="loading" src="loading.gif" height="20" width="20" />
+		<img id="loading" src="loading.gif" height="40" width="40" />
         <button id = "one" style="display:inline;">施設</button>
         <button id = "two" style="display:inline;">飲食</button>
         <button id = "three" style="display:inline;">ショップ</button>
@@ -79,7 +79,7 @@
 
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script type="text/javascript">
-	document.getElementById("result").style.display ="none";
+	document.getElementById("loading").style.display ="none";
 
 	var mymap = L.map('mapid',{
 	center: [35.710063, 139.8107],
@@ -114,7 +114,7 @@
 	var makerList = [];
 
 	async function set_point(point_name){
-		document.getElementById("result").style.display ="block";
+		document.getElementById("loading").style.display ="block";
 
 		for (i = 0; i < makerList.length; i++){
 			mymap.removeLayer(makerList[i]);
@@ -167,7 +167,7 @@
 			result.innerText = "該当する場所は見つかりませんでした";
 		}
 
-		document.getElementById("result").style.display ="none";
+		document.getElementById("loading").style.display ="none";
 	}
 </script>
 
