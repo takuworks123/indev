@@ -210,9 +210,11 @@ serve(async (req) => {
     let return_text = shop_lat + '\n' + shop_lon + '|' + shop_name;
     //console.log(return_text);
 
-    abc = new Array();
-    for (i=0; i<10; i++) abc[i] = Math.pow(2,i);
-    return new Response(abc);
+    const data = [];
+    for (i=0; i<10; i++) {
+      data.push(String(Math.pow(2,i)));
+    }
+    return new Response(data);
   };
 
 

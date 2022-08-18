@@ -64,8 +64,7 @@
         var lon = e.latlng.lng; //経度
 
 		//場所を取得
-		response = new Array();
-		response = await fetch("/search_shop", {
+		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({lat, lon})
