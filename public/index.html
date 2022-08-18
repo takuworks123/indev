@@ -114,7 +114,7 @@
 	var makerList = [];
 
 	async function set_point(point_name){
-		document.getElementById("result").style.display ="block";
+		document.getElementById("result").style.display ="none";
 		document.getElementById("loading").style.display ="block";
 
 		for (i = 0; i < makerList.length; i++){
@@ -168,7 +168,7 @@
 			result.innerText = "該当する場所は見つかりませんでした";
 		}
 
-		document.getElementById("result").style.display ="none";
+		document.getElementById("result").style.display ="block";
 		document.getElementById("loading").style.display ="none";
 	}
 </script>
