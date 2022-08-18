@@ -59,7 +59,7 @@
 		body: JSON.stringify({lat, lon})
 	  });
 
-	  const values = await response.text(); //暑さ指数をサーバー側から取得
+	  const values = await response.text(); //場所をサーバー側から取得
       const shop_lat = values.split('\n')[0];
       const shop_lon = values.split('\n')[1];
       const shop_name = values.split('\n')[2];

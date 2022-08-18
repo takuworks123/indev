@@ -161,8 +161,8 @@ serve(async (req) => {
     const requestJson = await req.json();
     lat = requestJson.lat; // 緯度
     lon = requestJson.lon; // 経度
-    lat = 35;
-    lon = 135;
+    //lat = 35;
+    //lon = 135;
     let dist = 1; //km
 
     let shop_info;
