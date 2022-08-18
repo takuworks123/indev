@@ -56,17 +56,13 @@
       }).addTo(mymap);
 
 	  //位置情報を取得
-	  navigator.geolocation.getCurrentPosition(success, error);
+	  //navigator.geolocation.getCurrentPosition(success, error);
 
 	  //位置情報の取得に成功したら
 	  async function success(position) {
 		var lat = position.coords.latitude; //緯度
 		var lon = position.coords.longitude; //経度
 			
-		L.marker(lat, lon)
-			.addTo(mymap)
-			.bindPopup("スカイツリーはここ！")
-			.openPopup();
 
 
 
@@ -80,6 +76,11 @@
       mymap.on('locationfound', onLocationFound);
       mymap.on('locationerror', onLocationError);
       mymap.locate({ setView: true, maxZoom: 16, timeout: 20000 });
+
+	  L.marker(e.latlng)
+		.addTo(mymap)
+		.bindPopup("スカイツリーはここ！")
+		.openPopup();
     </script>
 
     <p>右に施設の選択画面があってクリックすると詳細がみれる?</p>
