@@ -76,11 +76,13 @@
 		var shop_lat_list = values.split('|||')[0];
 		var shop_lon_list = values.split('|||')[1];
 		var shop_name_list = values.split('|||')[2];
-		
+
 		var splitstr = "@@@";
 		var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 		var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 		var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+
+		console.log(shop_lat_list_length, shop_lon_list_length, shop_name_list_length)
 
 		if (shop_lat_list_length == shop_lon_list_length == shop_name_list_length){
 			for (i = 0; i < shop_lat_list_length; i++){
