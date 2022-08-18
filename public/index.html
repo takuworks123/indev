@@ -6,65 +6,86 @@
 
 
   <title></title>
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
   <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
   <link rel="stylesheet" href="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.css">
   <style>
-    #mapid { height: 400px; width:400px; }
+    #mapid {
+      height: 500px;
+      width: 500px;
+      margin: auto;
+    }
 
-	.center-icon {
-		width: 12px !important;
-		height: 12px !important;
-		border-radius: 12px;
-		border: 3px solid #fdfdfd;
-		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-		background-color: #1E90FF;
-	}
-	</style>
+    .center-icon {
+      width: 12px !important;
+      height: 12px !important;
+      border-radius: 12px;
+      border: 3px solid #fdfdfd;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      background-color: #1E90FF;
+    }
+  </style>
 </head>
 
 <body>
   <h1>☀熱中症対策アプリ☀</h1>
-  <h2 style="display:inline;">クールマップ</h2>
-  <input id="mitei" type="text" />
-  <button id="search">検索</button>
+  <div>
+    <h2 style="display:inline;">クールマップ</h2>
+    <input id="mitei" type="text" />
+    <button id="search">検索</button>
+  </div>
 
-<div><button id = home>ホーム</button>
-<button id = wear>コーディネート</button><!--服装共有用SNS(?)に移動-->
-<button id = map>クールマップ</button><!--涼が取れる施設を表示するマップに移動-->
+  <div>
+    <button class="click" id=home>ホーム</button>
+    <button class="click" id="wear">コーディネート</button>
+    <!--服装共有用SNS(?)に移動-->
+    <button class="click" id="map">クールマップ</button>
+    <!--涼が取れる施設を表示するマップに移動-->
 
-<div id="mapid"></div>
+    <table><tr>
+      <td><div id="mapid"></div></td>
 
-  <table><tr>
-	<td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
-  </tr></table>
-  <table><tr>
-	<td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
-  </tr></table>
-  <table><tr>
-	<td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
-  </tr></table>
-	<table><tr>
-	<td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
-	<td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
-  </tr></table>
+      <td>
+		<p id="result"></p>
+        <button id = "one" style="display:inline;">施設</button>
+        <button id = "two" style="display:inline;">飲食</button>
+        <button id = "three" style="display:inline;">ショップ</button>
+        <table><tr>
+        
+      <table><tr>
+        <td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>
+      </tr></table>
+      <table><tr>
+        <td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>
+      </tr></table>
+        <table><tr>
+        <td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>
+        <td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>
+      </tr></table>
+    </td>
 
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-  <script type="text/javascript">
-    var mymap = L.map('mapid',{
-      center: [35.710063, 139.8107],
-      zoom: 16
-    });
-    
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-      attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
-    }).addTo(mymap);
+    </tr></table>
+
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script type="text/javascript">
+	var mymap = L.map('mapid',{
+	center: [35.710063, 139.8107],
+	zoom: 16
+	});
+	
+	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+	attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>"
+	}).addTo(mymap);
 	
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
@@ -126,48 +147,46 @@
 							//.openPopup();
 						makerList.push(maker);
 					}
+
 				} else {
 					console.log("場所情報のエラー");
 				}
 			} else {
 				console.log("場所情報のエラー");
 			}
+
+			const result = document.querySelector("#result");
+			result.innerText = "${previousWord}件見つかりました！";
 		} else {
+			const result = document.querySelector("#result");
+			result.innerText = "該当する場所は見つかりませんでした";
 			alert("該当する場所は見つかりませんでした");
 		}
 	}
-  </script>
-  
-<p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
+</script>
 
+  <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
 
-<a href="https://www.wbgt.env.go.jp/wbgt_data.php"> 環境省 熱中症予防情報サイト</a><!--参考元-->
-<a href="https://tenki.jp/">tenki.jp/ </a>
- 
-  <script type="module">
-    window.onload = async (event) => {
-    };
-    
-    document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
-      location.href = 'index.html';//homeのページに移動
-    }
+    <script type="module">
+      window.onload = async (event) => {
+      };
 
-    document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
-      location.href = 'coordination.html';//コーディネートのページに移動
-    }
+      document.querySelector("#home").onclick = async (event) => {//homeボタンが押されたときの挙動
+        location.href = 'index.html';//homeのページに移動
+      }
 
-  </script>
+      document.querySelector("#wear").onclick = async (event) => {//コーディネートボタンが押されたときの挙動
+        location.href = 'coordination.html';//コーディネートのページに移動
+      }
 
-<style>
-  h1{
-    color: red
-  }
-  h2{
-    color:cyan
-  }
+    </script>
 
-</style>
-
+    <style>
+      h2 {
+        color: cyan
+      }
+    </style>
+  </div>
 </body>
 
 </html>
