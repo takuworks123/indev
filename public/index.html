@@ -82,20 +82,21 @@
 		var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 		var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
 
-		console.log(shop_lat_list_length, shop_lon_list_length, shop_name_list_length);
-
-		if (shop_lat_list_length === shop_lon_list_length === shop_name_list_length){
-			for (i = 0; i < shop_lat_list_length; i++){
-				var shop_lat = shop_lat_list.split(splitstr)[i];
-				var shop_lon = shop_lon_list.split(splitstr)[i];
-				var shop_name = shop_name_list.split(splitstr)[i];
-				
-				L.marker([shop_lat, shop_lon])
-					.addTo(mymap)
-					.bindPopup(shop_name)
-					.openPopup();
+		if (shop_lat_list_length === shop_lon_list_length){
+			if (shop_lon_list_length === shop_name_list_length){
+				for (i = 0; i < shop_lat_list_length; i++){
+					var shop_lat = shop_lat_list.split(splitstr)[i];
+					var shop_lon = shop_lon_list.split(splitstr)[i];
+					var shop_name = shop_name_list.split(splitstr)[i];
+					
+					L.marker([shop_lat, shop_lon])
+						.addTo(mymap)
+						.bindPopup(shop_name)
+						.openPopup();
+				}
+			} else {
+				console.log("場所情報のエラー");
 			}
-
 		} else {
 			console.log("場所情報のエラー");
 		}
