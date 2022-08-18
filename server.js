@@ -198,7 +198,7 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["' + type + '"="' + place + '"];out;';
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*1000+',' + lat + ',' + lon + ')["' + type + '"="' + place + '"];out;';
     await callApi_overpass(url_overpass);
 
     let elements = shop_info.elements;
