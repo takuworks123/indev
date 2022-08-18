@@ -96,9 +96,9 @@
 	// 現在地のマーカーを設定
 	var myMarker;
 	mymap.locate({setView:true})
-	mymap.on('locationfound', (e)=>{
-	myMarker = L.marker([e.latitude, e.longitude]).addTo(mymap);
-	})
+	//mymap.on('locationfound', (e)=>{
+	//myMarker = L.marker([e.latitude, e.longitude]).addTo(mymap);
+	//})
 
 	//マップ上にボタンを設置
 	L.Control.Locate = L.Control.extend({
