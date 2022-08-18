@@ -163,7 +163,7 @@ serve(async (req) => {
     lon = requestJson.lon; // 経度
     //lat = 35;
     //lon = 135;
-    let dist = 1; //km
+    let dist = 10; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {

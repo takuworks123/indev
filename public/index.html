@@ -51,6 +51,9 @@
       .bindPopup("スカイツリーはここ！")
       .openPopup();
 	
+	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
+	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
+	
 
 
 	async function onLocationFound(e) {
