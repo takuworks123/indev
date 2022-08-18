@@ -69,15 +69,15 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 	
-	let lat = 35;
-	let lon = 135;
+	var lat = 35;
+	var lon = 135;
 
 	console.log(lat);
 
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
-
+		console.log("^^");
 		lat = e.latlng.lat; //緯度
 		lon = e.latlng.lng; //経度
 	}
