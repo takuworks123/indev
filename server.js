@@ -207,14 +207,8 @@ serve(async (req) => {
     }
 
     // return_text : 属性\n区切り，項目@@@区切り
-    let return_text = shop_lat + '\n' + shop_lon + '|' + shop_name;
-    //console.log(return_text);
-
-    const data = [];
-    for (i=0; i<10; i++) {
-      data.push(String(Math.pow(2,i)));
-    }
-    return new Response(data);
+    let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
+    console.log(return_text);
   };
 
 

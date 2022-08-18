@@ -70,29 +70,35 @@
 			body: JSON.stringify({lat, lon})
 		});
 
-		
-
 		console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		for (i=0; i<response.length; i++) console.log(response[i]);
 
-		/*
 		const values = await response.text(); //場所をサーバー側から取得
 		var shop_lat_list = values.split('\n')[0];
 		var shop_lon_list = values.split('\n')[1];
 		var shop_name_list = values.split('\n')[2];
-		var lat = shops_lat.split('\n')[0];
-		var shops_lon = values.split('@@@')[1];
-		var shops_name = values.split('@@@')[2];
-		//shop_lat = "34.68665";
-		//shop_lon = "135.13742";
-		//shop_name = "テストな店"
-		L.marker([shop_lat, shop_lon])
-			.addTo(mymap)
-			.bindPopup(shop_name)
-			.openPopup();
 		
-		*/
+		var splitstr = "@@@";
+		var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+		var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+		var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+
+		if (shop_lat_list_length == shop_lon_list_length == shop_name_list_length){
+			for (i = 0; i < shop_lat_list_length; i++){
+				var shop_lat = shop_lat_list.split(splitstr)[i];
+				var shop_lon = shop_lon_list.split(splitstr)[i];
+				var shop_name = shop_name_list.split(splitstr)[i];
+				
+				L.marker([shop_lat, shop_lon])
+					.addTo(mymap)
+					.bindPopup(shop_name)
+					.openPopup();
+			}
+
+		} else {
+			console.log("場所情報のエラー");
+		}
 		
+			
 	}
 	function onLocationError(e) {
 		alert('位置情報を取得できませんでした。' + e.message);
