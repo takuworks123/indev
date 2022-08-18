@@ -95,14 +95,13 @@
 	}
 	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
-	
+
 	var lat = 35;
 	var lon = 135;
 
 	async function onLocationFound(e) { //現在地取得
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-		L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
-		
+		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 		lat = e.latlng.lat; //緯度
 		lon = e.latlng.lng; //経度
 	}
@@ -153,12 +152,8 @@
 						var maker = L.marker([shop_lat, shop_lon])
 							.addTo(mymap)
 							.bindPopup(shop_name)
-							//.openPopup();
 						makerList.push(maker);
 					}
-      console.log(shop_lat_list.split("@@@").length);
-      console.log(shop_lat_list_length);
-
 
 				} else {
 					console.log("場所情報のエラー");

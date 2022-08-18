@@ -205,15 +205,17 @@ serve(async (req) => {
     let shop_lat = "", shop_lon = "", shop_name = "";
     let sp_key = "@@@";
     for (let i in elements) {
-      if (String(elements[i].lat) != "undefined" && String(elements[i].lon) != "undefined" && String(elements[i].tags.name) != "undefined") {
-        if (i == elements.length - 1) { sp_key = "" }
-        shop_lat += String(elements[i].lat) + sp_key;
-        shop_lon += String(elements[i].lon) + sp_key;
+      if (i == elements.length - 1) { sp_key = "" }
+      shop_lat += String(elements[i].lat) + sp_key;
+      shop_lon += String(elements[i].lon) + sp_key;
+      if (String(elements[i].tags.name) != "undefined") {
         if (String(elements[i].tags.branch) != 'undefined') {
           shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
         } else {
           shop_name += elements[i].tags.name + sp_key;
         }
+      } else {
+        shop_name += place + sp_key;
       }
     }
 
