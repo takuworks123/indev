@@ -163,7 +163,7 @@ serve(async (req) => {
     lon = requestJson.lon; // 経度
     //lat = 35;
     //lon = 135;
-    let dist = 0.1; //km
+    let dist = 1; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
@@ -181,7 +181,7 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*1000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
     callApi_overpass(url_overpass);
 
     // データ取得までsleep
