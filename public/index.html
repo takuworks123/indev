@@ -69,7 +69,7 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 	
-	var lat = 33;
+	var lat = 35;
 	var lon = 135;
 
 	async function onLocationFound(e) {
@@ -113,11 +113,10 @@
 					var shop_lon = shop_lon_list.split(splitstr)[i];
 					var shop_name = shop_name_list.split(splitstr)[i];
 					
-					maker = L.marker([shop_lat, shop_lon])
+					L.marker([shop_lat, shop_lon])
 						.addTo(mymap)
 						.bindPopup(shop_name)
 						.openPopup();
-					markerList.push(marker);
 				}
 			} else {
 				console.log("場所情報のエラー");
