@@ -181,7 +181,7 @@ serve(async (req) => {
           shop_info = jsonData;
         });
     };
-    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["building"="train_station"];out;';
+    const url_overpass = 'http://overpass-api.de/api/interpreter?data=[out:json];node(around:'+dist*10000+',' + lat + ',' + lon + ')["amenity"="fast_food"];out;';
     callApi_overpass(url_overpass);
 
     // データ取得までsleep
@@ -206,7 +206,7 @@ serve(async (req) => {
       }
     }
 
-    // return_text : 属性\n区切り，項目@@@区切り
+    // return_text : 属性|区切り，項目@@@区切り
     let return_text = shop_lat + '|' + shop_lon + '|' + shop_name;
     console.log(return_text);
     return new Response(return_text);
