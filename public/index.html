@@ -73,9 +73,9 @@
 		console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
 		const values = await response.text(); //場所をサーバー側から取得
-		var shop_lat_list = values.split('\n')[0];
-		var shop_lon_list = values.split('\n')[1];
-		var shop_name_list = values.split('\n')[2];
+		var shop_lat_list = values.split('|||')[0];
+		var shop_lon_list = values.split('|||')[1];
+		var shop_name_list = values.split('|||')[2];
 		console.log(shop_lon_list);
 		var splitstr = "@@@";
 		var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
