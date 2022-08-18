@@ -53,53 +53,7 @@
           });
 		  alert(lat);
 		  alert(lon);
-          const values = await response.text(); //暑さ指数をサーバー側から取得
-          const wbgt = values.split(',')[0];
-          const people = values.split(',')[1];
-          const para = document.querySelector("#wbgt_val");
-          const message = document.querySelector("#wbgt_message");//メッセージの変数
-          const deadman = document.querySelector("#heatstroke");//搬送者数
-          //暑さ指数に応じて色とかフォントサイズを変えたい
-
-          if(Number(wbgt) >= 31){
-            document.getElementById("wbgt_val").style.fontSize = "40px" ;
-            document.getElementById("wbgt_val").style.color = "black" ;
-            document.getElementById("wbgt_val").style.backgroundColor = "red" ;
-            document.getElementById("wbgt_val").style.textAlign = "center" ;
-            document.getElementById("wbgt_val").style.border = "none" ;
-            document.getElementById("wbgt_message").style.color = "red" ;
-            message.innerText = "非常に危険なので外出や運動は避けましょう!"
-          }else if(Number(wbgt) >= 28){
-            document.getElementById("wbgt_val").style.fontSize = "40px" ;
-            document.getElementById("wbgt_val").style.color = "black" ;
-            document.getElementById("wbgt_val").style.backgroundColor = "orange" ;
-            document.getElementById("wbgt_val").style.textAlign = "center" ;
-            document.getElementById("wbgt_val").style.border = "none" ;
-            message.innerText = "10分おきには水分、塩分を取り休憩することを心がけましょう"
-          }else if(Number(wbgt) >= 25){
-            document.getElementById("wbgt_val").style.fontSize = "40px" ;
-            document.getElementById("wbgt_val").style.color = "black" ;
-            document.getElementById("wbgt_val").style.backgroundColor = "yellow" ;
-            document.getElementById("wbgt_val").style.textAlign = "center" ;
-            document.getElementById("wbgt_val").style.border = "none" ;
-            message.innerText = "のどが渇いたら水分を取ることを心がけましょう"
-          }else {
-            document.getElementById("wbgt_val").style.fontSize = "40px" ;
-            document.getElementById("wbgt_val").style.color = "black" ;
-            document.getElementById("wbgt_val").style.backgroundColor = "aqua" ;
-            document.getElementById("wbgt_val").style.textAlign = "center" ;
-            document.getElementById("wbgt_val").style.border = "none" ;
-            message.innerText = "危険性は低いですが十分注意しましょう"
-          }
           
-          document.getElementById("heatstroke").style.fontSize = "40px" ;
-          document.getElementById("heatstroke").style.color = "white" ;
-          document.getElementById("heatstroke").style.backgroundColor = "purple" ;
-          document.getElementById("heatstroke").style.textAlign = "center" ;
-          document.getElementById("heatstroke").style.border = "none" ;
-          
-          para.innerText = "あなたのまわりの暑さ指数: "+`${wbgt}`; 
-          deadman.innerText = "あなたのまわりの搬送者数:" + `${people}`;
         }
 
         //位置情報の取得に失敗したら
