@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 
 
-  <title></title>
+  <title>クールマップ</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
   <script src="//rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script>
@@ -38,7 +38,7 @@
   </div>
 
   <div>
-    <button class="click" id=home>ホーム</button>
+    <button class="click" id="home">ホーム</button>
     <button class="click" id="wear">コーディネート</button>
     <!--服装共有用SNS(?)に移動-->
     <button class="click" id="map">クールマップ</button>
@@ -47,30 +47,37 @@
 
     <table><tr>
       <td><div id="mapid"></div></td>
-
       <td>
+        <table><tr>
+          <td><p>現在地から検索範囲を指定</p></td>
+          <td><select id="dist">
+            <option value="0.5">500m</option>
+            <option value="1">1km</option>
+            <option value="2">2km</option>
+            <option value="5">5km</option>
+            <option value="10" selected>10km</option>
+            <option value="15">15km</option>
+            <option value="150">150km（非推奨）</option>
+          </select></td>
+        </tr></table>
         <table><tr>
           <p id="result"></p>
           <img id="loading" src="map_icon/loading.gif" height="40" width="40" />
-
-		  <select id="range">
-			<option value="1">1km圏内</option>
-			<option value="5">5km圏内</option>
-			<option value="10">10km圏内</option>
-			<option value="20">20km圏内</option>
-			<option value="50">50km圏内</option>
-		  </select>
-
           <button id = "one" style="display:inline;">施設</button>
           <button id = "two" style="display:inline;">飲食</button>
           <button id = "three" style="display:inline;">ショップ</button>
+          <button id = "four" style="display:inline;">他の属性</button>
         </tr></table>
         <div id="buttons"></div>
       </td>
     </tr></table>
+  </div>
 
 
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.searchabledropdown-1.0.8.min.js"></script>
+
 <script type="text/javascript">
 	document.getElementById("loading").style.display ="none";
 
@@ -85,7 +92,7 @@
 	
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
-	
+
 	//マップ上にボタンを設置
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
@@ -105,9 +112,6 @@
 	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
 
-	var lat = 35;
-	var lon = 135;
-
 	async function onLocationFound(e) { //現在地取得
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
@@ -115,6 +119,8 @@
 		lon = e.latlng.lng; //経度
 	}
 	function onLocationError(e) {
+    lat = 35;
+	  lon = 135;
 		alert('位置情報を取得できませんでした。' + e.message);
 	}
 
@@ -124,10 +130,22 @@
 
 	var makerList = [];
 
+  map.on('click', onMapClick);
+
+  function onMapClick(e) {
+      //地図のclickイベント呼び出される
+      //クリック地点の座標にマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
+      clickedLoc = L.marker(e.latlng).on('click', onMarkerClick).addTo(mymap);
+    }
+  function onMarkerClick(e) {
+    //マーカーのclickイベント呼び出される
+    //クリックされたマーカーを地図のレイヤから削除する
+    map.removeLayer(clickedLoc)
+  }
+
 	async function set_point(point_name){
 		document.getElementById("result").style.display ="none";
 		document.getElementById("loading").style.display ="block";
-		var range = document.getElementById("range").value;
 
 		for (i = 0; i < makerList.length; i++){
 			mymap.removeLayer(makerList[i]);
@@ -135,53 +153,61 @@
 		makerList = [];
 		console.log(point_name);
 
+
+    // 検索距離を取得
+    let dist = Number(document.getElementById("dist").value);
+
+    // マップ視界移動
+    if (dist<=3){
+      mymap.setView([lat, lon], 12);
+    }else if (dist>3 && dist<=10){
+      mymap.setView([lat, lon], 11);
+    }else if (dist>10 && dist<20){
+      mymap.setView([lat, lon], 10);
+    }else{
+      mymap.setView([lat, lon], 7);
+    }
+
+
 		const response = await fetch("/search_shop", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({lat, lon, point_name, range})
+			body: JSON.stringify({lat, lon, point_name, dist})
 		});
 
-		const values = await response.text(); //場所をサーバー側から取得
-		var shop_lat_list = values.split('\n')[0];
-		var shop_lon_list = values.split('\n')[1];
-		var shop_name_list = values.split('\n')[2];
+		let values = await response.text(); //場所をサーバー側から取得
+    if (values != "None"){
+      values = values.split('\n');
+      var splitstr = "@@@";
+      var shop_lat_list = values[0].split(splitstr);
+      var shop_lon_list = values[1].split(splitstr);
+      var shop_name_list = values[2].split(splitstr);
 
-		if (shop_lat_list.length != 0){ //場所がある場合
-			var splitstr = "@@@";
-			var shop_lat_list_length = ( shop_lat_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-			var shop_lon_list_length = ( shop_lon_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
-			var shop_name_list_length = ( shop_name_list.match( new RegExp( splitstr, "g" ) ) || [] ).length + 1;
+      for (let i in shop_lat_list){
+        var shop_lat = shop_lat_list[i];
+        var shop_lon = shop_lon_list[i];
+        var shop_name = shop_name_list[i];
 
-			if (shop_lat_list_length === shop_lon_list_length){
-				if (shop_lon_list_length === shop_name_list_length){
-					for (i = 0; i < shop_lat_list_length; i++){
-						var shop_lat = shop_lat_list.split(splitstr)[i];
-						var shop_lon = shop_lon_list.split(splitstr)[i];
-						var shop_name = shop_name_list.split(splitstr)[i];
-						
-						var maker = L.marker([shop_lat, shop_lon])
-							.addTo(mymap)
-							.bindPopup(shop_name)
-						makerList.push(maker);
-					}
-
-				} else {
-					console.log("場所情報のエラー");
-				}
-			} else {
-				console.log("場所情報のエラー");
-			}
-			
-			const result = document.querySelector("#result");
-			result.innerText = range + "km圏内で" + makerList.length + "件見つかりました！";
-		} else {
+        var maker = L.marker([shop_lat, shop_lon])
+          .addTo(mymap)
+          .bindPopup(shop_name)
+        makerList.push(maker);
+      }
+      const result = document.querySelector("#result");
+			result.innerText = makerList.length + "件見つかりました！";
+    }else{
 			const result = document.querySelector("#result");
 			result.innerText = "該当する場所は見つかりませんでした";
-		}
+    }
 
 		document.getElementById("result").style.display ="block";
 		document.getElementById("loading").style.display ="none";
 	}
+
+  async function set_point_other(){
+    let point_name = document.getElementById("search_points").value;
+    set_point(point_name);
+  }
 </script>
 
   <p>下に施設の選択画面があってクリックすると詳細がみれる?</p>
@@ -195,23 +221,23 @@
         }
         ele.innerHTML = '<dev>'+
           '<table><tr>'+
-          '<td><button type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80" /></button></td>'+
+          '<td><button title="自動販売機" type="button" value="amenity@vending_machine" onclick="set_point(this.value)"><img src="map_icon/vending_machine.png" height="80" width="80"/></button></td>'+
+          '<td><button title="病院" type="button" value="amenity@hospital" onclick="set_point(this.value)"><img src="map_icon/hospital.png" height="80" width="80"/></button></td>'+
+          '<td><button title="映画館" type="button" value="amenity@cinema" onclick="set_point(this.value)"><img src="map_icon/cinema.png" height="80" width="80"/></button></td>'+
           '</tr></table>'+
           '<table><tr>'+
-          '<td><button type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80" /></button></td>'+
+          '<td><button title="ベンチ" type="button" value="amenity@bench" onclick="set_point(this.value)"><img src="map_icon/bench.png" height="80" width="80"/></button></td>'+
+          '<td><button title="給水所" type="button" value="amenity@drinking_water" onclick="set_point(this.value)"><img src="map_icon/drinking_water.png" height="80" width="80"/></button></td>'+
+          '<td><button title="シャワー" type="button" value="amenity@shower" onclick="set_point(this.value)"><img src="map_icon/shower.png" height="80" width="80"/></button></td>'+
           '</tr></table>'+
           '<table><tr>'+
-          '<td><button type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80" /></button></td>'+
+          '<td><button title="公衆トイレ" type="button" value="amenity@toilets" onclick="set_point(this.value)"><img src="map_icon/toilets.png" height="80" width="80"/></button></td>'+
+          '<td><button title="公共図書館" type="button" value="amenity@library" onclick="set_point(this.value)"><img src="map_icon/library.png" height="80" width="80"/></button></td>'+
+          '<td><button title="噴水" type="button" value="amenity@fountain" onclick="set_point(this.value)"><img src="map_icon/fountain.png" height="80" width="80"/></button></td>'+
           '</tr></table>'+
           '<table><tr>'+
-          '<td><button type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80" /></button></td>'+
-          '<td><button type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80" /></button></td>'+
+          '<td><button title="水辺のアミューズメントエリア" type="button" value="leisure@water_park" onclick="set_point(this.value)"><img src="map_icon/water_park.png" height="80" width="80"/></button></td>'+
+          '<td><button title="アイスリンク" type="button" value="leisure@ice_rink" onclick="set_point(this.value)"><img src="map_icon/ice_rink.png" height="80" width="80"/></button></td>'+
           '</tr></table></dev>';
         key = 1;
       }
@@ -241,15 +267,15 @@
             ele.removeChild( ele.firstChild );
           }
           ele.innerHTML = '<dev>'+
-              '<table><tr>'+
-              '<td><button type="button" value="amenity@ice_cream" onclick="set_point(this.value)"><img src="map_icon/ice_cream.png" height="80" width="80" /></button></td>'+
-              '<td><button type="button" value="amenity@cafe" onclick="set_point(this.value)"><img src="map_icon/cafe.png" height="80" width="80" /></button></td>'+
-              '<td><button type="button" value="amenity@fast_food" onclick="set_point(this.value)"><img src="map_icon/fast_food.png" height="80" width="80" /></button></td>'+
-              '</tr></table>'+
-              '<table><tr>'+
-              '<td><button type="button" value="amenity@restaurant" onclick="set_point(this.value)"><img src="map_icon/restaurant.png" height="80" width="80" /></button></td>'+
-              '<td><button type="button" value="amenity@bar" onclick="set_point(this.value)"><img src="map_icon/bar.png" height="80" width="80" /></button></td>'+
-              '</tr></table></dev>';
+            '<table><tr>'+
+            '<td><button title="アイスクリーム" type="button" value="amenity@ice_cream" onclick="set_point(this.value)"><img src="map_icon/ice_cream.png" height="80" width="80"/></button></td>'+
+            '<td><button title="カフェ" type="button" value="amenity@cafe" onclick="set_point(this.value)"><img src="map_icon/cafe.png" height="80" width="80"/></button></td>'+
+            '<td><button title="ファストフード" type="button" value="amenity@fast_food" onclick="set_point(this.value)"><img src="map_icon/fast_food.png" height="80" width="80"/></button></td>'+
+            '</tr></table>'+
+            '<table><tr>'+
+            '<td><button title="レストラン" type="button" value="amenity@restaurant" onclick="set_point(this.value)"><img src="map_icon/restaurant.png" height="80" width="80"/></button></td>'+
+            '<td><button title="バー" type="button" value="amenity@bar" onclick="set_point(this.value)"><img src="map_icon/bar.png" height="80" width="80"/></button></td>'+
+            '</tr></table></dev>';
           key = 2;
         }
       }
@@ -262,14 +288,302 @@
           }
           ele.innerHTML = '<dev>'+
             '<table><tr>'+
-            '<td><button type="button" value="shop@convenience" onclick="set_point(this.value)"><img src="map_icon/convenience.png" height="80" width="80" /></button></td>'+
-            '<td><button type="button" value="shop@beverages" onclick="set_point(this.value)"><img src="map_icon/beverages.png" height="80" width="80" /></button></td>'+
-            '<td><button type="button" value="amenity@pharmacy" onclick="set_point(this.value)"><img src="map_icon/pharmacy.png" height="80" width="80" /></button></td>'+
+            '<td><button title="コンビニ" type="button" value="shop@convenience" onclick="set_point(this.value)"><img src="map_icon/convenience.png" height="80" width="80"/></button></td>'+
+            '<td><button title="飲料店" type="button" value="shop@beverages" onclick="set_point(this.value)"><img src="map_icon/beverages.png" height="80" width="80"/></button></td>'+
+            '<td><button title="薬局" type="button" value="amenity@chemist" onclick="set_point(this.value)"><img src="map_icon/chemist.png" height="80" width="80"/></button></td>'+
             '</tr></table></dev>';
           key = 3;
         }
       }
 
+      document.querySelector("#four").onclick = async (event) => {
+        if (key!=4){
+          let ele = document.getElementById("buttons");
+          while( ele.firstChild ){
+            ele.removeChild( ele.firstChild );
+          }
+          ele.innerHTML = '<select id="search_points">'+
+            '<option value="amenity@bar">バー</option>'+
+            '<option value="amenity@biergarten">ビアガーデン</option>'+
+            '<option value="amenity@cafe">カフェ</option>'+
+            '<option value="amenity@fast_food">ファストフード店</option>'+
+            '<option value="amenity@food_court">フードコート</option>'+
+            '<option value="amenity@ice_cream">アイスクリーム店</option>'+
+            '<option value="amenity@pub">パブ</option>'+
+            '<option value="amenity@restaurant">レストラン</option>'+
+            '<option value="amenity@college">キャンパス</option>'+
+            '<option value="amenity@driving_school">自動車学校</option>'+
+            '<option value="amenity@kindergarten">保育園</option>'+
+            '<option value="amenity@language_school">外国語学校</option>'+
+            '<option value="amenity@library">公共図書館</option>'+
+            '<option value="amenity@toy_library">おもちゃ図書館</option>'+
+            '<option value="amenity@music_school">音楽学校</option>'+
+            '<option value="amenity@school">学校</option>'+
+            '<option value="amenity@university">大学キャンパス</option>'+
+            '<option value="amenity@bicycle_parking">駐輪場</option>'+
+            '<option value="amenity@bicycle_repair_station">修理スタンド</option>'+
+            '<option value="amenity@bicycle_rental">レンタサイクル</option>'+
+            '<option value="amenity@boat_rental">レンタルボート</option>'+
+            '<option value="amenity@boat_sharing">共有ボート</option>'+
+            '<option value="amenity@bus_station">バス停</option>'+
+            '<option value="amenity@car_rental">レンタカー</option>'+
+            '<option value="amenity@car_sharing">カーシェアリング</option>'+
+            '<option value="amenity@car_wash">洗車場</option>'+
+            '<option value="amenity@vehicle_inspection">車検</option>'+
+            '<option value="amenity@charging_station">自動車充電施設</option>'+
+            '<option value="amenity@ferry_terminal">フェリーターミナル</option>'+
+            '<option value="amenity@fuel">ガソリンスタンド</option>'+
+            '<option value="amenity@grit_bin">グリット入れ</option>'+
+            '<option value="amenity@motorcycle_parking">オートバイ駐輪場</option>'+
+            '<option value="amenity@parking">駐車場</option>'+
+            '<option value="amenity@parking_entrance">多層駐車場</option>'+
+            '<option value="amenity@parking_space">単一パーキング</option>'+
+            '<option value="amenity@taxi">タクシー乗り場</option>'+
+            '<option value="amenity@atm">ATM</option>'+
+            '<option value="amenity@bank">銀行</option>'+
+            '<option value="amenity@bureau_de_change">外貨両替</option>'+
+            '<option value="amenity@baby_hatch">赤ちゃんポスト</option>'+
+            '<option value="amenity@clinic">クリニック</option>'+
+            '<option value="amenity@dentist">歯医者</option>'+
+            '<option value="amenity@doctors">診療所・医院</option>'+
+            '<option value="amenity@hospital">病院（緊急を含む）</option>'+
+            '<option value="amenity@nursing_home">老人ホーム</option>'+
+            '<option value="amenity@pharmacy">調剤薬局</option>'+
+            '<option value="amenity@social_facility">社会福祉サービス</option>'+
+            '<option value="amenity@veterinary">動物病院</option>'+
+            '<option value="amenity@arts_centre">アートセンター</option>'+
+            '<option value="amenity@cinema">映画館</option>'+
+            '<option value="amenity@community_centre">集会所</option>'+
+            '<option value="amenity@conference_centre">会議場</option>'+
+            '<option value="amenity@events_venue">イベント施設</option>'+
+            '<option value="amenity@fountain">噴水</option>'+
+            '<option value="amenity@planetarium">プラネタリウム</option>'+
+            '<option value="amenity@public_bookcase">公共書架</option>'+
+            '<option value="amenity@social_centre">ソーシャルセンター</option>'+
+            '<option value="amenity@studio">収録スタジオ</option>'+
+            '<option value="amenity@theatre">劇場</option>'+
+            '<option value="amenity@courthouse">裁判所</option>'+
+            '<option value="amenity@fire_station">消防署</option>'+
+            '<option value="amenity@police">警察署／交番</option>'+
+            '<option value="amenity@post_box">郵便ボックス</option>'+
+            '<option value="amenity@post_depot">集荷センター</option>'+
+            '<option value="amenity@post_office">郵便局</option>'+
+            '<option value="amenity@prison">刑務所／拘置所</option>'+
+            '<option value="amenity@ranger_station">レンジャーステーション</option>'+
+            '<option value="amenity@townhall">役場</option>'+
+            '<option value="amenity@bbq">バーベキュー</option>'+
+            '<option value="amenity@bench">ベンチ</option>'+
+            '<option value="amenity@dog_toilet">ペットトイレ</option>'+
+            '<option value="amenity@drinking_water">水飲み場</option>'+
+            '<option value="amenity@give_box">リユース施設</option>'+
+            '<option value="amenity@parcel_locker">宅配ロッカー</option>'+
+            '<option value="amenity@shelter">シェルター</option>'+
+            '<option value="amenity@shower">浴場／シャワー</option>'+
+            '<option value="amenity@telephone">公衆電話</option>'+
+            '<option value="amenity@toilets">公衆便所</option>'+
+            '<option value="amenity@water_point">給水所</option>'+
+            '<option value="amenity@watering_place">ペット給水所</option>'+
+            '<option value="amenity@animal_boarding">ドッグラン／ペットホテル</option>'+
+            '<option value="amenity@animal_shelter">動物リハビリ施設</option>'+
+            '<option value="amenity@baking_oven">オーブン施設</option>'+
+            '<option value="amenity@childcare">託児所</option>'+
+            '<option value="amenity@clock">公共時計</option>'+
+            '<option value="amenity@crematorium">火葬場</option>'+
+            '<option value="amenity@dice_centre">ダイブセンター</option>'+
+            '<option value="amenity@funeral_hall">葬儀場</option>'+
+            '<option value="amenity@grave_yard">墓地</option>'+
+            '<option value="amenity@hunting_stand">狩猟台</option>'+
+            '<option value="amenity@internet_cafe">インターネットカフェ</option>'+
+            '<option value="amenity@kitchen">キッチン</option>'+
+            '<option value="amenity@marketplace">市場</option>'+
+            '<option value="amenity@photo_booth">証明写真</option>'+
+            '<option value="amenity@place_of worship">礼拝施設</option>'+
+            '<option value="amenity@public_bath">温泉／共同風呂</option>'+
+            '<option value="amenity@refugee_site">難民キャンプ</option>'+
+            '<option value="amenity@vending_machine">難民キャンプ</option>'+
+            '<option value="shop@alcohol">酒屋</option>'+
+            '<option value="shop@bakery">パン屋</option>'+
+            '<option value="shop@beverages">飲料店</option>'+
+            '<option value="shop@brewing_supplies">醸造材料店</option>'+
+            '<option value="shop@butcher">精肉店</option>'+
+            '<option value="shop@cheese">チーズ店</option>'+
+            '<option value="shop@chocolate">チョコレート店</option>'+
+            '<option value="shop@coffee">コーヒー屋</option>'+
+            '<option value="shop@confectionery">菓子屋</option>'+
+            '<option value="shop@convenience">コンビニエンスストア</option>'+
+            '<option value="shop@deli">惣菜／デリカテッセン</option>'+
+            '<option value="shop@dairy">乳製品店</option>'+
+            '<option value="shop@farm">農場</option>'+
+            '<option value="shop@frozen_food">冷凍食品</option>'+
+            '<option value="shop@greengrocer">八百屋</option>'+
+            '<option value="shop@health_food">健康食品店</option>'+
+            '<option value="shop@ice_cream">アイスクリーム店</option>'+
+            '<option value="shop@pasta">パスタ販売店</option>'+
+            '<option value="shop@pastry">洋風焼き菓子店</option>'+
+            '<option value="shop@seafood">鮮魚店</option>'+
+            '<option value="shop@spices">スパイス専門店</option>'+
+            '<option value="shop@tea">茶葉販売店</option>'+
+            '<option value="shop@wine">ワイン販売店</option>'+
+            '<option value="shop@water">水専門店</option>'+
+            '<option value="shop@department_store">百貨店／デパート</option>'+
+            '<option value="shop@general">雑貨屋</option>'+
+            '<option value="shop@kiosk">キオスク</option>'+
+            '<option value="shop@mall">ショッピングモール</option>'+
+            '<option value="shop@supermarket">スーパーマーケット</option>'+
+            '<option value="shop@wholesale">業者向け販売店</option>'+
+            '<option value="shop@baby_goods">ベビー用品</option>'+
+            '<option value="shop@bag">かばん店</option>'+
+            '<option value="shop@boutique">ブティック</option>'+
+            '<option value="shop@clothes">衣料品店／服屋</option>'+
+            '<option value="shop@fabric">生地屋</option>'+
+            '<option value="shop@fashion_accessories">アクセサリー</option>'+
+            '<option value="shop@jewelry">宝石／装飾</option>'+
+            '<option value="shop@leather">革製品店</option>'+
+            '<option value="shop@sewing">手芸用品店</option>'+
+            '<option value="shop@shoes">靴／シューズ</option>'+
+            '<option value="shop@watches">腕時計</option>'+
+            '<option value="shop@wool">ウール／羊毛販売</option>'+
+            '<option value="shop@charity">チャリティー</option>'+
+            '<option value="shop@second_hand">リサイクルショップ</option>'+
+            '<option value="shop@variety_store">100円ショップ</option>'+
+            '<option value="shop@beauty">美容院</option>'+
+            '<option value="shop@chemist">薬局</option>'+
+            '<option value="shop@cosmetics">化粧品店</option>'+
+            '<option value="shop@hairdresser">美容室／理髪店／床屋</option>'+
+            '<option value="shop@hairdresser_supply">理美容品店</option>'+
+            '<option value="shop@hearing_aids">補聴器店</option>'+
+            '<option value="shop@massage">マッサージ／整体</option>'+
+            '<option value="shop@medical_supply">医療用品店</option>'+
+            '<option value="shop@nutrition_supplements">サプリメント</option>'+
+            '<option value="shop@optician">メガネ</option>'+
+            '<option value="shop@perfumery">香水</option>'+
+            '<option value="shop@agrarian">農業用品店</option>'+
+            '<option value="shop@appliance">家電量販店</option>'+
+            '<option value="shop@bathroom_furnishing">浴室用品</option>'+
+            '<option value="shop@doityourself">ホームセンター</option>'+
+            '<option value="shop@electrical">電子機器</option>'+
+            '<option value="shop@energy">燃料販売</option>'+
+            '<option value="shop@fireplace">暖炉販売</option>'+
+            '<option value="shop@florist">花屋</option>'+
+            '<option value="shop@garden_furniture">園芸用品</option>'+
+            '<option value="shop@gas">ガス販売</option>'+
+            '<option value="shop@glaziery">ガラス屋</option>'+
+            '<option value="shop@hardware">金物店</option>'+
+            '<option value="shop@locksmith">鍵屋</option>'+
+            '<option value="shop@paint">塗料店</option>'+
+            '<option value="shop@security">防犯用品店</option>'+
+            '<option value="shop@trade">建築資材店</option>'+
+            '<option value="shop@antiques">アンティーク家具屋</option>'+
+            '<option value="shop@bed">寝具店</option>'+
+            '<option value="shop@candles">ろうそく専門店</option>'+
+            '<option value="shop@carpet">カーペット</option>'+
+            '<option value="shop@curtain">カーテン</option>'+
+            '<option value="shop@furniture">家具屋</option>'+
+            '<option value="shop@interior_decoration">インテリア用品</option>'+
+            '<option value="shop@computer">パソコンショップ</option>'+
+            '<option value="shop@electronics">電器店</option>'+
+            '<option value="shop@hifi">オーディオショップ</option>'+
+            '<option value="shop@mobile_phone">携帯ショップ</option>'+
+            '<option value="shop@radiotechnics">電子デバイス／電子部品</option>'+
+            '<option value="shop@vacuum_cleaner">掃除機専門店</option>'+
+            '<option value="shop@bicycle">自転車屋</option>'+
+            '<option value="shop@car">自動車屋</option>'+
+            '<option value="shop@car_repair">自動車修理</option>'+
+            '<option value="shop@car_parts">自動車部品</option>'+
+            '<option value="shop@fuel">燃料販売</option>'+
+            '<option value="shop@fishing">釣具店</option>'+
+            '<option value="shop@golf">ゴルフショップ</option>'+
+            '<option value="shop@hunting">狩猟用品店</option>'+
+            '<option value="shop@motorcycle">バイクショップ</option>'+
+            '<option value="shop@outdoor">アウトドア用品</option>'+
+            '<option value="shop@scuba_diving">スキューバダイビング</option>'+
+            '<option value="shop@ski">スキー用品店</option>'+
+            '<option value="shop@sports">スポーツ用品店</option>'+
+            '<option value="shop@sqo,,omg_pool">プール用具</option>'+
+            '<option value="shop@tyres">タイヤ店</option>'+
+            '<option value="shop@art">美術作品</option>'+
+            '<option value="shop@camera">カメラ専門店</option>'+
+            '<option value="shop@collector">切手／コイン／フィギュア</option>'+
+            '<option value="shop@craft">工芸用品店</option>'+
+            '<option value="shop@games">ボードゲーム／カードゲーム</option>'+
+            '<option value="shop@model">模型店</option>'+
+            '<option value="shop@music">レコードショップ／CD</option>'+
+            '<option value="shop@musical_instrument">楽器店</option>'+
+            '<option value="shop@photo">写真／カメラ</option>'+
+            '<option value="shop@trophy">徽章店</option>'+
+            '<option value="shop@video">レンタルビデオ／ビデオ販売</option>'+
+            '<option value="shop@video_games">テレビゲーム</option>'+
+            '<option value="shop@anime">アニメ関連商品販売</option>'+
+            '<option value="shop@books">本屋</option>'+
+            '<option value="shop@gift">ギフトショップ</option>'+
+            '<option value="shop@lottery">宝くじ</option>'+
+            '<option value="shop@newsagent">新聞販売店／たばこ</option>'+
+            '<option value="shop@stationery">文具店</option>'+
+            '<option value="shop@ticket">チケット屋</option>'+
+            '<option value="shop@bookmaker">ブックメーカー</option>'+
+            '<option value="shop@copyshop">コピー／印刷サービス</option>'+
+            '<option value="shop@dry_cleaning">クリーニング店</option>'+
+            '<option value="shop@e-cigarette">電子タバコ</option>'+
+            '<option value="shop@funeral_directors">葬儀屋</option>'+
+            '<option value="shop@laundry">コインランドリー</option>'+
+            '<option value="shop@money_lender">消費者金融</option>'+
+            '<option value="shop@party">パーティ用品</option>'+
+            '<option value="shop@pawnbroker">質屋</option>'+
+            '<option value="shop@pet">ペットショップ</option>'+
+            '<option value="shop@pyrotechnics">花火店</option>'+
+            '<option value="shop@religion">宗教関連商品</option>'+
+            '<option value="shop@tabacco">たばこ屋</option>'+
+            '<option value="shop@toys">おもちゃ屋</option>'+
+            '<option value="shop@travel_agency">旅行代理店</option>'+
+            '<option value="shop@vacant">空き店舗</option>'+
+            '<option value="leisure@amusement_arcade">ゲームセンター</option>'+
+            '<option value="leisure@bandstand">屋外ライブ会場</option>'+
+            '<option value="leisure@beach_resort">管理ビーチ</option>'+
+            '<option value="leisure@bird_hide">野鳥観察舎</option>'+
+            '<option value="leisure@bleachers">スポーツ観戦施設</option>'+
+            '<option value="leisure@bowling_alley">ボーリング</option>'+
+            '<option value="leisure@common">共有地</option>'+
+            '<option value="leisure@dance">ダンス</option>'+
+            '<option value="leisure@dog_park">ドッグラン</option>'+
+            '<option value="leisure@escape_game">体験型ゲーム</option>'+
+            '<option value="leisure@firepit">焚き火</option>'+
+            '<option value="leisure@fishing">釣り場</option>'+
+            '<option value="leisure@fitness_centre">フィットネスセンター</option>'+
+            '<option value="leisure@fitness_station">フィットネスマシン</option>'+
+            '<option value="leisure@garden">庭園／植物園</option>'+
+            '<option value="leisure@golf_course">ゴルフコース</option>'+
+            '<option value="leisure@horse_riding">乗馬</option>'+
+            '<option value="leisure@ice_rinl">アイスリンク</option>'+
+            '<option value="leisure@marina">マリーナ</option>'+
+            '<option value="leisure@miniature_golf">ミニチュアゴルフ</option>'+
+            '<option value="leisure@nature_reserve">自然保護区域</option>'+
+            '<option value="leisure@park">公園</option>'+
+            '<option value="leisure@picnic_table">ピクニックテーブル</option>'+
+            '<option value="leisure@pitch">運動場</option>'+
+            '<option value="leisure@playground">子供の遊び場</option>'+
+            '<option value="leisure@resort">リゾート</option>'+
+            '<option value="leisure@sauna">サウナ</option>'+
+            '<option value="leisure@slipway">進水所</option>'+
+            '<option value="leisure@sports_centre">スポーツセンター</option>'+
+            '<option value="leisure@sports_hall">体育館</option>'+
+            '<option value="leisure@stadium">スタジアム</option>'+
+            '<option value="leisure@summer_camp">サマーキャンプ</option>'+
+            '<option value="leisure@swimming_area">遊泳区域</option>'+
+            '<option value="leisure@swimming_pool">スイミングプール</option>'+
+            '<option value="leisure@tanning_salon">日焼けサロン</option>'+
+            '<option value="leisure@track">陸上／競輪／競馬トラック</option>'+
+            '<option value="leisure@trampoline_park">トランポリンパーク</option>'+
+            '<option value="leisure@water_park">水辺のアミューズメントエリア</option>'+
+            '<option value="leisure@wildlife_hide">野生生物観察</option>'+
+            '</select>'+
+            '<button title="検索" type="button" onclick="set_point_other()">検索</button>';
+          key = 4;
+          // jQueryによる検索ボックス設定
+          $(document).ready(function() {
+            $("#search_points").searchable();
+          });
+        }
+      }
 
     </script>
 

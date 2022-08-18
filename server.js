@@ -183,9 +183,10 @@ serve(async (req) => {
     let type_name = requestJson.point_name; //
     let type = type_name.split('@')[0];
     let place = type_name.split('@')[1];
+    let dist = requestJson.dist;
     //lat = 35;
     //lon = 135;
-    let dist = requestJson.range; //km
+    //let dist = 1; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
@@ -204,25 +205,29 @@ serve(async (req) => {
     let elements = shop_info.elements;
     let shop_lat = "", shop_lon = "", shop_name = "";
     let sp_key = "@@@";
-    for (let i in elements) {
-      if (i == elements.length - 1) { sp_key = "" }
-      shop_lat += String(elements[i].lat) + sp_key;
-      shop_lon += String(elements[i].lon) + sp_key;
-      if (String(elements[i].tags.name) != "undefined") {
-        if (String(elements[i].tags.branch) != 'undefined') {
-          shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
+    if (elements.length != 0) {
+      for (let i in elements) {
+        if (i == elements.length - 1) { sp_key = "" }
+        shop_lat += String(elements[i].lat) + sp_key;
+        shop_lon += String(elements[i].lon) + sp_key;
+        if (String(elements[i].tags.name) != "undefined") {
+          if (String(elements[i].tags.branch) != 'undefined') {
+            shop_name += elements[i].tags.name + elements[i].tags.branch + sp_key;
+          } else {
+            shop_name += elements[i].tags.name + sp_key;
+          }
         } else {
-          shop_name += elements[i].tags.name + sp_key;
+          shop_name += place + sp_key;
         }
-      } else {
-        shop_name += place + sp_key;
       }
-    }
 
-    // return_text : 属性\n区切り，項目@@@区切り
-    let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
-    console.log(return_text);
-    return new Response(return_text);
+      // return_text : 属性\n区切り，項目@@@区切り
+      let return_text = shop_lat + '\n' + shop_lon + '\n' + shop_name;
+      console.log(return_text);
+      return new Response(return_text);
+    } else {
+      return new Response("None");
+    }
   };
 
   return serveDir(req, {
