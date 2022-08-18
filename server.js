@@ -208,7 +208,7 @@ serve(async (req) => {
 
     // return_text : 属性\n区切り，項目@@@区切り
     let return_text = shop_lat + '\n' + shop_lon + '|' + shop_name;
-    console.log(return_text);
+    //console.log(return_text);
 
     abc = new Array();
     for (i=0; i<10; i++) abc[i] = Math.pow(2,i);
