@@ -201,8 +201,6 @@
     lonSave = lon;
     lat = e.latlng.lat; //緯度
     lon = e.latlng.lng; //経度
-    console.log(lat);
-    console.log(lon);
   }
   function removeAltCenter(e) {
     //マーカーのclickイベント呼び出される
@@ -212,8 +210,6 @@
       lat = latSave; //保存した緯度経度に戻す
       lon = lonSave;
       altCenterMaker = null;
-      console.log(lat);
-      console.log(lon);
     }
   }
 
