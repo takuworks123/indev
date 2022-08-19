@@ -106,7 +106,7 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-home');
+		const icon = L.DomUtil.create('a','fas fa-location-arrow');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
 			mymap.flyTo(nowCenterMaker._latlng);
@@ -125,7 +125,7 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
+		const icon = L.DomUtil.create('a','fas fa-map-marker');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
       mymap.flyTo(altCenterMaker._latlng);
@@ -144,7 +144,7 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-marker-alt-slash');
+		const icon = L.DomUtil.create('a','fas fa-map-marker-slash');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
       removeAltCenter(altCenterMaker);
