@@ -118,8 +118,8 @@
 	L.control.locate = function(opts){
 	return new L.Control.Locate(opts);
 	}
-	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
+	//var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+	//L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
 
 	async function onLocationFound(e) { //現在地取得、在地マーカーを設置
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
