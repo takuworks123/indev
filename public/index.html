@@ -102,7 +102,7 @@
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
 	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(mymap);
 
-	//マップ上にボタンを設置
+	//マップの左上に「現在地に飛ぶボタン」を設置
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
@@ -121,7 +121,29 @@
 	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
 
-	async function onLocationFound(e) { //現在地取得、在地マーカーを設置
+  //マップの左上に「代わりの現在地削除ボタン」を設置
+	L.Control.Locate = L.Control.extend({
+	onAdd: function(mymap) {
+		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
+		const icon = L.DomUtil.create('a','fa-solid fa-map-pin');
+		icon.style='cursor:pointer'
+		icon.onclick=()=>{
+      removeAltCenter(altCenterMaker);
+		}
+		this._div.append(icon)
+		return this._div;
+	}
+	})
+	L.control.locate = function(opts){
+	return new L.Control.Locate(opts);
+	}
+	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
+
+
+
+  //現在地取得、現在地マーカーを設置
+	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
 		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 		lat = e.latlng.lat; //緯度
@@ -145,13 +167,13 @@
   var altCenterMaker = null;
   function onMapClick(e) {
     //地図のclickイベント呼び出される
-    //クリック地点の座標にオレンジマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
+    //クリック地点の座標に代わりの現在地マーカーを追加、マーカーのclickイベントでremoveAltCenter関数を呼び出し
     if (altCenterMaker != null){
-      onMarkerClick(altCenterMaker)// ひとつ前に置いたオレンジマーカーを消す
+      removeAltCenter(altCenterMaker) // ひとつ前に置いた代わりの現在地マーカーを消す
     }
     var altCenterIcon = L.divIcon({ className: 'alt-center-icon', iconAnchor: [8, 8] });
     altCenterMaker = L.marker(e.latlng, {icon: altCenterIcon})
-      .on('click', onMarkerClick)
+      .on('click', removeAltCenter)
       .addTo(mymap)
       .bindPopup("クリックで削除できます")
       .openPopup();
@@ -162,9 +184,9 @@
     console.log(lat);
     console.log(lon);
   }
-  function onMarkerClick(e) {
+  function removeAltCenter(e) {
     //マーカーのclickイベント呼び出される
-    //クリックされたオレンジマーカーを地図のレイヤから削除する
+    //クリックされた代わりの現在地マーカーを地図のレイヤから削除する
     mymap.removeLayer(altCenterMaker)
     lat = latSave; //保存した緯度経度に戻す
     lon = lonSave;
