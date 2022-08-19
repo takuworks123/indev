@@ -193,9 +193,8 @@
     var altCenterIcon = L.divIcon({ className: 'alt-center-icon', iconAnchor: [8, 8] });
     altCenterMaker = L.marker(e.latlng, {icon: altCenterIcon})
       .on('click', removeAltCenter)
-      .addTo(mymap)
-      .bindPopup("クリックで削除できます")
-      .openPopup();
+      .addTo(mymap);
+    mymap.flyTo(altCenterMaker._latlng);
     latSave = lat; //緯度経度の保存
     lonSave = lon;
     lat = e.latlng.lat; //緯度
