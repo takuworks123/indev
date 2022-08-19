@@ -138,7 +138,8 @@
 	mymap.locate({setView: true, maxZoom: 16, timeout: 20000});
 
 	var makerList = [];
-  var latlonSave = [];
+  var latSave = 0;
+  var lonSave = 0;
 
   mymap.on('click', onMapClick);
   var altCenterMaker = null;
@@ -148,8 +149,8 @@
     if (altCenterMaker == null){
       var altCenterIcon = L.divIcon({ className: 'alt-center-icon', iconAnchor: [8, 8] });
       altCenterMaker = L.marker(e.latlng, {icon: altCenterIcon}).on('click', onMarkerClick).addTo(mymap);
-      latlonSave.push(lat);//緯度経度の保存
-      latlonSave.push(lng);
+      latSave = lat; //緯度経度の保存
+      lonSave = lon;
       lat = e.latlng.lat; //緯度
 		  lon = e.latlng.lng; //経度
       console.log(lat);
@@ -160,8 +161,8 @@
     //マーカーのclickイベント呼び出される
     //クリックされたオレンジマーカーを地図のレイヤから削除する
     mymap.removeLayer(altCenterMaker)
-    lat = latlonSave.shift();//保存してた緯度経度を戻す
-    lng = latlonSave.shift();
+    lat = latSave; //保存した緯度経度に戻す
+    lon = lonSave;
     altCenterMaker = null;
     console.log(lat);
     console.log(lon);
