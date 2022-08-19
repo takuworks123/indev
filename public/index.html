@@ -125,7 +125,7 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fa-solid fa-map-pin');
+		const icon = L.DomUtil.create('a','fas fa-map-pin');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
       removeAltCenter(altCenterMaker);
