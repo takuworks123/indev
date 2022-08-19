@@ -128,7 +128,9 @@
 		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
-      mymap.flyTo(altCenterMaker._latlng);
+      if (altCenterMaker != null){
+        mymap.flyTo(altCenterMaker._latlng);
+      }
 		}
 		this._div.append(icon)
 		return this._div;
@@ -205,12 +207,14 @@
   function removeAltCenter(e) {
     //マーカーのclickイベント呼び出される
     //クリックされた代わりの現在地マーカーを地図のレイヤから削除する
-    mymap.removeLayer(altCenterMaker)
-    lat = latSave; //保存した緯度経度に戻す
-    lon = lonSave;
-    altCenterMaker = null;
-    console.log(lat);
-    console.log(lon);
+    if (altCenterMaker != null){
+      mymap.removeLayer(altCenterMaker)
+      lat = latSave; //保存した緯度経度に戻す
+      lon = lonSave;
+      altCenterMaker = null;
+      console.log(lat);
+      console.log(lon);
+    }
   }
 
 	async function set_point(point_name){
