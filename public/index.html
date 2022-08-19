@@ -141,24 +141,21 @@
   var latSave = 0;
   var lonSave = 0;
 
-  mymap.on('click', onMapClick);
+  mymap.on('dblclick', onMapClick);
   var altCenterMaker = null;
   function onMapClick(e) {
     //地図のclickイベント呼び出される
     //クリック地点の座標にオレンジマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
-    if (e.target.memo == "別の現在地やでー"){
-      if (altCenterMaker == null){
-        var altCenterIcon = L.divIcon({ className: 'alt-center-icon', iconAnchor: [8, 8] });
-        altCenterMaker = L.marker(e.latlng, {icon: altCenterIcon}).on('click', onMarkerClick).addTo(mymap);
-        altCenterMaker.memo = "別の現在地やでー";
-        
-        latSave = lat; //緯度経度の保存
-        lonSave = lon;
-        lat = e.latlng.lat; //緯度
-        lon = e.latlng.lng; //経度
-        console.log(lat);
-        console.log(lon);
-      }
+    if (altCenterMaker == null){
+      var altCenterIcon = L.divIcon({ className: 'alt-center-icon', iconAnchor: [8, 8] });
+      altCenterMaker = L.marker(e.latlng, {icon: altCenterIcon}).on('click', onMarkerClick).addTo(mymap);
+
+      latSave = lat; //緯度経度の保存
+      lonSave = lon;
+      lat = e.latlng.lat; //緯度
+      lon = e.latlng.lng; //経度
+      console.log(lat);
+      console.log(lon);
     }
   }
   function onMarkerClick(e) {
