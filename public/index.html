@@ -118,8 +118,8 @@
 	L.control.locate = function(opts){
 	return new L.Control.Locate(opts);
 	}
-	//var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-	//L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
+	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
 
 	async function onLocationFound(e) { //現在地取得、在地マーカーを設置
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
@@ -152,6 +152,8 @@
       latlonSave.push(lng);
       lat = e.latlng.lat; //緯度
 		  lon = e.latlng.lng; //経度
+      console.log(lat);
+      console.log(lon);
     }
   }
   function onMarkerClick(e) {
@@ -161,6 +163,8 @@
     lat = latlonSave.shift();//保存してた緯度経度を戻す
     lng = latlonSave.shift();
     altCenterMaker = null;
+    console.log(lat);
+    console.log(lon);
   }
 
 	async function set_point(point_name){
