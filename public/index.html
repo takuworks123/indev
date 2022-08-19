@@ -106,10 +106,29 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-marker-alt');
+		const icon = L.DomUtil.create('a','fas fa-house-chimney');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
-			mymap.flyTo(nowLocMaker._latlng);
+			mymap.flyTo(nowCenterMaker._latlng);
+		}
+		this._div.append(icon)
+		return this._div;
+	}
+	})
+	L.control.locate = function(opts){
+	return new L.Control.Locate(opts);
+	}
+	var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
+	L.control.locate({ position: 'topleft', icon: centerIcon }).addTo(mymap);
+
+  //マップの左上に「代わりの現在に飛ぶボタン」を設置
+	L.Control.Locate = L.Control.extend({
+	onAdd: function(mymap) {
+		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
+		const icon = L.DomUtil.create('a','fas fa-location-dot');
+		icon.style='cursor:pointer'
+		icon.onclick=()=>{
+      mymap.flyTo(altCenterMaker._latlng);
 		}
 		this._div.append(icon)
 		return this._div;
@@ -125,7 +144,7 @@
 	L.Control.Locate = L.Control.extend({
 	onAdd: function(mymap) {
 		this._div = L.DomUtil.create('div', 'custom-panel leaflet-bar');
-		const icon = L.DomUtil.create('a','fas fa-map-pin');
+		const icon = L.DomUtil.create('a','fas fa-location-dot-slash');
 		icon.style='cursor:pointer'
 		icon.onclick=()=>{
       removeAltCenter(altCenterMaker);
@@ -145,7 +164,7 @@
   //現在地取得、現在地マーカーを設置
 	async function onLocationFound(e) {
 		var centerIcon = L.divIcon({ className: 'center-icon', iconAnchor: [8, 8] });
-		nowLocMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
+		nowCenterMaker = L.marker(e.latlng, {icon: centerIcon}).addTo(mymap);
 		lat = e.latlng.lat; //緯度
 		lon = e.latlng.lng; //経度
 	}
