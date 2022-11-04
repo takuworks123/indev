@@ -66,7 +66,7 @@ serve(async (req) => {
     let pre_id = -1;
     for (let i in pre_ids) {
       for (let j in pre_ids[i]) {
-        if (pre_ids[i][j] == id.substr(0, 2)) {
+        if (pre_ids[i][j] == id.substring(0, 2)) {
           pre_id = Number(i);
         }
       }
@@ -77,13 +77,13 @@ serve(async (req) => {
     async function callApi_wbgt(url_wbgt) {
       const data = CSV.toJSON(await CSV.fetch(url_wbgt))[0];
       let keys = Object.keys(data);
-      let time = data[""].substr(0, 10).replace(/\//g, "");
+      let time = data[""].substring(0, 10).replace(/\//g, "");
       let max_key;
       let tmp_val = 0;
       for (let i in keys) {
-        if (keys[i].substr(0, 8) == time) {
+        if (keys[i].substring(0, 8) == time) {
           let key = keys[i];
-          let val = Number(data[key].substr(1));
+          let val = Number(data[key].substring(1));
           data[key] = val; // 数値をJSONobjに反映
           if (val > tmp_val) {
             tmp_val = val;
@@ -91,10 +91,10 @@ serve(async (req) => {
           }
         }
       }
-      // let year = max_key.substr(0, 4);
-      // let month = max_key.substr(4, 2);
-      // let day = max_key.substr(6, 2);
-      // let hour = max_key.substr(8);
+      // let year = max_key.substring(0, 4);
+      // let month = max_key.substring(4, 4 + 2);
+      // let day = max_key.substring(6, 6 + 2);
+      // let hour = max_key.substring(8);
       wbgt_val = data[max_key]/10;
       people_val = wbgt_people[pre_id][String(wbgt_val)];
     };
@@ -146,7 +146,8 @@ serve(async (req) => {
       let comment = obj.data[id].comment;
       let photo_data = obj.data[id].photo_data;
       let name = obj.data[id].name;
-      return new Response(name + '@' + title + '@' + comment + '@' + photo_data);
+      let time = obj.data[id].created_at;
+      return new Response(name + '@' + title + '@' + comment + '@' + photo_data + '@' + time);
     } else {
       return new Response(obj.error.message);
     }
@@ -184,9 +185,6 @@ serve(async (req) => {
     let type = type_name.split('@')[0];
     let place = type_name.split('@')[1];
     let dist = requestJson.dist;
-    //lat = 35;
-    //lon = 135;
-    //let dist = 1; //km
 
     let shop_info;
     async function callApi_overpass(url_overpass) {
