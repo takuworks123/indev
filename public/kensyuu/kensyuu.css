@@ -1,11 +1,9 @@
 midasi {
-  position: absolute;
-  top: 100px;
+  position: relative;
   left: 40px;
 }
 
 honbun {
-  position: absolute;
-  top: 0px;
+  position: relative;
   left: 80px;
 }
