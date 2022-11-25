@@ -32,10 +32,8 @@
         body: JSON.stringify({ username, password })
       });
       let result = await response.text();
-      alert(result);
 
       if (result >= 1) { // ログイン成功した場合
-        alert('ログイン成功');
 
         const response = await fetch("/login_add", {
           method: "POST",
