@@ -62,11 +62,6 @@
       let time = `${year}-${month}`
       reload(group, time);
     }
-    
-    window.addEventListener('beforeunload', function(event) {
-      event.preventDefault();
-      event.returnValue = '';
-    });
 
     document.querySelector("#update").onclick = async (event) => {
       let year = 2022;
