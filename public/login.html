@@ -22,18 +22,18 @@
     }
 
     document.querySelector("#login").onclick = async (event) => {
-      const username = document.querySelector("#username").value;
+      const user = document.querySelector("#username").value;
       const original_pass = document.querySelector("#password").value;
-      const password = $.md5(original_pass); // MD5でパスワードをハッシュ値に変換
+      const pass = $.md5(original_pass); // MD5でパスワードをハッシュ値に変換
       
       const response = await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ user, pass })
       });
       let result = await response.text();
       let data = result.split('@@');
-      let user_id = data[0];
+      let username = data[0];
       let group = data[1];
 
       if (group >= 1) { // ログイン成功した場合
@@ -41,7 +41,7 @@
         const response = await fetch("/login_add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_id, group })
+          body: JSON.stringify({ username, group })
         });
 
         location.href = 'calendar.html';

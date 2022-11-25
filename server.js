@@ -42,12 +42,12 @@ serve(async (req) => {
     let sp = await supabase // userテーブルへ問い合わせ
       .from('user')
       .select()
-      .eq( 'username', requestJson.username )
-      .eq( 'password', requestJson.password );
+      .eq( 'username', requestJson.user )
+      .eq( 'password', requestJson.pass );
     
     if (sp.error == null) { // エラーがないとき
       if (sp.data.length == 1){ // データベースに、対応するアカウントが１つある場合
-        return new Response(sp.data[0].username + "@@" + sp.data[0].group); // usernameカラムとgroupカラムを返す
+        return new Response(sp.data[0].user + "@@" + sp.data[0].group); // userカラムとgroupカラムを返す
 
       }else if (sp.data.length < 1){ // データベースに、対応するアカウントがない場合
         return new Response('-1'); // ログイン失敗（エラー）と返す
