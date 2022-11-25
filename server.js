@@ -74,6 +74,7 @@ serve(async (req) => {
       }
       login_check.push(requestJson.username);
       login_check.push(requestJson.group);
+      alert(login_check)
     }
   }
 
