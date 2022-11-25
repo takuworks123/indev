@@ -20,12 +20,13 @@
 
   <script type="module">
     let group;
+    let username;
     let date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let time = `${year}-${month}`;
 
-    async function reload(group, time){
+    async function reload(){
       const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,14 +39,16 @@
         for (let i = 0; i < data.length-1; i++) {
           let data2 = data[i].split('||');
           let created_at = data2[0];
-          let sche_start = data2[1];
-          let sche_end = data2[2];
-          let comment = data2[3];
+          let username = data2[1];
+          let sche_start = data2[2];
+          let sche_end = data2[3];
+          let comment = data2[4];
 
           comment_op.textContent = comment;
 
           console.log('------------------------------------');
           console.log(created_at);
+          console.log(username);
           console.log(sche_start);
           console.log(sche_end);
           console.log(comment);
@@ -62,24 +65,27 @@
 
       console.log('こんですー今から処理しますー');
       //const response = await fetch("/reset_obj"); // GET
-      group = await response.text();
-      reload(group, time);
+      let result = await response.text();
+      let data = result.split('@@');
+      username = data[0];
+      group = data[1];
+      reload();
     }
 
     document.querySelector("#update").onclick = async (event) => {
-      reload(group, time);
+      reload();
     }
 
     document.querySelector("#back").onclick = async (event) => {
       month--;
       time = `${year}-${month}`;
-      reload(group, time);
+      reload();
     }
 
     document.querySelector("#next").onclick = async (event) => {
       month++;
       time = `${year}-${month}`;
-      reload(group, time);
+      reload();
     }
 
     document.querySelector("#submit").onclick = async (event) => {

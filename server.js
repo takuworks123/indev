@@ -47,7 +47,7 @@ serve(async (req) => {
     
     if (sp.error == null) { // エラーがないとき
       if (sp.data.length == 1){ // データベースに、対応するアカウントが１つある場合
-        return new Response(sp.data[0].group); // groupカラムと、ログイン成功を返す
+        return new Response(sp.data[0].username + "@@" + sp.data[0].group); // usernameカラムとgroupカラムを返す
 
       }else if (sp.data.length < 1){ // データベースに、対応するアカウントがない場合
         return new Response('-1'); // ログイン失敗（エラー）と返す
@@ -65,28 +65,31 @@ serve(async (req) => {
     const requestJson = await req.json();
 
     if (login_check.length == 0) {
-      login_check.push(requestJson.result);
+      login_check.push(requestJson.username);
+      login_check.push(requestJson.group);
 
     } else {
       while (login_check.length != 0) {
         setTimeout( ()=>{}, 1000 );
       }
-      login_check.push(requestJson.result);
+      login_check.push(requestJson.username);
+      login_check.push(requestJson.group);
     }
   }
 
   if (req.method === "POST" && pathname === "/login_remove") {
-    let data = login_check.pop();
+    let group = login_check.pop();
+    let username = login_check.pop();
     login_check = [];
-    return new Response(data);
+    return new Response(username + "@@" + group);
   }
-  
+
   if (req.method === "POST" && pathname === "/send") {
     const requestJson = await req.json();
     let sp;
 
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
-      return new Response('no');
+      return new Response('');
     } else {
       sp = await supabase
         .from('calendar')
@@ -94,11 +97,38 @@ serve(async (req) => {
     }
 
     if (sp.error == null) {
-      return new Response("finished");
+      return new Response('successfully');
     } else {
       return new Response(sp.error.message);
     }
   }
+
+  if (req.method === "POST" && pathname === "/download") {
+    const requestJson = await req.json();
+    let group = requestJson.group;
+    let time = requestJson.time;
+    let sp = await supabase // calendarテーブルへ問い合わせ
+      .from('calendar')
+      .select()
+      .eq('group', group);
+    
+    let data = '';
+    if (sp.error == null) {
+      for (let i = 0; i < sp.data.length; i++) {
+        if (sp.data[i].sche_start.includes(`${time}`)){
+          data += sp.data[i].created_at + '||';
+          data += sp.data[i].username + '||';
+          data += sp.data[i].sche_start + '||';
+          data += sp.data[i].sche_end + '||';
+          data += sp.data[i].comment + '@@';
+        }
+      }
+      return new Response(data);
+    } else {
+      return new Response('Database Error');
+    }
+  }
+
 
 
 
@@ -117,31 +147,6 @@ serve(async (req) => {
     main_obj = await supabase.from('calendar').select().rangeGt('sche_start', '[2022-11-01 00:00, 2022-11-01 00:00)');
     return main_obj;
   };
-
-  if (req.method === "POST" && pathname === "/download") {
-    const requestJson = await req.json();
-    let group = requestJson.group;
-    let time = requestJson.time;
-    let sp = await supabase // calendarテーブルへ問い合わせ
-      .from('calendar')
-      .select()
-      .eq('group', group);
-    
-    let data = '';
-    if (sp.error == null) {
-      for (let i = 0; i < sp.data.length; i++) {
-        if (sp.data[i].sche_start.includes(`${time}`)){
-          data += sp.data[i].created_at + '||';
-          data += sp.data[i].sche_start + '||';
-          data += sp.data[i].sche_end + '||';
-          data += sp.data[i].comment + '@@';
-        }
-      }
-      return new Response(data);
-    } else {
-      return new Response('Database Error');
-    }
-  }
 
   // 現在の投稿数を確認
   if (req.method === "GET" && pathname === "/code_info") {
