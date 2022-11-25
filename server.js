@@ -76,7 +76,7 @@ serve(async (req) => {
   }
 
   if (req.method === "POST" && pathname === "/login_remove") {
-    let data = login_check.pop();
+    let data = login_check.shift();
     login_check = [];
     return new Response(data);
   }
