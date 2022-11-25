@@ -74,7 +74,7 @@
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
-      console.log(group);
+      
       const response = await fetch("/code_info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
