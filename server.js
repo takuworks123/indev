@@ -67,7 +67,7 @@ serve(async (req) => {
     if (login_check.length == 0) {
       login_check.push(requestJson.username);
       login_check.push(requestJson.group);
-      alert(login_check)
+      alert(login_check[0] + "^^^" + login_check[1]);
 
     } else {
       while (login_check.length != 0) {
