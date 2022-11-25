@@ -94,7 +94,7 @@ serve(async (req) => {
   }
 
   // コーディネートの投稿
-  if (req.method === "POST" && pathname === "/send") {
+  if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
 
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
