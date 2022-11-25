@@ -62,6 +62,14 @@
       let time = `${year}-${month}`
       reload(group, time);
     }
+    
+    window.addEventListener('beforeunload', async function(e){
+      const response = await fetch("/login_add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ group })
+      });
+    });
 
     document.querySelector("#update").onclick = async (event) => {
       let year = 2022;
