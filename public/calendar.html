@@ -17,6 +17,8 @@
   <nobr id = "time_op"></nobr>
 
   <script type="module">
+    let group;
+
     async function reload(group, time){
       const response = await fetch("/code_info2", {
         method: "POST",
@@ -45,8 +47,6 @@
       }
     }
 
-    let group;
-
     window.onload = async (event) => {
       const response = await fetch("/login_remove", {
         method: "POST",
@@ -74,7 +74,7 @@
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
-
+      console.log(group);
       const response = await fetch("/code_info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
