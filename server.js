@@ -65,24 +65,20 @@ serve(async (req) => {
     const requestJson = await req.json();
 
     if (login_check.length == 0) {
-      login_check.push(requestJson.username);
-      login_check.push(requestJson.group);
-      alert(login_check[0] + "^^^" + login_check[1]);
+      login_check.push(requestJson.username + "@@" + requestJson.group);
 
     } else {
       while (login_check.length != 0) {
         setTimeout( ()=>{}, 1000 );
       }
-      login_check.push(requestJson.username);
-      login_check.push(requestJson.group);
+      login_check.push(requestJson.username + "@@" + requestJson.group);
     }
   }
 
   if (req.method === "POST" && pathname === "/login_remove") {
-    let group = login_check.pop();
-    let username = login_check.pop();
+    let data = login_check.pop();
     login_check = [];
-    return new Response(username + "@@" + group);
+    return new Response(data);
   }
 
   if (req.method === "POST" && pathname === "/send") {
