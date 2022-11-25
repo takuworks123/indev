@@ -71,7 +71,6 @@
     }
 
     document.querySelector("#submit").onclick = async (event) => {
-      const group_temp = 1;
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
@@ -79,7 +78,7 @@
       const response = await fetch("/code_info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group_temp, sche_start, sche_end, comment })
+        body: JSON.stringify({ group, sche_start, sche_end, comment })
       });
       let result = await response.text();
       result_op.textContent = result;

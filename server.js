@@ -94,10 +94,10 @@ serve(async (req) => {
   }
 
   // コーディネートの投稿
-  if (req.method === "POST" && pathname === "/code_info") {
+  if (req.method === "POST" && pathname === "/send") {
     const requestJson = await req.json();
     let sp;
-    
+
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
       return new Response('no');
     } else {
