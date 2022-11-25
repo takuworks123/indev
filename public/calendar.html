@@ -64,11 +64,10 @@
     }
 
     document.querySelector("#update").onclick = async (event) => {
-      const response = await fetch("/login_add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group })
-      });
+      let year = 2022;
+      let month = 11;
+      let time = `${year}-${month}`
+      reload(group, time);
     }
 
     document.querySelector("#submit").onclick = async (event) => {
