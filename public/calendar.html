@@ -64,11 +64,7 @@
     }
     
     window.addEventListener('beforeunload', async function(e){
-      const response = await fetch("/login_add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group })
-      });
+      event.preventDefault();
     });
 
     document.querySelector("#update").onclick = async (event) => {
