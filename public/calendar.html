@@ -13,11 +13,17 @@
   <input id="sche_end_ip" type="datetime-local" />
   <button id="submit">送信</button>
   <button id="update">更新</button>
+  <button id="back"><前の月</button>
+  <button id="next">次の月></button>
   <div id = "comment_op"></div>
   <div id = "result_op"></div>
 
   <script type="module">
     let group;
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getFullMonth();
+    let time = `${year}-${month}`;
 
     async function reload(group, time){
       const response = await fetch("/download", {
@@ -57,16 +63,22 @@
       console.log('こんですー今から処理しますー');
       //const response = await fetch("/reset_obj"); // GET
       group = await response.text();
-      let year = 2022;
-      let month = 11;
-      let time = `${year}-${month}`;
       reload(group, time);
     }
 
     document.querySelector("#update").onclick = async (event) => {
-      let year = 2022;
-      let month = 11;
-      let time = `${year}-${month}`;
+      reload(group, time);
+    }
+
+    document.querySelector("#back").onclick = async (event) => {
+      month--;
+      time = `${year}-${month}`;
+      reload(group, time);
+    }
+
+    document.querySelector("#next").onclick = async (event) => {
+      month++;
+      time = `${year}-${month}`;
       reload(group, time);
     }
 
