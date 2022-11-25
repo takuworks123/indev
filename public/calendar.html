@@ -66,6 +66,7 @@
       console.log('こんですー今から処理しますー');
       //const response = await fetch("/reset_obj"); // GET
       let result = await response.text();
+      console.log(result);
       let data = result.split('@@');
       username = data[0];
       group = data[1];
