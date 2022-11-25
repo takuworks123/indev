@@ -80,20 +80,7 @@ serve(async (req) => {
     login_check = [];
     return new Response(data);
   }
-
-
-
-
-
-
-
-
-  //　コーディネート初期化
-  if (req.method === "GET" && pathname === "/reset_obj") {
-    main_obj = await supabase.from('calendar').select().rangeGt('sche_start', '[2022-11-01 00:00, 2022-11-01 00:00)');
-  }
-
-  // コーディネートの投稿
+  
   if (req.method === "POST" && pathname === "/send") {
     const requestJson = await req.json();
     let sp;
@@ -111,6 +98,18 @@ serve(async (req) => {
     } else {
       return new Response(sp.error.message);
     }
+  }
+
+
+
+
+
+
+
+
+  //　コーディネート初期化
+  if (req.method === "GET" && pathname === "/reset_obj") {
+    main_obj = await supabase.from('calendar').select().rangeGt('sche_start', '[2022-11-01 00:00, 2022-11-01 00:00)');
   }
 
   // データベース更新確認
