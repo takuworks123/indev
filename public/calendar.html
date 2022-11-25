@@ -71,7 +71,7 @@
     }
 
     document.querySelector("#submit").onclick = async (event) => {
-      const group_temp = group;
+      const group_temp = Number(group);
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
