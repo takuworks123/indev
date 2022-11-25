@@ -22,8 +22,7 @@
     let group;
     let date = new Date();
     let year = date.getFullYear();
-    let month = date.getMonth();
-    console.log(month);
+    let month = date.getMonth() + 1;
     let time = `${year}-${month}`;
 
     async function reload(group, time){
