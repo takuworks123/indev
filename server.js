@@ -104,7 +104,6 @@ serve(async (req) => {
         .from('calendar')
         .insert({ group: `${requestJson.group}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
     }
-    return new Response("送信しました");
 
     if (sp.error == null) {
       return new Response("finished");
