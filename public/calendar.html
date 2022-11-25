@@ -63,8 +63,9 @@
       reload(group, time);
     }
     
-    window.addEventListener('beforeunload', function(e){
+    window.addEventListener('beforeunload', function(event) {
       event.preventDefault();
+      event.returnValue = '';
     });
 
     document.querySelector("#update").onclick = async (event) => {
