@@ -12,7 +12,7 @@
   <input id="sche_start_ip" type="datetime-local" />
   <input id="sche_end_ip" type="datetime-local" />
   <button id="submit">送信</button>
-  <button id="show">表示</button>
+  <button id="update">更新</button>
   <nobr id = "comment_op"></nobr>
   <nobr id = "time_op"></nobr>
 
@@ -45,6 +45,8 @@
       }
     }
 
+    let group;
+
     window.onload = async (event) => {
       const response = await fetch("/login_remove", {
         method: "POST",
@@ -54,11 +56,19 @@
 
       console.log('こんですー今から処理しますー');
       //const response = await fetch("/reset_obj"); // GET
-      let group = await response.text();;
+      group = await response.text();
       let year = 2022;
       let month = 11;
       let time = `${year}-${month}`
       reload(group, time);
+    }
+
+    document.querySelector("#update").onclick = async (event) => {
+      const response = await fetch("/login_add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ result })
+      });
     }
 
     document.querySelector("#submit").onclick = async (event) => {
