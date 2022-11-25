@@ -39,7 +39,7 @@
         for (let i = 0; i < data.length-1; i++) {
           let data2 = data[i].split('||');
           let created_at = data2[0];
-          let username = data2[1];
+          let user = data2[1];
           let sche_start = data2[2];
           let sche_end = data2[3];
           let comment = data2[4];
@@ -48,7 +48,7 @@
 
           console.log('------------------------------------');
           console.log(created_at);
-          console.log(username);
+          console.log(user);
           console.log(sche_start);
           console.log(sche_end);
           console.log(comment);
