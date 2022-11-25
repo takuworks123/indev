@@ -20,7 +20,7 @@
     let group;
 
     async function reload(group, time){
-      const response = await fetch("/code_info2", {
+      const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group, time })
@@ -74,8 +74,8 @@
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
-      
-      const response = await fetch("/code_info", {
+
+      const response = await fetch("/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group, sche_start, sche_end, comment })

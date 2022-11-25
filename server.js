@@ -94,7 +94,7 @@ serve(async (req) => {
   }
 
   // コーディネートの投稿
-  if (req.method === "POST" && pathname === "/code_info") {
+  if (req.method === "POST" && pathname === "/send") {
     const requestJson = await req.json();
 
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
@@ -118,7 +118,7 @@ serve(async (req) => {
     return main_obj;
   };
 
-  if (req.method === "POST" && pathname === "/code_info2") {
+  if (req.method === "POST" && pathname === "/download") {
     const requestJson = await req.json();
     let group = requestJson.group;
     let time = requestJson.time;
