@@ -96,11 +96,12 @@ serve(async (req) => {
   // コーディネートの投稿
   if (req.method === "POST" && pathname === "/code_info") {
     const requestJson = await req.json();
-
+    let sp;
+    
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
       return new Response('no');
     } else {
-      let sp = await supabase
+      sp = await supabase
         .from('calendar')
         .insert({ group: `${requestJson.group}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
     }
