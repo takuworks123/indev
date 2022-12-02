@@ -39,6 +39,7 @@ table td {
   text-align: left;
 }
 .calendar th {
-  background-color: #435fff;
+  border: 1px solid #000000;
+  background-color: #778cff;
 }
   
