@@ -48,13 +48,11 @@ table td {
   table-layout: fixed;
 }
 .day th {
-  border: 1px solid #000000;
   background-color: #fcff56;
   width: 120px;
-  height: 30px;
+  height: 20px;
 }
 .day td {
-  border: 1px solid #a7a7a7;
   background-color: #fcffa9;
   padding: 5px 10px;
   text-align: left;
