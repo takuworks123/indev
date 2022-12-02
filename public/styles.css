@@ -33,7 +33,7 @@ table td {
   border: 1px solid #000000;
   background-color: #778cff;
   width: 120px;
-  height: 100px;
+  height: 50px;
 }
 .calendar td {
   border: 1px solid #000000;
@@ -47,7 +47,7 @@ table td {
   table-layout: fixed;
 }
 .day th {
-  background-color: #fcff56;
+  background-color: #fdff9b;
   width: 110px;
   height: 20px;
 }
