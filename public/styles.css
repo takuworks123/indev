@@ -29,7 +29,10 @@ table td {
   border-collapse: collapse;
   table-layout: fixed;
 }
-.calendar th,
+.calendar th {
+  width: 100px;
+  height: 100px;
+}
 .calendar td {
   border: 1px solid #CCCCCC;
   padding: 5px 10px;
