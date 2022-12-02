@@ -49,14 +49,14 @@ table td {
 }
 .day th {
   background-color: #fcff56;
-  width: 120px;
+  width: 100px;
   height: 20px;
 }
 .day td {
   background-color: #fcffa9;
   padding: 5px 10px;
   text-align: left;
-  width: 120px;
+  width: 100px;
   height: 100px;
 }
   
