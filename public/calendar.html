@@ -23,7 +23,8 @@
       <th>日</th> <th>月</th> <th>火</th> <th>水</th> <th>木</th> <th>金</th> <th>土</th>
     </tr>
     <tr>
-      <td><div id = "c1"></div></td> <td><div id = "c2"></div></td>
+      <td><div id = "d1"><br><br><div id = "n1"></div><div id = "c1"></div></td>
+      <td><div id = "d2"><br><br><div id = "n2"></div><div id = "c2"></div></td>
     </tr>
     <tr>
       <td>レモン</td> <td>酸っぱい</td>
@@ -83,8 +84,14 @@
       group = data[1];
       reload();
 
-      c1.textContent = "1";
-      c2.textContent = "2";
+      d1.textContent = "1";
+      d2.textContent = "2";
+
+      n1.textContent = "名無しA";
+      n2.textContent = "名無しB";
+
+      c1.textContent = "テストな予定a";
+      c2.textContent = "テストな予定b";
     }
 
     document.querySelector("#update").onclick = async (event) => {
