@@ -42,4 +42,22 @@ table td {
   width: 120px;
   height: 100px;
 }
+
+.day {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.day th {
+  border: 1px solid #000000;
+  background-color: #fdff97;
+  width: 20px;
+  height: 20px;
+}
+.day td {
+  border: 1px solid #a7a7a7;
+  padding: 5px 10px;
+  text-align: left;
+  width: 120px;
+  height: 100px;
+}
   
