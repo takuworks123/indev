@@ -23,7 +23,7 @@
       <th>日</th> <th>月</th> <th>火</th> <th>水</th> <th>木</th> <th>金</th> <th>土</th>
     </tr>
     <tr>
-      <td>いちご</td> <td>甘い</td>
+      <td><div id = "c1"></div></td> <td><div id = "c2"></div></td>
     </tr>
     <tr>
       <td>レモン</td> <td>酸っぱい</td>
@@ -82,6 +82,9 @@
       username = data[0];
       group = data[1];
       reload();
+
+      c1.textContent = "1";
+      c2.textContent = "2";
     }
 
     document.querySelector("#update").onclick = async (event) => {
