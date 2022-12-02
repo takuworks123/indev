@@ -54,7 +54,7 @@ table td {
 }
 .day td {
   padding: 5px 10px;
-  text-align: center;
+  text-align: left;
   vertical-align: top;
   height: 100px;
 }
