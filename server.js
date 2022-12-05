@@ -23,13 +23,14 @@ serve(async (req) => {
 
     if (sp.data.length == 0){
       let rdm_group;
+      let sp1;
       do{
         rdm_group = Math.floor(Math.random() * 1000000000000000);
-        let sp1 = await supabase // userテーブルへ問い合わせ
+        sp1 = await supabase // userテーブルへ問い合わせ
           .from('user')
           .select()
           .eq( 'group', rdm_group );
-      }while(sp1.data.length == 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+      }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
 
       let sp2 = await supabase // userテーブルへ問い合わせ
         .from('user')
