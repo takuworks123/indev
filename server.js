@@ -36,7 +36,7 @@ serve(async (req) => {
         .insert({ group: `${rdm_group}`, username: `${requestJson.username}`, password: `${requestJson.password}` });
       
       if (sp2.error == null) {
-        return new Response(0); // 新規登録成功と返す
+        return new Response('0'); // 新規登録成功と返す
       }else{
         return new Response('internal error'); // 内部エラーと返す
       }
