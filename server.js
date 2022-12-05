@@ -29,7 +29,7 @@ serve(async (req) => {
           .from('user')
           .select()
           .eq( 'group', rdm_group );
-      }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+      }while(sp1.data.length == 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
 
       let sp2 = await supabase // userテーブルへ問い合わせ
         .from('user')
