@@ -22,18 +22,27 @@ serve(async (req) => {
       .eq( 'username', requestJson.username );
 
     if (sp.data.length == 0){
-      let sp1 = await supabase // userテーブルへ問い合わせ
+      let rdm_group;
+      do{
+        rdm_group = Math.floor(Math.random() * 1000000000000000);
+        let sp1 = await supabase // userテーブルへ問い合わせ
+          .from('user')
+          .select()
+          .eq( 'group', rdm_group );
+      }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+
+      let sp2 = await supabase // userテーブルへ問い合わせ
         .from('user')
-        .insert({ username: `${requestJson.username}`, password: `${requestJson.password}` });
+        .insert({ group: `${rdm_group}`, username: `${requestJson.username}`, password: `${requestJson.password}` });
       
-      if (sp1.error == null) {
-        return new Response('register successfully'); // 新規登録成功と返す
+      if (sp2.error == null) {
+        return new Response(0); // 新規登録成功と返す
       }else{
         return new Response('internal error'); // 内部エラーと返す
       }
       
     }else{
-      return new Response('same username already registered'); // ユーザー名被りエラーと返す
+      return new Response('同じユーザー名がすでに登録されています'); // ユーザー名被りエラーと返す
     }
   }
 
