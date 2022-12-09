@@ -768,7 +768,29 @@
       }
       time = `${year}-${month}`;
       reload();
-      calendarZure(year, month);
+
+      let date = [];
+      let zure = calendarZure(year, month);
+      let i, j;
+
+      if (zure != 6) {
+        for (i = 0; i < zure + 1; i++) {
+          date.push('');
+        }
+      }
+
+      let cnt;
+      for (j = i, cnt = 1; cnt <= monthLen[month - 1]; j++, cnt++) {
+        date.push(`${cnt}`);
+      }
+
+      if (35 - date.length !== 0){
+        for (i = 0; i < 35 - date.length; i++){
+          date.push('');
+        }
+      }
+
+      console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
     }
 
     document.querySelector("#next").onclick = async (event) => {
@@ -779,7 +801,29 @@
       }
       time = `${year}-${month}`;
       reload();
-      calendarZure(year, month);
+
+      let date = [];
+      let zure = calendarZure(year, month);
+      let i, j;
+
+      if (zure != 6) {
+        for (i = 0; i < zure + 1; i++) {
+          date.push('');
+        }
+      }
+
+      let cnt;
+      for (j = i, cnt = 1; cnt <= monthLen[month - 1]; j++, cnt++) {
+        date.push(`${cnt}`);
+      }
+
+      if (35 - date.length !== 0){
+        for (i = 0; i < 35 - date.length; i++){
+          date.push('');
+        }
+      }
+
+      console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
     }
 
     document.querySelector("#submit").onclick = async (event) => {
