@@ -782,22 +782,29 @@
 
       if (zure != 6) {
         for (i = 0; i < zure + 1; i++) {
-          date.push('');
+          date[date.length] = 0;
         }
       }
 
-      let cnt;
-      for (j = i, cnt = 1; cnt <= monthLen[month - 1]; j++, cnt++) {
-        date.push(`${cnt}`);
+      for (i = 1; i <= monthLen[month - 1]; i++) {
+        date[date.length] = i;
       }
 
       if (35 - date.length !== 0){
         for (i = 0; i < 35 - date.length; i++){
-          date.push('');
+          date[date.length] = 0;
         }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
+      console.log(date);
+      console.log(date[0]);
+      console.log(date[1]);
+      console.log(date[32]);
+      console.log(date[33]);
+      console.log(date[34]);
+      console.log(date[35]);
+      console.log(date[36]);
     }
 
     document.querySelector("#next").onclick = async (event) => {
@@ -815,22 +822,29 @@
 
       if (zure != 6) {
         for (i = 0; i < zure + 1; i++) {
-          date.push('');
+          date[date.length] = 0;
         }
       }
 
-      let cnt;
-      for (j = i, cnt = 1; cnt <= monthLen[month - 1]; j++, cnt++) {
-        date.push(`${cnt}`);
+      for (i = 1; i <= monthLen[month - 1]; i++) {
+        date[date.length] = i;
       }
 
       if (35 - date.length !== 0){
         for (i = 0; i < 35 - date.length; i++){
-          date.push('');
+          date[date.length] = 0;
         }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
+      console.log(date);
+      console.log(date[0]);
+      console.log(date[1]);
+      console.log(date[32]);
+      console.log(date[33]);
+      console.log(date[34]);
+      console.log(date[35]);
+      console.log(date[36]);
     }
 
     document.querySelector("#submit").onclick = async (event) => {
