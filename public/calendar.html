@@ -726,30 +726,29 @@
 
       if (zure != 6) {
         for (i = 0; i < zure + 1; i++) {
-          date.push('0');
+          date[date.length] = '0';
         }
       }
 
       for (i = 1; i <= monthLen[month - 1]; i++) {
-        date.push(`${i}`);
+        date[date.length] = '`${i}`';
       }
 
       if (35 - date.length !== 0){
         for (i = 0; i < 35 - date.length; i++){
-          date.push('0');
-          console.log();
+          date[date.length] = '0';
         }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
-      console.log(data);
-      console.log(data[0]);
-      console.log(data[1]);
-      console.log(data[32]);
-      console.log(data[33]);
-      console.log(data[34]);
-      console.log(data[35]);
-      console.log(data[36]);
+      console.log(date);
+      console.log(date[0]);
+      console.log(date[1]);
+      console.log(date[32]);
+      console.log(date[33]);
+      console.log(date[34]);
+      console.log(date[35]);
+      console.log(date[36]);
 
       d1.textContent = "1";
       d2.textContent = "2";
