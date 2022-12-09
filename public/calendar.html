@@ -635,11 +635,13 @@
   <script type="module">
     let group;
     let username;
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = d.getMonth() + 1;
     let time = `${year}-${month}`;
+    let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
+    // time変数の年月の予定を取得する
     async function reload(){
       const response = await fetch("/download", {
         method: "POST",
@@ -696,10 +698,12 @@
         }
         zure = zure % 7;
       }
-      console.log(zure);
 
-      return zure;
+      return Math.floor(zure);
     }
+
+
+
 
     window.onload = async (event) => {
       const response = await fetch("/login_remove", {
@@ -715,8 +719,29 @@
       username = data[0];
       group = data[1];
       reload();
+      
+      let date = [];
+      let zure = calendarZure(year, month);
+      let i, j;
 
-      calendarZure(year, month);
+      if (zure != 6) {
+        for (i = 0; i < zure + 1; i++) {
+          date.push('');
+        }
+      }
+
+      let cnt;
+      for (j = i, cnt = 1; cnt <= monthLen[month - 1]; j++, cnt++) {
+        date.push(`${cnt}`);
+      }
+
+      if (35 - date.length !== 0){
+        for (i = 0; i < 35 - date.length; i++){
+          date.push('');
+        }
+      }
+
+      console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
 
       d1.textContent = "1";
       d2.textContent = "2";
