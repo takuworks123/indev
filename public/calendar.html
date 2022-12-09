@@ -670,6 +670,37 @@
       }
     }
 
+    // 指定した年、月を引数に入れると、月曜日からのズレを整数型で出力する。
+    // ズレが0の場合は月曜日始まり、ズレが5の場合は日曜日始まり。
+    function calendarZure(y, m){
+      let zure, i, cnt;
+      let date = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+      zure = (y - 1) * 365;
+      zure = zure + y / 4;
+      zure = zure + y / 400;
+      zure = zure - y / 100;
+      zure = zure % 7;
+      
+      if (y % 400 == 0) {
+        date[1]++;
+        zure--;
+      } else if (y % 4 == 0 && y % 100 != 0) {
+        date[1]++;
+        zure--;
+      }
+
+      if (m >= 2) {
+        for (i = 0; i < m - 1; i++) {
+          zure = zure + date[i];
+        }
+        zure = zure % 7;
+      }
+      console.log(zure);
+
+      return zure;
+    }
+
     window.onload = async (event) => {
       const response = await fetch("/login_remove", {
         method: "POST",
@@ -684,6 +715,8 @@
       username = data[0];
       group = data[1];
       reload();
+
+      calendarZure(year, month);
 
       d1.textContent = "1";
       d2.textContent = "2";
