@@ -732,18 +732,29 @@
 
     document.querySelector("#update").onclick = async (event) => {
       reload();
+      calendarZure(year, month);
     }
 
     document.querySelector("#back").onclick = async (event) => {
       month--;
+      if (month < 1) {
+        year--;
+        month = 12;
+      }
       time = `${year}-${month}`;
       reload();
+      calendarZure(year, month);
     }
 
     document.querySelector("#next").onclick = async (event) => {
       month++;
+      if (month > 12) {
+        year++;
+        month = 1;
+      }
       time = `${year}-${month}`;
       reload();
+      calendarZure(year, month);
     }
 
     document.querySelector("#submit").onclick = async (event) => {
