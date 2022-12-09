@@ -726,17 +726,17 @@
 
       if (zure != 6) {
         for (i = 0; i < zure + 1; i++) {
-          date[date.length] = '0';
+          date[date.length] = 0;
         }
       }
 
       for (i = 1; i <= monthLen[month - 1]; i++) {
-        date[date.length] = `${i}`;
+        date[date.length] = i;
       }
 
       if (35 - date.length !== 0){
         for (i = 0; i < 35 - date.length; i++){
-          date[date.length] = '0';
+          date[date.length] = 0;
         }
       }
 
