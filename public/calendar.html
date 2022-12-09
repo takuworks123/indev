@@ -734,10 +734,12 @@
         date[date.length] = i;
       }
 
-      if (35 - date.length !== 0){
-        for (i = 0; i < 35 - date.length; i++){
-          date[date.length] = 0;
-        }
+      if (date.length == 35){
+        i = 34;
+        while (date[i] === undefined){
+            date[i] = 0;
+            i--;
+          }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
@@ -790,10 +792,12 @@
         date[date.length] = i;
       }
 
-      if (35 - date.length !== 0){
-        for (i = 0; i < 35 - date.length; i++){
-          date[date.length] = 0;
-        }
+      if (date.length == 35){
+        i = 34;
+        while (date[i] === undefined){
+            date[i] = 0;
+            i--;
+          }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
@@ -830,10 +834,12 @@
         date[date.length] = i;
       }
 
-      if (35 - date.length !== 0){
-        for (i = 0; i < 35 - date.length; i++){
-          date[date.length] = 0;
-        }
+      if (date.length == 35){
+        i = 34;
+        while (date[i] === undefined){
+            date[i] = 0;
+            i--;
+          }
       }
 
       console.log('^^^^^^^^^^^-----^^^^^^^^' + date.length);
