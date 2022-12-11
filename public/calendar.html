@@ -678,7 +678,7 @@
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
     // time変数の年月の予定を取得する
-    async function reload(){
+    async function reload(event){
       const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -808,8 +808,7 @@
       let data = result.split('@@');
       username = data[0];
       group = data[1];
-      reload();
-      d1.textContent = "TEST";
+      reload(event);
     }
 
     document.querySelector("#update").onclick = async (event) => {
