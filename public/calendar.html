@@ -676,7 +676,7 @@
     let month = d.getMonth() + 1;
     let time = `${year}-${month}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-    let date = [];
+    //let date = [];
 
     // time変数の年月の予定を取得する
     async function reload(){
@@ -699,7 +699,7 @@
         }
 
 
-        date = [];
+        let date = [];
         let zure = calendarZure(year, month);
         let i, j;
 
@@ -716,9 +716,9 @@
         if (date.length != 37){
           i = 36;
           while (date[i] === undefined){
-              date[i] = 0;
-              i--;
-            }
+            date[i] = 0;
+            i--;
+          }
         }
       }
       console.log(date);
