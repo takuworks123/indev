@@ -678,6 +678,11 @@
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
     //let date = [];
 
+    function clickBtn1(){
+      const comment_op = document.getElementById("comment_op");
+      comment_op.textContent = "<b>ボタンを押しました</b>";
+    }
+
     // time変数の年月の予定を取得する
     async function reload(){
       let date = [];
@@ -723,6 +728,7 @@
       }else{
         alert("Database Error");
       }
+      clickBtn1();
       console.log(date);
       console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       return date;
