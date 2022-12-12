@@ -676,11 +676,10 @@
     let month = d.getMonth() + 1;
     let time = `${year}-${month}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-    //let date = [];
+    let date = [];
 
     // time変数の年月の予定を取得する
     async function reload(){
-      let date = [];
       const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -699,7 +698,7 @@
           let comment = data2[4];
         }
 
-
+        date = [];
         let zure = calendarZure(year, month);
         let i;
 
@@ -723,8 +722,6 @@
       }else{
         alert("Database Error");
       }
-
-      return date;
     }
 
     // 指定した年、月を引数に入れると、月曜日からのズレを整数型で出力する。
@@ -773,10 +770,9 @@
       let data = result.split('@@');
       username = data[0];
       group = data[1];
-      const date = reload();
-      console.log("^^^^^^^^^-^-^-^----------");
+      reload();
       console.log(date);
-      d1.textContent = date[0]; // ここの表示ができず、手こずってます
+      d1.textContent = `${date[0]}`; // ここの表示ができず、手こずってます
       d2.textContent = `${date[1]}`;
       d3.textContent = `${date[2]}`;
       d4.textContent = `${date[3]}`;
