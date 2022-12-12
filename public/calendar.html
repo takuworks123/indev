@@ -745,7 +745,7 @@
 
         if (zure != 6) {
           for (i = 0; i < zure + 1; i++) {
-            date[date.length] = 0;
+            date[date.length] = "";
           }
         }
 
@@ -756,14 +756,14 @@
         if (date.length != 37){
           i = 36;
           while (date[i] === undefined){
-            date[i] = 0;
+            date[i] = "";
             i--;
           }
         }
       }else{
         alert("Database Error");
       }
-      
+
       output(date);
     }
 
