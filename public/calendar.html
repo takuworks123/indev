@@ -702,7 +702,6 @@
 
         let zure = calendarZure(year, month);
         let i;
-        console.log(zure + "pppppppppppppppppp");
 
         if (zure != 6) {
           for (i = 0; i < zure + 1; i++) {
@@ -724,7 +723,7 @@
       }else{
         alert("Database Error");
       }
-      console.log(date);
+
       return date;
     }
 
@@ -775,6 +774,7 @@
       username = data[0];
       group = data[1];
       const date = reload();
+      console.log("^^^^^^^^^-^-^-^----------");
       console.log(date);
       d1.textContent = `${date[0]}`; // ここの表示ができず、手こずってます
       d2.textContent = `${date[1]}`;

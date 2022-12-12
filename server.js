@@ -119,8 +119,8 @@ serve(async (req) => {
       .select()
       .eq('group', group);
     
-    let data = '';
     if (sp.error == null) {
+      let data = '';
       for (let i = 0; i < sp.data.length; i++) {
         if (sp.data[i].sche_start.includes(`${time}`)){
           data += sp.data[i].created_at + '||';
