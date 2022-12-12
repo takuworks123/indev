@@ -678,9 +678,46 @@
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
     //let date = [];
 
-    function clickBtn1(){
-      const comment_op = document.getElementById("comment_op");
-      comment_op.textContent = "<b>ボタンを押しました</b>";
+    function clickBtn1(date){
+      const d1 = document.getElementById("d1");
+      d1.textContent = `${date[0]}`;
+      //d1.textContent = `${date[0]}`; // ここの表示ができず、手こずってます
+      d2.textContent = `${date[1]}`;
+      d3.textContent = `${date[2]}`;
+      d4.textContent = `${date[3]}`;
+      d5.textContent = `${date[4]}`;
+      d6.textContent = `${date[5]}`;
+      d7.textContent = `${date[6]}`;
+      d8.textContent = `${date[7]}`;
+      d9.textContent = `${date[8]}`;
+      d10.textContent = `${date[9]}`;
+      d11.textContent = `${date[10]}`;
+      d12.textContent = `${date[11]}`;
+      d13.textContent = `${date[12]}`;
+      d14.textContent = `${date[13]}`;
+      d15.textContent = `${date[14]}`;
+      d16.textContent = `${date[15]}`;
+      d17.textContent = `${date[16]}`;
+      d18.textContent = `${date[17]}`;
+      d19.textContent = `${date[18]}`;
+      d20.textContent = `${date[19]}`;
+      d21.textContent = `${date[20]}`;
+      d22.textContent = `${date[21]}`;
+      d23.textContent = `${date[22]}`;
+      d24.textContent = `${date[23]}`;
+      d25.textContent = `${date[24]}`;
+      d26.textContent = `${date[25]}`;
+      d27.textContent = `${date[26]}`;
+      d28.textContent = `${date[27]}`;
+      d29.textContent = `${date[28]}`;
+      d30.textContent = `${date[29]}`;
+      d31.textContent = `${date[30]}`;
+      d32.textContent = `${date[31]}`;
+      d33.textContent = `${date[32]}`;
+      d34.textContent = `${date[33]}`;
+      d35.textContent = `${date[34]}`;
+      d36.textContent = `${date[35]}`;
+      d37.textContent = `${date[36]}`;
     }
 
     // time変数の年月の予定を取得する
@@ -728,7 +765,7 @@
       }else{
         alert("Database Error");
       }
-      clickBtn1();
+      clickBtn1(date);
       console.log(date);
       console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       return date;
