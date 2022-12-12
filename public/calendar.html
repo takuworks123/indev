@@ -705,18 +705,18 @@
 
         if (zure != 6) {
           for (i = 0; i < zure + 1; i++) {
-            date[date.length] = String(0);
+            date[date.length] = 0;
           }
         }
 
         for (i = 1; i <= monthLen[month - 1]; i++) {
-          date[date.length] = String(i);
+          date[date.length] = i;
         }
 
         if (date.length != 37){
           i = 36;
           while (date[i] === undefined){
-              date[i] = String(0);
+              date[i] = 0;
               i--;
             }
         }
