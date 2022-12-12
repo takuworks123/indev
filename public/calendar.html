@@ -687,7 +687,6 @@
         body: JSON.stringify({ group, time })
       });
       let result = await response.text();
-      reload2(result)
       if (result != 'Database Error'){
         let data = result.split('@@');
         
