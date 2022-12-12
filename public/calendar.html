@@ -669,6 +669,8 @@
   </table>
 
   <script type="module">
+    var dd1 = document.getElementById("d1");
+
     let group;
     let username;
     let d = new Date();
@@ -720,9 +722,8 @@
               i--;
             }
         }
-
-        var d1 = document.getElementById("d1");
-        d1.innerHTML = date[0];
+        
+        dd1.innerHTML = date[0];
 
         d1.textContent = date[0];
         d2.textContent = date[1];
