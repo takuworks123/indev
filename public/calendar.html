@@ -677,49 +677,90 @@
     let time = `${year}-${month}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
-    function output(date){
-      d1.textContent = `${date[0]}`;
-      d2.textContent = `${date[1]}`;
-      d3.textContent = `${date[2]}`;
-      d4.textContent = `${date[3]}`;
-      d5.textContent = `${date[4]}`;
-      d6.textContent = `${date[5]}`;
-      d7.textContent = `${date[6]}`;
-      d8.textContent = `${date[7]}`;
-      d9.textContent = `${date[8]}`;
-      d10.textContent = `${date[9]}`;
-      d11.textContent = `${date[10]}`;
-      d12.textContent = `${date[11]}`;
-      d13.textContent = `${date[12]}`;
-      d14.textContent = `${date[13]}`;
-      d15.textContent = `${date[14]}`;
-      d16.textContent = `${date[15]}`;
-      d17.textContent = `${date[16]}`;
-      d18.textContent = `${date[17]}`;
-      d19.textContent = `${date[18]}`;
-      d20.textContent = `${date[19]}`;
-      d21.textContent = `${date[20]}`;
-      d22.textContent = `${date[21]}`;
-      d23.textContent = `${date[22]}`;
-      d24.textContent = `${date[23]}`;
-      d25.textContent = `${date[24]}`;
-      d26.textContent = `${date[25]}`;
-      d27.textContent = `${date[26]}`;
-      d28.textContent = `${date[27]}`;
-      d29.textContent = `${date[28]}`;
-      d30.textContent = `${date[29]}`;
-      d31.textContent = `${date[30]}`;
-      d32.textContent = `${date[31]}`;
-      d33.textContent = `${date[32]}`;
-      d34.textContent = `${date[33]}`;
-      d35.textContent = `${date[34]}`;
-      d36.textContent = `${date[35]}`;
-      d37.textContent = `${date[36]}`;
+    function output_d(dates){
+      d1.textContent = `${dates[0]}`;
+      d2.textContent = `${dates[1]}`;
+      d3.textContent = `${dates[2]}`;
+      d4.textContent = `${dates[3]}`;
+      d5.textContent = `${dates[4]}`;
+      d6.textContent = `${dates[5]}`;
+      d7.textContent = `${dates[6]}`;
+      d8.textContent = `${dates[7]}`;
+      d9.textContent = `${dates[8]}`;
+      d10.textContent = `${dates[9]}`;
+      d11.textContent = `${dates[10]}`;
+      d12.textContent = `${dates[11]}`;
+      d13.textContent = `${dates[12]}`;
+      d14.textContent = `${dates[13]}`;
+      d15.textContent = `${dates[14]}`;
+      d16.textContent = `${dates[15]}`;
+      d17.textContent = `${dates[16]}`;
+      d18.textContent = `${dates[17]}`;
+      d19.textContent = `${dates[18]}`;
+      d20.textContent = `${dates[19]}`;
+      d21.textContent = `${dates[20]}`;
+      d22.textContent = `${dates[21]}`;
+      d23.textContent = `${dates[22]}`;
+      d24.textContent = `${dates[23]}`;
+      d25.textContent = `${dates[24]}`;
+      d26.textContent = `${dates[25]}`;
+      d27.textContent = `${dates[26]}`;
+      d28.textContent = `${dates[27]}`;
+      d29.textContent = `${dates[28]}`;
+      d30.textContent = `${dates[29]}`;
+      d31.textContent = `${dates[30]}`;
+      d32.textContent = `${dates[31]}`;
+      d33.textContent = `${dates[32]}`;
+      d34.textContent = `${dates[33]}`;
+      d35.textContent = `${dates[34]}`;
+      d36.textContent = `${dates[35]}`;
+      d37.textContent = `${dates[36]}`;
+    }
+    
+    function output_c(comments){
+      c1_1.textContent = `${comments[0]}`;
+      c2_1.textContent = `${comments[1]}`;
+      c3_1.textContent = `${comments[2]}`;
+      c4_1.textContent = `${comments[3]}`;
+      c5_1.textContent = `${comments[4]}`;
+      c6_1.textContent = `${comments[5]}`;
+      c7_1.textContent = `${comments[6]}`;
+      c8_1.textContent = `${comments[7]}`;
+      c9_1.textContent = `${comments[8]}`;
+      c10_1.textContent = `${comments[9]}`;
+      c11_1.textContent = `${comments[10]}`;
+      c12_1.textContent = `${comments[11]}`;
+      c13_1.textContent = `${comments[12]}`;
+      c14_1.textContent = `${comments[13]}`;
+      c15_1.textContent = `${comments[14]}`;
+      c16_1.textContent = `${comments[15]}`;
+      c17_1.textContent = `${comments[16]}`;
+      c18_1.textContent = `${comments[17]}`;
+      c19_1.textContent = `${comments[18]}`;
+      c20_1.textContent = `${comments[19]}`;
+      c21_1.textContent = `${comments[20]}`;
+      c22_1.textContent = `${comments[21]}`;
+      c23_1.textContent = `${comments[22]}`;
+      c24_1.textContent = `${comments[23]}`;
+      c25_1.textContent = `${comments[24]}`;
+      c26_1.textContent = `${comments[25]}`;
+      c27_1.textContent = `${comments[26]}`;
+      c28_1.textContent = `${comments[27]}`;
+      c29_1.textContent = `${comments[28]}`;
+      c30_1.textContent = `${comments[29]}`;
+      c31_1.textContent = `${comments[30]}`;
+      c32_1.textContent = `${comments[31]}`;
+      c33_1.textContent = `${comments[32]}`;
+      c34_1.textContent = `${comments[33]}`;
+      c35_1.textContent = `${comments[34]}`;
+      c36_1.textContent = `${comments[35]}`;
+      c37_1.textContent = `${comments[36]}`;
     }
 
     // time変数の年月の予定を取得する
     async function reload(){
-      let date = [];
+      let dates = [];
+      let comments = [];
       const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -736,6 +777,8 @@
           let sche_start = data2[2];
           let sche_end = data2[3];
           let comment = data2[4];
+
+          comments[comments.length] = comment;
         }
 
         
@@ -744,18 +787,18 @@
 
         if (zure != 6) {
           for (i = 0; i < zure + 1; i++) {
-            date[date.length] = "";
+            dates[dates.length] = "";
           }
         }
 
         for (i = 1; i <= monthLen[month - 1]; i++) {
-          date[date.length] = i;
+          dates[dates.length] = i;
         }
 
-        if (date.length != 37){
+        if (dates.length != 37){
           i = 36;
-          while (date[i] === undefined){
-            date[i] = "";
+          while (dates[i] === undefined){
+            dates[i] = "";
             i--;
           }
         }
@@ -763,7 +806,8 @@
         alert("Database Error");
       }
 
-      output(date);
+      output_d(dates);
+      output_c(comments);
     }
 
     // 指定した年、月を引数に入れると、月曜日からのズレを整数型で出力する。
