@@ -759,7 +759,6 @@
 
     // time変数の年月の予定を取得する
     async function reload(){
-      let dates = [];
       let comments = [];
       const response = await fetch("/download", {
         method: "POST",
@@ -781,27 +780,8 @@
           comments[comments.length] = comment;
         }
 
+        let dates = calendarZure(year, month);
         
-        let zure = calendarZure(year, month);
-        let i;
-
-        if (zure != 6) {
-          for (i = 0; i < zure + 1; i++) {
-            dates[dates.length] = "";
-          }
-        }
-
-        for (i = 1; i <= monthLen[month - 1]; i++) {
-          dates[dates.length] = i;
-        }
-
-        if (dates.length != 37){
-          i = 36;
-          while (dates[i] === undefined){
-            dates[i] = "";
-            i--;
-          }
-        }
       }else{
         alert("Database Error");
       }
@@ -812,7 +792,8 @@
 
     // 指定した年、月を引数に入れると、月曜日からのズレを整数型で出力する。
     // ズレが0の場合は月曜日始まり、ズレが5の場合は日曜日始まり。
-    function calendarZure(y, m){
+    function MannnenCalendar(y, m){
+      let dates = [];
       let zure, i, cnt;
       let monthLen_tmp = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
@@ -837,7 +818,25 @@
         zure = zure % 7;
       }
 
-      return Math.floor(zure);
+      if (zure != 6) {
+        for (i = 0; i < zure + 1; i++) {
+          dates[dates.length] = "";
+        }
+      }
+
+      for (i = 1; i <= monthLen[month - 1]; i++) {
+        dates[dates.length] = i;
+      }
+
+      if (dates.length != 37){
+        i = 36;
+        while (dates[i] === undefined){
+          dates[i] = "";
+          i--;
+        }
+      }
+
+      return dates;
     }
 
 
