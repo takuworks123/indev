@@ -30,10 +30,10 @@
             <th><div id = "d1" class = "daynum"></div></th>
           </tr>
           <tr>
-            <th><div id = "n1_1"></div><div id = "c1_1"></div></th>
+            <th id = "th1_1"><div id = "n1_1"></div><div id = "c1_1"></div></th>
           </tr>
           <tr>
-            <th><div id = "n1_2"></div><div id = "c1_2"></div></th>
+            <th id = "th1_2"><div id = "n1_2"></div><div id = "c1_2"></div></th>
           </tr>
         </table>
 
@@ -872,7 +872,8 @@
           console.log(sche_start);
           users[users.length] = user;
           comments[comments.length] = comment;
-          n2_1.style.color = '#ffffff'
+          th1_1.style.color = '#bbffff'
+          th1_2.style.color = '#bbffff'
         }
 
         let dates = MannnenCalendar(year, month);
