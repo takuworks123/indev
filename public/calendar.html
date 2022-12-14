@@ -716,6 +716,46 @@
       d36.textContent = `${dates[35]}`;
       d37.textContent = `${dates[36]}`;
     }
+
+    function output_n(users){
+      n1_1.textContent = `${users[0]}`;
+      n2_1.textContent = `${users[1]}`;
+      n3_1.textContent = `${users[2]}`;
+      n4_1.textContent = `${users[3]}`;
+      n5_1.textContent = `${users[4]}`;
+      n6_1.textContent = `${users[5]}`;
+      n7_1.textContent = `${users[6]}`;
+      n8_1.textContent = `${users[7]}`;
+      n9_1.textContent = `${users[8]}`;
+      n10_1.textContent = `${users[9]}`;
+      n11_1.textContent = `${users[10]}`;
+      n12_1.textContent = `${users[11]}`;
+      n13_1.textContent = `${users[12]}`;
+      n14_1.textContent = `${users[13]}`;
+      n15_1.textContent = `${users[14]}`;
+      n16_1.textContent = `${users[15]}`;
+      n17_1.textContent = `${users[16]}`;
+      n18_1.textContent = `${users[17]}`;
+      n19_1.textContent = `${users[18]}`;
+      n20_1.textContent = `${users[19]}`;
+      n21_1.textContent = `${users[20]}`;
+      n22_1.textContent = `${users[21]}`;
+      n23_1.textContent = `${users[22]}`;
+      n24_1.textContent = `${users[23]}`;
+      n25_1.textContent = `${users[24]}`;
+      n26_1.textContent = `${users[25]}`;
+      n27_1.textContent = `${users[26]}`;
+      n28_1.textContent = `${users[27]}`;
+      n29_1.textContent = `${users[28]}`;
+      n30_1.textContent = `${users[29]}`;
+      n31_1.textContent = `${users[30]}`;
+      n32_1.textContent = `${users[31]}`;
+      n33_1.textContent = `${users[32]}`;
+      n34_1.textContent = `${users[33]}`;
+      n35_1.textContent = `${users[34]}`;
+      n36_1.textContent = `${users[35]}`;
+      n37_1.textContent = `${users[36]}`;
+    }
     
     function output_c(comments){
       c1_1.textContent = `${comments[0]}`;
@@ -759,6 +799,7 @@
 
     // time変数の年月の予定を取得する
     async function reload(){
+      let users = [];
       let comments = [];
       const response = await fetch("/download", {
         method: "POST",
@@ -777,13 +818,14 @@
           let sche_end = data2[3];
           let comment = data2[4];
 
+          users[users.length] = user;
           comments[comments.length] = comment;
         }
 
         let dates = MannnenCalendar(year, month);
-        console.log(dates);
 
         output_d(dates);
+        output_n(users);
         output_c(comments);
         
       }else{
