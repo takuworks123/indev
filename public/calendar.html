@@ -797,49 +797,12 @@
       c37_1.textContent = `${comments[36]}`;
     }
 
-    // time変数の年月の予定を取得する
-    async function reload(){
-      let users = [];
-      let comments = [];
-      const response = await fetch("/download", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group, time })
-      });
-      let result = await response.text();
-      if (result != 'Database Error'){
-        let data = result.split('@@');
-        
-        for (let i = 0; i < data.length-1; i++) {
-          let data2 = data[i].split('||');
-          let created_at = data2[0];
-          let user = data2[1];
-          let sche_start = data2[2];
-          let sche_end = data2[3];
-          let comment = data2[4];
-
-          console.log(sche_start);
-          users[users.length] = user;
-          comments[comments.length] = comment;
-        }
-
-        let dates = MannnenCalendar(year, month);
-
-        output_d(dates);
-        output_n(users);
-        output_c(comments);
-        
-      }else{
-        alert("Database Error");
-      }
-    }
-
-    // 指定した年、月を引数に入れると、月曜日からのズレを整数型で出力する。
-    // ズレが0の場合は月曜日始まり、ズレが5の場合は日曜日始まり。
+    // 指定した年、月を引数に入れると、月曜日からのズレを計算し、
+    // カレンダーの一番左上（日曜日）を添字0とする配列が戻り値となる。
     function MannnenCalendar(y, m){
       let dates = [];
       let zure, i, cnt;
-      let monthLen_tmp = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+      let monthLen_tmp = monthLen;
 
       zure = (y - 1) * 365;
       zure = zure + y / 4;
@@ -885,6 +848,43 @@
       return dates;
     }
 
+    // time変数の年月の予定を取得し、output_d,n,c関数によって出力する。
+    async function reload(){
+      let users = [];
+      let comments = [];
+      const response = await fetch("/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ group, time })
+      });
+      let result = await response.text();
+      if (result != 'Database Error'){
+        let data = result.split('@@');
+        
+        for (let i = 0; i < data.length-1; i++) {
+          let data2 = data[i].split('||');
+          let created_at = data2[0];
+          let user = data2[1];
+          let sche_start = data2[2];
+          let sche_end = data2[3];
+          let comment = data2[4];
+
+          console.log(sche_start);
+          users[users.length] = user;
+          comments[comments.length] = comment;
+        }
+
+        let dates = MannnenCalendar(year, month);
+
+        output_d(dates);
+        output_n(users);
+        output_c(comments);
+        
+      }else{
+        alert("Database Error");
+      }
+    }
+
 
 
 
@@ -906,7 +906,6 @@
 
     document.querySelector("#update").onclick = async (event) => {
       await reload();
-      MannnenCalendar(year, month);
     }
 
     document.querySelector("#back").onclick = async (event) => {
