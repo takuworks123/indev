@@ -1038,7 +1038,7 @@
         });
         let result = await response.text();
 
-        document.getElementById("modalH_" + slot).innerHTML = `${date}日の予定一覧`;
+        document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
         document.getElementById("modalP_" + slot).innerHTML = "";
 
         let data = result.split('@@');
@@ -1083,7 +1083,7 @@
         });
         let result = await response.text();
 
-        document.getElementById("modalH_" + slot).innerHTML = `${date}日の予定一覧`;
+        document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
         document.getElementById("modalP_" + slot).innerHTML = "";
 
         let data = result.split('@@');
