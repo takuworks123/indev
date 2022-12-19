@@ -432,14 +432,14 @@
               <div id = "d24" class = "daynum"></div>
 
               <!-- モーダルエリアここから -->
-              <section id="modalArea" class="modalArea">
-                <div id="modalBg" class="modalBg"></div>
+              <section id="modalArea_24" class="modalArea">
+                <div id="modalBg_24" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH"></h1>
-                    <p id="modalP"></p>
+                    <h1 id="modalH_24"></h1>
+                    <p id="modalP_24"></p>
                   </div>
-                  <div id="closeModal" class="closeModal">
+                  <div id="closeModal_24" class="closeModal">
                     ×
                   </div>
                 </div>
@@ -471,14 +471,14 @@
               <div id = "d25" class = "daynum"></div>
 
               <!-- モーダルエリアここから -->
-              <section id="modalArea" class="modalArea">
-                <div id="modalBg" class="modalBg"></div>
+              <section id="modalArea_25" class="modalArea">
+                <div id="modalBg_25" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH"></h1>
-                    <p id="modalP"></p>
+                    <h1 id="modalH_25"></h1>
+                    <p id="modalP_25"></p>
                   </div>
-                  <div id="closeModal" class="closeModal">
+                  <div id="closeModal_25" class="closeModal">
                     ×
                   </div>
                 </div>
@@ -1019,22 +1019,22 @@
 
     $(function () {
       $('#d24').click(function(){
-        modalH.textContent = "見出し1";
-        modalP.textContent = "本文1";
-        $('#modalArea').fadeIn(200);
+        modalH_24.textContent = "見出し1";
+        modalP_24.textContent = "本文1";
+        $('#modalArea_24').fadeIn(200);
       });
-      $('#closeModal , #modalBg').click(function(){
-        $('#modalArea').fadeOut(200);
+      $('#closeModal_24 , #modalBg_24').click(function(){
+        $('#modalArea_24').fadeOut(200);
       });
 
 
       $('#d25').click(function(){
-        modalH.textContent = "見出し2";
-        modalP.textContent = "本文2";
-        $('#modalArea').fadeIn(200);
+        modalH_25.textContent = "見出し2";
+        modalP_25.textContent = "本文2";
+        $('#modalArea_25').fadeIn(200);
       });
-      $('#closeModal , #modalBg').click(function(){
-        $('#modalArea').fadeOut(200);
+      $('#closeModal_25 , #modalBg_25').click(function(){
+        $('#modalArea_25').fadeOut(200);
       });
     });
     
