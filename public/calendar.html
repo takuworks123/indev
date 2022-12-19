@@ -1057,6 +1057,9 @@
       let result = await response.text();
 
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
+      for (let i = 0; i < 5; i++) {
+        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
+      }
 
       let data = result.split('@@');
       for (let i = 0; i < data.length-1; i++) {
