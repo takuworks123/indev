@@ -1026,6 +1026,11 @@
 
 
 
+
+
+
+
+
     async function popup(slot){
       let date = document.getElementById("d" + slot).textContent;
       let day = time + "-" + ('00' + date).slice(-2);
@@ -1050,15 +1055,9 @@
         let comment = data2[4];
 
         console.log(comment);
-        document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment}`;
+        document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment} --- <button type="button">削除</button>`;
       }
     }
-
-
-
-
-
-
 
 
     // 
