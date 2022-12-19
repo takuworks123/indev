@@ -1014,6 +1014,37 @@
 
 
 
+    async function popup(slot){
+      let date = document.getElementById("d" + slot).textContent;
+      let day = time + "-" + ('00' + date).slice(-2);
+      console.log(day);
+      const response = await fetch("/download_day", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ group, day })
+      });
+      let result = await response.text();
+
+      document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
+      document.getElementById("modalP_" + slot).innerHTML = "";
+
+      let data = result.split('@@');
+      for (let i = 0; i < data.length-1; i++) {
+        let data2 = data[i].split('||');
+        let created_at = data2[0];
+        let user = data2[1];
+        let sche_start = data2[2];
+        let sche_end = data2[3];
+        let comment = data2[4];
+
+        console.log(comment);
+        document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment}`;
+      }
+    }
+
+
+
+
 
 
 
@@ -1022,37 +1053,7 @@
     $(function () {
 
       $('#d24').click(async function(){
-        let slot = 24;
-
-        console.log(slot);
-        let test = "op";
-        document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
-
-        let date = document.getElementById("d" + slot).textContent;
-        let day = time + "-" + ('00' + date).slice(-2);
-        console.log(day);
-        const response = await fetch("/download_day", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ group, day })
-        });
-        let result = await response.text();
-
-        document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
-        document.getElementById("modalP_" + slot).innerHTML = "";
-
-        let data = result.split('@@');
-        for (let i = 0; i < data.length-1; i++) {
-          let data2 = data[i].split('||');
-          let created_at = data2[0];
-          let user = data2[1];
-          let sche_start = data2[2];
-          let sche_end = data2[3];
-          let comment = data2[4];
-
-          console.log(comment);
-          document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment}`;
-        }
+        await popup(24);
 
         $('#modalArea_24').fadeIn(200);
       });
@@ -1067,37 +1068,7 @@
 
 
       $('#d25').click(async function(){
-        let slot = 25;
-
-        console.log(slot);
-        let test = "op";
-        document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
-
-        let date = document.getElementById("d" + slot).textContent;
-        let day = time + "-" + ('00' + date).slice(-2);
-        console.log(day);
-        const response = await fetch("/download_day", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ group, day })
-        });
-        let result = await response.text();
-
-        document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
-        document.getElementById("modalP_" + slot).innerHTML = "";
-
-        let data = result.split('@@');
-        for (let i = 0; i < data.length-1; i++) {
-          let data2 = data[i].split('||');
-          let created_at = data2[0];
-          let user = data2[1];
-          let sche_start = data2[2];
-          let sche_end = data2[3];
-          let comment = data2[4];
-
-          console.log(comment);
-          document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment}`;
-        }
+        await popup(25);
 
         $('#modalArea_25').fadeIn(200);
       });
