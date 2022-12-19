@@ -1025,9 +1025,10 @@
         console.log(i);
 
         $('#d' + i).click(async function(){
+          console.log(i);
           let test = "op";
           document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
-          
+
           let date = document.getElementById("d24").textContent;
           let day = time + "-" + ('00' + date).slice(-2);
           console.log(day);
