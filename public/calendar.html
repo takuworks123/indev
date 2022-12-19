@@ -1061,7 +1061,7 @@
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
 
       let data = result.split('@@');
-      for (let i = 0; i < ScheAmountPerDay; i++) {
+      for (let i = 0; i < 5; i++) {
         let data2 = data[i].split('||');
         let id = data2[0];
         let created_at = data2[1];
