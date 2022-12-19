@@ -1055,7 +1055,7 @@
         let comment = data2[4];
 
         console.log(comment);
-        document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment} --- <button type="button">削除</button>`;
+        document.getElementById("modalP_" + slot).innerHTML += `<br><button id="delete${i}" type="button">削除</button> ${sche_start}: ${comment}`;
       }
     }
 
