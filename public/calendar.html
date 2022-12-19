@@ -1076,10 +1076,10 @@
 
       for (i = i; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button', '<button hidden');
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button id=', '<button hidden id=');
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
 
-        console.log(temp.replace('<button', '<button hidden'));
+        console.log(temp.replace('<button id=', '<button hidden id='));
       }
     }
 
