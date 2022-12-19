@@ -139,7 +139,7 @@ serve(async (req) => {
   if (req.method === "POST" && pathname === "/download_day") {
     const requestJson = await req.json();
     let group = requestJson.group;
-    let time = requestJson.time;
+    let day = requestJson.day;
     let sp = await supabase // calendarテーブルへ問い合わせ
       .from('calendar')
       .select()
@@ -148,7 +148,7 @@ serve(async (req) => {
     if (sp.error == null) {
       let data = '';
       for (let i = 0; i < sp.data.length; i++) {
-        if (sp.data[i].sche_start.includes(`${time}`)){
+        if (sp.data[i].sche_start.includes(`${day}`)){
           data += sp.data[i].created_at + '||';
           data += sp.data[i].username + '||';
           data += sp.data[i].sche_start + '||';
