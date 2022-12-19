@@ -110,7 +110,33 @@ serve(async (req) => {
     }
   }
 
-  if (req.method === "POST" && pathname === "/download") {
+  if (req.method === "POST" && pathname === "/download_month") {
+    const requestJson = await req.json();
+    let group = requestJson.group;
+    let time = requestJson.time;
+    let sp = await supabase // calendarテーブルへ問い合わせ
+      .from('calendar')
+      .select()
+      .eq('group', group);
+    
+    if (sp.error == null) {
+      let data = '';
+      for (let i = 0; i < sp.data.length; i++) {
+        if (sp.data[i].sche_start.includes(`${time}`)){
+          data += sp.data[i].created_at + '||';
+          data += sp.data[i].username + '||';
+          data += sp.data[i].sche_start + '||';
+          data += sp.data[i].sche_end + '||';
+          data += sp.data[i].comment + '@@';
+        }
+      }
+      return new Response(data);
+    } else {
+      return new Response('Database Error');
+    }
+  }
+
+  if (req.method === "POST" && pathname === "/download_day") {
     const requestJson = await req.json();
     let group = requestJson.group;
     let time = requestJson.time;

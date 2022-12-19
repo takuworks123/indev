@@ -908,7 +908,7 @@
 
     // time変数の年月の予定を取得し、output_d,n,c関数によって出力する。
     async function reload(){
-      const response = await fetch("/download", {
+      const response = await fetch("/download_month", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group, time })
@@ -1018,9 +1018,28 @@
 
 
     $(function () {
-      $('#d24').click(function(){
-        modalH_24.innerHTML = "見出し1";
-        modalP_24.innerHTML = "本文1<br>aaaaaaa";
+      $('#d24').click(async function(){
+        let day = time + ('00' + d24.textContent).slice(-2);
+        const response = await fetch("/download_day", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ group, day })
+        });
+        let result = await response.text();
+        modalH_24.innerHTML = d24.textContent + "日の予定一覧";
+        modalP_24.innerHTML = "";
+
+        let data = result.split('@@');
+        for (let i = 0; i < data.length-1; i++) {
+          let data2 = data[i].split('||');
+          let created_at = data2[0];
+          let user = data2[1];
+          let sche_start = data2[2];
+          let sche_end = data2[3];
+          let comment = data2[4];
+
+          modalP_24.innerHTML += `<br>${comment}`
+
         $('#modalArea_24').fadeIn(200);
       });
       $('#closeModal_24 , #modalBg_24').click(function(){
@@ -1028,9 +1047,9 @@
       });
 
 
-      $('#d25').click(function(){
+      $('#d25').click(async function(){
         modalH_25.innerHTML = "見出し2";
-        modalP_25.innerHTML = "本文2<br>bbbbbbb";
+        modalP_25.innerHTML = "本文2";
         $('#modalArea_25').fadeIn(200);
       });
       $('#closeModal_25 , #modalBg_25').click(function(){
