@@ -1020,48 +1020,46 @@
 
 
     $(function () {
-      let i;
-      for(i = 1; i <= 37; i++){
-        console.log(i);
 
-        $('#d' + i).click(async function(){
-          console.log(i);
-          let test = "op";
-          document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
+      $('#d24').click(async function(){
+        let slot = 24;
 
-          let date = document.getElementById("d24").textContent;
-          let day = time + "-" + ('00' + date).slice(-2);
-          console.log(day);
-          const response = await fetch("/download_day", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ group, day })
-          });
-          let result = await response.text();
+        console.log(slot);
+        let test = "op";
+        document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
 
-          document.getElementById("modalH_" + i).innerHTML = `${date}日の予定一覧`;
-          document.getElementById("modalP_" + i).innerHTML = "";
-
-          let data = result.split('@@');
-          for (let i = 0; i < data.length-1; i++) {
-            let data2 = data[i].split('||');
-            let created_at = data2[0];
-            let user = data2[1];
-            let sche_start = data2[2];
-            let sche_end = data2[3];
-            let comment = data2[4];
-
-            console.log(comment);
-            document.getElementById("modalP_" + i).innerHTML += `<br>${sche_start}: ${comment}`;
-          }
-
-          $('#modalArea_24' + i).fadeIn(200);
+        let date = document.getElementById("d" + slot).textContent;
+        let day = time + "-" + ('00' + date).slice(-2);
+        console.log(day);
+        const response = await fetch("/download_day", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ group, day })
         });
+        let result = await response.text();
 
-        $('#closeModal_' + i + ' , #modalBg_' + i).click(function(){
-          $('#modalArea_' + i).fadeOut(200);
-        });
-      }
+        document.getElementById("modalH_" + slot).innerHTML = `${date}日の予定一覧`;
+        document.getElementById("modalP_" + slot).innerHTML = "";
+
+        let data = result.split('@@');
+        for (let i = 0; i < data.length-1; i++) {
+          let data2 = data[i].split('||');
+          let created_at = data2[0];
+          let user = data2[1];
+          let sche_start = data2[2];
+          let sche_end = data2[3];
+          let comment = data2[4];
+
+          console.log(comment);
+          document.getElementById("modalP_" + slot).innerHTML += `<br>${sche_start}: ${comment}`;
+        }
+
+        $('#modalArea_' + slot).fadeIn(200);
+      });
+
+      $('#closeModal_' + slot + ' , #modalBg_' + slot).click(function(){
+        $('#modalArea_' + slot).fadeOut(200);
+      });
 
     });
     
