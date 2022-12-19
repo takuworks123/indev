@@ -1057,7 +1057,7 @@
         body: JSON.stringify({ group, day })
       });
       let result = await response.text();
-
+      console.log(result);
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
 
       let data = result.split('@@');
@@ -1070,13 +1070,15 @@
         let sche_end = data2[4];
         let comment = data2[5];
 
-        /*if (i < data.length-1){
+        /*
+        if (i < data.length-1){
           //console.log("A " + document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
           document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
         } else {
           //console.log("B " + document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
           document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
-        }*/
+        }
+        */
 
         console.log(`${slot}_${i + 1}`);
         
