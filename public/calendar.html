@@ -448,15 +448,14 @@
             <th>
               
               <div id = "d25" class = "daynum"></div>
-              <button id="openModal">Open modal</button>
 
               <!-- モーダルエリアここから -->
               <section id="modalArea" class="modalArea">
                 <div id="modalBg" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1>Here are modal contents!</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                    <h1 id="modalH"></h1>
+                    <p id="modalP"></p>
                   </div>
                   <div id="closeModal" class="closeModal">
                     ×
@@ -991,7 +990,7 @@
 
 
     $(function () {
-      $('#openModal').click(function(){
+      $('#d25').click(function(){
           $('#modalArea').fadeIn(200);
       });
       $('#closeModal , #modalBg').click(function(){
