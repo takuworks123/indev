@@ -1019,8 +1019,8 @@
 
     $(function () {
       $('#d24').click(function(){
-        modalH_24.textContent = "見出し1";
-        modalP_24.textContent = "本文1";
+        modalH_24.innerHTML = "見出し1";
+        modalP_24.innerHTML = "本文1<br>aaaaaaa";
         $('#modalArea_24').fadeIn(200);
       });
       $('#closeModal_24 , #modalBg_24').click(function(){
@@ -1029,8 +1029,8 @@
 
 
       $('#d25').click(function(){
-        modalH_25.textContent = "見出し2";
-        modalP_25.textContent = "本文2";
+        modalH_25.innerHTML = "見出し2";
+        modalP_25.innerHTML = "本文2<br>bbbbbbb";
         $('#modalArea_25').fadeIn(200);
       });
       $('#closeModal_25 , #modalBg_25').click(function(){
