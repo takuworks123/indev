@@ -839,7 +839,7 @@
     // ZureCalendar関数によって得たズレを引数に入れると、日付と曜日が一致した、
     // カレンダーの一番左上のマス（日曜日）を添字0とする配列が戻り値となる。
     function MannnenCalendar(zure){
-      let dates = [];
+      let dates = new Array<string>(37).fill(' ');;
       let i;
       let monthLen_tmp = monthLen;
 
@@ -864,8 +864,6 @@
 
     // time変数の年月の予定を取得し、output_d,n,c関数によって出力する。
     async function reload(){
-      let users = [];
-      let comments = [];
       const response = await fetch("/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -875,6 +873,9 @@
       if (result != 'Database Error'){
 
         let zure = ZureCalendar(year, month);
+        let dates = MannnenCalendar(zure);
+        let users = new Array<string>(37).fill(' ');
+        let comments = new Array<string>(37).fill(' ');
 
         let data = result.split('@@');
         for (let i = 0; i < data.length-1; i++) {
@@ -895,8 +896,6 @@
           //th1_1.style.backgroundColor = '#bb4444'
           //th1_2.style.backgroundColor = '#bb4444'
         }
-
-        let dates = MannnenCalendar(zure);
 
         output_d(dates);
         output_n(users);
