@@ -874,8 +874,8 @@
 
         let zure = ZureCalendar(year, month);
         let dates = MannnenCalendar(zure);
-        let users = new Array<string>(37).fill(' ');
-        let comments = new Array<string>(37).fill(' ');
+        let users = new Array(37).fill(' ');
+        let comments = new Array(37).fill(' ');
 
         let data = result.split('@@');
         for (let i = 0; i < data.length-1; i++) {
