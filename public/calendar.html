@@ -1070,7 +1070,7 @@
         let comment = data2[5];
 
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button hidden id=', '<button id=');
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('type=""button"" hidden >', 'type=""button"" >');
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
         
         console.log("set");
@@ -1078,10 +1078,10 @@
 
       for (i = i; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button id=', '<button hidden id=');
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('type=""button"" >', 'type=""button"" hidden >');
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
 
-        console.log(temp.replace('<button id=', '<button hidden id='));
+        console.log(temp.replace('type=""button"" >', 'type=""button"" hidden >'));
       }
     }
 
