@@ -938,11 +938,12 @@
         let data = result.split('@@');
         for (let i = 0; i < data.length-1; i++) {
           let data2 = data[i].split('||');
-          let created_at = data2[0];
-          let user = data2[1];
-          let sche_start = data2[2];
-          let sche_end = data2[3];
-          let comment = data2[4];
+          let id = data2[0];
+          let created_at = data2[1];
+          let user = data2[2];
+          let sche_start = data2[3];
+          let sche_end = data2[4];
+          let comment = data2[5];
 
           console.log(sche_start);
           let temp = sche_start.split('T');
@@ -1048,22 +1049,29 @@
       let data = result.split('@@');
       for (let i = 0; i < data.length-1; i++) {
         let data2 = data[i].split('||');
-        let created_at = data2[0];
-        let user = data2[1];
-        let sche_start = data2[2];
-        let sche_end = data2[3];
-        let comment = data2[4];
+        let id = data2[0];
+        let created_at = data2[1];
+        let user = data2[2];
+        let sche_start = data2[3];
+        let sche_end = data2[4];
+        let comment = data2[5];
 
         console.log(comment);
-        document.getElementById("modalP_" + slot).innerHTML += `<br><button id="delete${i}" type="button">削除</button> ${sche_start}: ${comment}`;
+        document.getElementById("modalP_" + slot).innerHTML += `<br><button id="delete${slot}_${i + 1}" type="button">削除</button> ${sche_start}: ${comment}`;
       }
     }
 
+    function deleteSche(slot, index){
+      console.log(document.getElementById("modalP_" + slot).innerHTML)
+    }
 
-    // 
-    $(function () {
+
+    
+    $(function () {      
       $('#d24').click(async function(){ await popup(24); $('#modalArea_24').fadeIn(200); });
       $('#closeModal_24 , #modalBg_24').click(function(){ $('#modalArea_24').fadeOut(200); });
+
+      $('#delete24_1').click(async function(){ deleteSche(24, 1) });
 
       $('#d25').click(async function(){ await popup(25); $('#modalArea_25').fadeIn(200); });
       $('#closeModal_25 , #modalBg_25').click(function(){ $('#modalArea_25').fadeOut(200); });
