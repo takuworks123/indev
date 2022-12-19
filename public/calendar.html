@@ -1027,7 +1027,7 @@
         $('#d' + i).click(async function(){
           let test = "op";
           document.getElementById("comment_" + test).textContent = "FOOOOOOOOOOOOOO";
-
+          
           let date = document.getElementById("d24").textContent;
           let day = time + "-" + ('00' + date).slice(-2);
           console.log(day);
@@ -1038,7 +1038,7 @@
           });
           let result = await response.text();
 
-          document.getElementById("modalH_" + i).innerHTML = date + "日の予定一覧";
+          document.getElementById("modalH_" + i).innerHTML = `${date}日の予定一覧`;
           document.getElementById("modalP_" + i).innerHTML = "";
 
           let data = result.split('@@');
