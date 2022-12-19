@@ -1090,6 +1090,7 @@
       });
       let result = await response.text();
       result_op.textContent = result;
+      await popup(slot);
     }
 
 
