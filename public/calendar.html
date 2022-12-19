@@ -738,6 +738,8 @@
   </table>
 
   <script type="module">
+    let ScheAmountPerDay = 5
+
     let group;
     let username;
     let d = new Date();
@@ -1057,7 +1059,8 @@
       let result = await response.text();
 
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < ScheAmountPerDay; i++) {
+        document.getElementById(`delete${slot}_${i + 1}`).innerHTML = "";
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
       }
 
