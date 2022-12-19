@@ -80,16 +80,16 @@ th.saturday {
 
 
 
-.open {
+.popup_open {
 	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
 }
-#pop-up {
+#popup {
 	display: none; /* label でコントロールするので input は非表示に */
 }
-.overlay {
+.popup_overlay {
 	display: none; /* input にチェックが入るまでは非表示に */
 }
-#pop-up:checked + .overlay {
+#popup:checked + .popup_overlay {
 	display: block;
 	z-index: 9999;
 	background-color: #00000070;
@@ -99,7 +99,7 @@ th.saturday {
 	top: 0;
 	left: 0;
 }
-.window {
+.popup_window {
 	width: 90vw;
 	max-width: 380px;
 	height: 240px;
@@ -113,11 +113,11 @@ th.saturday {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.text {
+.popup_text {
 	font-size: 18px;
 	margin: 0;
 }
-.close {
+.popup_close {
 	cursor:pointer;
 	position: absolute;
 	top: 4px;
