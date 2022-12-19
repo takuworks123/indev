@@ -1051,36 +1051,18 @@
 
 
     $(function () {
+      $('#d24').click(async function(){ await popup(24); $('#modalArea_24').fadeIn(200); });
+      $('#closeModal_24 , #modalBg_24').click(function(){ $('#modalArea_24').fadeOut(200); });
 
-      $('#d24').click(async function(){
-        await popup(24);
-
-        $('#modalArea_24').fadeIn(200);
-      });
-
-      $('#closeModal_24 , #modalBg_24').click(function(){
-        $('#modalArea_24').fadeOut(200);
-      });
+      $('#d25').click(async function(){ await popup(25); $('#modalArea_25').fadeIn(200); });
+      $('#closeModal_25 , #modalBg_25').click(function(){ $('#modalArea_25').fadeOut(200); });
+      
+      $('#d26').click(async function(){ await popup(26); $('#modalArea_26').fadeIn(200); });
+      $('#closeModal_26 , #modalBg_26').click(function(){ $('#modalArea_26').fadeOut(200); });
 
 
 
 
-
-
-      $('#d25').click(async function(){
-        await popup(25);
-
-        $('#modalArea_25').fadeIn(200);
-      });
-
-
-
-
-
-
-      $('#closeModal_25 , #modalBg_25').click(function(){
-        $('#modalArea_25').fadeOut(200);
-      });
 
     });
     
