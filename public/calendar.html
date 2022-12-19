@@ -1075,7 +1075,7 @@
 
       for (let i = data.length - 1; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('show', 'hidden');
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('value=""""', 'hidden');
       }
     }
 
