@@ -436,8 +436,8 @@
                 <div id="modalBg" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH_24"></h1>
-                    <p id="modalP_24"></p>
+                    <h1 id="modalH"></h1>
+                    <p id="modalP"></p>
                   </div>
                   <div id="closeModal" class="closeModal">
                     ×
@@ -475,8 +475,8 @@
                 <div id="modalBg" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH_25"></h1>
-                    <p id="modalP_25"></p>
+                    <h1 id="modalH"></h1>
+                    <p id="modalP"></p>
                   </div>
                   <div id="closeModal" class="closeModal">
                     ×
@@ -1019,18 +1019,18 @@
 
     $(function () {
       $('#d24').click(function(){
-        modalH_24.textContent = "見出し1";
-        modalP_24.textContent = "本文1";
+        modalH.textContent = "見出し1";
+        modalP.textContent = "本文1";
         $('#modalArea').fadeIn(200);
       });
       $('#closeModal , #modalBg').click(function(){
         $('#modalArea').fadeOut(200);
       });
 
-      
+
       $('#d25').click(function(){
-        modalH_25.textContent = "見出し2";
-        modalP_25.textContent = "本文2";
+        modalH.textContent = "見出し2";
+        modalP.textContent = "本文2";
         $('#modalArea').fadeIn(200);
       });
       $('#closeModal , #modalBg').click(function(){
