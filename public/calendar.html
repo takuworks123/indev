@@ -673,7 +673,7 @@
     let username;
     let d = new Date();
     let year = d.getFullYear();
-    let month = d.getMonth() + 1;
+    let month = ('00' + (d.getMonth() + 1)).slice(-2);
     let time = `${year}-${month}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
