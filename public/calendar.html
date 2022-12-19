@@ -23,7 +23,7 @@
   <div class="overlay">
     <div class="window">
       <label class="close" for="pop-up">×</label>
-      <p class="text">ポップアップの中身が入ります</p>
+      <p class="text" id="content">ポップアップの中身が入ります</p>
     </div>
   </div>
 
@@ -973,6 +973,12 @@
       });
       let result = await response.text();
       result_op.textContent = result;
+    }
+
+
+
+    document.querySelector("#pop-up").onclick = async (event) => {
+      content.textContent = "TESTING NOW";
     }
     
   </script>
