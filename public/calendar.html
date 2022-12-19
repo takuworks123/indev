@@ -432,14 +432,18 @@
               <div id = "d24" class = "daynum"></div>
 
               <!-- モーダルエリアここから -->
-              <section id="modalArea_24" class="modalArea">
-                <div id="modalBg_24" class="modalBg"></div>
+              <section id="modalArea24" class="modalArea">
+                <div id="modalBg24" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH_24"></h1>
-                    <p id="modalP_24"></p>
+                    <h1 id="modalH24"></h1>
+                    <button onclick="await deleteSche(24, 1);" type="button">削除</button> <p id="modalP24_1"></p>
+                    <button onclick="await deleteSche(24, 2);" type="button">削除</button> <p id="modalP24_2"></p>
+                    <button onclick="await deleteSche(24, 3);" type="button">削除</button> <p id="modalP24_3"></p>
+                    <button onclick="await deleteSche(24, 4);" type="button">削除</button> <p id="modalP24_4"></p>
+                    <button onclick="await deleteSche(24, 5);" type="button">削除</button> <p id="modalP24_5"></p>
                   </div>
-                  <div id="closeModal_24" class="closeModal">
+                  <div id="closeModal24" class="closeModal">
                     ×
                   </div>
                 </div>
@@ -470,14 +474,14 @@
               
               <div id = "d25" class = "daynum"></div>
 
-              <section id="modalArea_25" class="modalArea">
-                <div id="modalBg_25" class="modalBg"></div>
+              <section id="modalArea25" class="modalArea">
+                <div id="modalBg25" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH_25"></h1>
-                    <p id="modalP_25"></p>
+                    <h1 id="modalH25"></h1>
+                    <p id="modalP25"></p>
                   </div>
-                  <div id="closeModal_25" class="closeModal">
+                  <div id="closeModal25" class="closeModal">
                     ×
                   </div>
                 </div>
@@ -505,14 +509,14 @@
               
               <div id = "d26" class = "daynum"></div>
 
-              <section id="modalArea_26" class="modalArea">
-                <div id="modalBg_26" class="modalBg"></div>
+              <section id="modalArea26" class="modalArea">
+                <div id="modalBg26" class="modalBg"></div>
                 <div class="modalWrapper">
                   <div class="modalContents">
-                    <h1 id="modalH_26"></h1>
-                    <p id="modalP_26"></p>
+                    <h1 id="modalH26"></h1>
+                    <p id="modalP26"></p>
                   </div>
-                  <div id="closeModal_26" class="closeModal">
+                  <div id="closeModal26" class="closeModal">
                     ×
                   </div>
                 </div>
@@ -1043,8 +1047,7 @@
       });
       let result = await response.text();
 
-      document.getElementById("modalH_" + slot).innerHTML = `${month}月${date}日の予定一覧`;
-      document.getElementById("modalP_" + slot).innerHTML = "";
+      document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
 
       let data = result.split('@@');
       for (let i = 0; i < data.length-1; i++) {
@@ -1057,27 +1060,27 @@
         let comment = data2[5];
 
         console.log(`${slot}_${i + 1}`);
-        document.getElementById("modalP_" + slot).innerHTML += `<br><button onclick="await deleteSche(${slot}, ${i + 1});" type="button">削除</button> ${sche_start}: ${comment}`;
+        document.getElementById("modalP" + slot).textContent = `${sche_start}: ${comment}`;
       }
     }
 
 
     async function deleteSche(slot, index){
-      console.log(document.getElementById("modalP_" + slot).innerHTML);
+      console.log(document.getElementById("modalP" + slot).innerHTML);
       console.log("delete!!!!!!!!");
     }
 
 
     
     $(function () {      
-      $('#d24').click(async function(){ await popup(24); $('#modalArea_24').fadeIn(200); });
-      $('#closeModal_24 , #modalBg_24').click(function(){ $('#modalArea_24').fadeOut(200); });
+      $('#d24').click(async function(){ await popup(24); $('#modalArea24').fadeIn(200); });
+      $('#closeModal24 , #modalBg24').click(function(){ $('#modalArea24').fadeOut(200); });
 
-      $('#d25').click(async function(){ await popup(25); $('#modalArea_25').fadeIn(200); });
-      $('#closeModal_25 , #modalBg_25').click(function(){ $('#modalArea_25').fadeOut(200); });
+      $('#d25').click(async function(){ await popup(25); $('#modalArea25').fadeIn(200); });
+      $('#closeModal25 , #modalBg25').click(function(){ $('#modalArea25').fadeOut(200); });
       
-      $('#d26').click(async function(){ await popup(26); $('#modalArea_26').fadeIn(200); });
-      $('#closeModal_26 , #modalBg_26').click(function(){ $('#modalArea_26').fadeOut(200); });
+      $('#d26').click(async function(){ await popup(26); $('#modalArea26').fadeIn(200); });
+      $('#closeModal26 , #modalBg26').click(function(){ $('#modalArea26').fadeOut(200); });
 
 
     });
