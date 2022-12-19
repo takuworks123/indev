@@ -1070,12 +1070,12 @@
         let comment = data2[5];
 
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('show', 'hidden');
-        console.log(temp.replace('show', 'hidden'));
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
       }
 
       for (let i = data.length - 1; i < ScheAmountPerDay; i++) {
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = "";
+        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('show', 'hidden');
       }
     }
 
