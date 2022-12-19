@@ -1050,7 +1050,6 @@
     async function popup(slot){
       let date = document.getElementById("d" + slot).textContent;
       let day = time + "-" + ('00' + date).slice(-2);
-      console.log(day);
       const response = await fetch("/download_day", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1069,13 +1068,18 @@
         let sche_start = data2[3];
         let sche_end = data2[4];
         let comment = data2[5];
-        
+
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
+        
+        console.log("set");
       }
 
       for (i = i; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
         document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button', '<button hidden');
+        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
+
+        console.log(temp.replace('<button', '<button hidden'));
       }
     }
 
