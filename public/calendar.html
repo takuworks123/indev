@@ -1013,7 +1013,9 @@
 
     $(function () {
       $('#d24').click(function(){
-          $('#modalArea').fadeIn(200);
+        modalH.textContent = "見出し1";
+        modalP.textContent = "本文1";
+        $('#modalArea').fadeIn(200);
       });
       $('#closeModal , #modalBg').click(function(){
         $('#modalArea').fadeOut(200);
@@ -1022,7 +1024,9 @@
 
     $(function () {
       $('#d25').click(function(){
-          $('#modalArea').fadeIn(200);
+        modalH.textContent = "見出し2";
+        modalP.textContent = "本文2";
+        $('#modalArea').fadeIn(200);
       });
       $('#closeModal , #modalBg').click(function(){
         $('#modalArea').fadeOut(200);
