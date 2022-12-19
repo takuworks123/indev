@@ -1034,6 +1034,7 @@
       });
       let result = await response.text();
       result_op.textContent = result;
+      await reload();
     }
 
 
@@ -1074,8 +1075,8 @@
 
 
     async function deleteSche(slot, index){
-      console.log("delete!!!!!!!!");
-      console.log(document.getElementById("modalP" + slot + "_" + index).textContent);
+      console.log(`modalP${slot}_${index}   delete`);
+      console.log(document.getElementById(`modalP${slot}_${index}`).textContent);
     }
 
 
