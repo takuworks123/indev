@@ -1069,19 +1069,19 @@
         let sche_end = data2[4];
         let comment = data2[5];
 
-        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('type=""button"" hidden >', 'type=""button"" >');
-        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
+        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button hidden id=', '<button id='); // ボタン全体のhiddenを消し、表示する
+        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`; // 本文を書き、表示する
         
-        console.log("set");
+        console.log(temp.replace('<button hidden id=', '<button id='));
       }
 
-      for (i = i; i < ScheAmountPerDay; i++) {
-        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('type=""button"" >', 'type=""button"" hidden >');
-        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
+      for (i = i; i < ScheAmountPerDay; j++) {
+        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button id=', '<button hidden id='); // ボタンを非表示にする
+        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
 
-        console.log(temp.replace('type=""button"" >', 'type=""button"" hidden >'));
+        console.log(temp.replace('<button id=', '<button hidden id='));
       }
     }
 
@@ -1104,7 +1104,7 @@
     }
 
 
-    
+    // 日付をクリックでpopup関数が起動
     $(function () {      
       $('#d24').click(async function(){ await popup(24); $('#modalArea24').fadeIn(200); });
       $('#closeModal24 , #modalBg24').click(function(){ $('#modalArea24').fadeOut(200); });
@@ -1118,6 +1118,9 @@
 
     });
 
+
+
+    // ポップアップの削除ボタンを押すとdeleteSche関数が起動
     document.querySelector("#delete24_1").onclick = async (event) => { await deleteSche(24, 1) };
     document.querySelector("#delete24_2").onclick = async (event) => { await deleteSche(24, 2) };
     document.querySelector("#delete24_3").onclick = async (event) => { await deleteSche(24, 3) };
