@@ -1038,8 +1038,8 @@
           });
           let result = await response.text();
 
-          document.getElementById("modalH_" + i).innerHTML = date + "日の予定一覧"
-          document.getElementById("modalP_" + i).innerHTML = ""
+          document.getElementById("modalH_" + i).innerHTML = date + "日の予定一覧";
+          document.getElementById("modalP_" + i).innerHTML = "";
 
           let data = result.split('@@');
           for (let i = 0; i < data.length-1; i++) {
