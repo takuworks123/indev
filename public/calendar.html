@@ -1059,13 +1059,9 @@
       let result = await response.text();
 
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
-      for (let i = 0; i < ScheAmountPerDay; i++) {
-        document.getElementById(`delete${slot}_${i + 1}`).innerHTML = "";
-        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
-      }
 
       let data = result.split('@@');
-      for (let i = 0; i < data.length-1; i++) {
+      for (let i = 0; i < ScheAmountPerDay; i++) {
         let data2 = data[i].split('||');
         let id = data2[0];
         let created_at = data2[1];
@@ -1074,8 +1070,16 @@
         let sche_end = data2[4];
         let comment = data2[5];
 
+        if (i < data.length-1){
+          console.log("A" + document.getElementById(`delete${slot}_${i + 1}`).innerHTML);
+          document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
+        } else {
+          console.log("B" + document.getElementById(`delete${slot}_${i + 1}`).innerHTML);
+          document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
+        }
+
         console.log(`${slot}_${i + 1}`);
-        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
+        
       }
     }
 
