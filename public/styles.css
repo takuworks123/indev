@@ -68,7 +68,8 @@ th.saturday {
 }
 
 .daynum {
-  font-size: 20px
+  font-size: 20px;
+  cursor:pointer;
 }
 
 

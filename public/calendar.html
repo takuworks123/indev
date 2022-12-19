@@ -454,7 +454,13 @@
 
         <table class="day">
           <tr>
-            <th><div id = "d25" class = "daynum"></div></th>
+            <th><div id = "d25" class = "daynum" for="popup"></div></th>
+            <div class="popup_overlay">
+              <div class="popup_window">
+                <label class="popup_close" for="popup">×</label>
+                <p id="content" class="popup_text"></p>
+              </div>
+            </div>
           </tr>
           <tr>
             <th><div id = "n25_1"></div><div id = "c25_1"></div></th>
@@ -977,7 +983,7 @@
 
 
 
-    document.querySelector("#pop-up").onclick = async (event) => {
+    document.querySelector("#popup").onclick = async (event) => {
       content.textContent = "TESTING NOW";
     }
     
