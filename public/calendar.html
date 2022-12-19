@@ -1060,13 +1060,13 @@
         let comment = data2[5];
 
         console.log(`${slot}_${i + 1}`);
-        document.getElementById("modalP" + slot + "_" + i + 1).textContent = sche_start + ": " + comment;
+        document.getElementById(`modalP${slot}_${i}`).textContent = `${sche_start}: ${comment}`;
       }
     }
 
 
     async function deleteSche(slot, index){
-      console.log(document.getElementById("modalP" + slot + "_" + i).innerHTML);
+      console.log(document.getElementById("modalP" + slot + "_" + index).innerHTML);
       console.log("delete!!!!!!!!");
     }
 
