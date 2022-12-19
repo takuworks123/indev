@@ -447,7 +447,7 @@
           <tr>
             <th>
               
-              <div id = "d25" class = "daynum" for="popup"></div>
+              <div id = "d25" class = "daynum"></div>
               <button id="openModal">Open modal</button>
 
               <!-- モーダルエリアここから -->
@@ -987,13 +987,6 @@
       });
       let result = await response.text();
       result_op.textContent = result;
-    }
-
-
-
-    document.querySelector("#popup").onclick = async (event) => {
-      content.textContent = "TESTING NOW";
-      console.log("ポップアップ表示！！！！");
     }
 
 
