@@ -1020,6 +1020,7 @@
     $(function () {
       $('#d24').click(async function(){
         let day = time + ('00' + d24.textContent).slice(-2);
+        console.log(day);
         const response = await fetch("/download_day", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
