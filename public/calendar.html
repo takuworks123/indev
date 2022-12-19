@@ -1076,7 +1076,7 @@
         console.log(temp.replace('<button hidden id=', '<button id='));
       }
 
-      for (i = i; i < ScheAmountPerDay; j++) {
+      for (i = i; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
         document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('<button id=', '<button hidden id='); // ボタンを非表示にする
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
