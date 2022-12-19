@@ -673,8 +673,9 @@
     let username;
     let d = new Date();
     let year = d.getFullYear();
-    let month = ('00' + (d.getMonth() + 1)).slice(-2);
-    let time = `${year}-${month}`;
+    let month = d.getMonth() + 1;
+    let month_str = ('00' + month).slice(-2);
+    let time = `${year}-${month_str}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
     function output_d(dates){
@@ -935,7 +936,8 @@
         year--;
         month = 12;
       }
-      time = `${year}-${month}`;
+      month_str = ('00' + month).slice(-2);
+      time = `${year}-${month_str}`;
       await reload();
     }
 
@@ -945,7 +947,8 @@
         year++;
         month = 1;
       }
-      time = `${year}-${month}`;
+      month_str = ('00' + month).slice(-2);
+      time = `${year}-${month_str}`;
       await reload();
     }
 
