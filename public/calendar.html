@@ -797,11 +797,11 @@
       c37_1.textContent = `${comments[36]}`;
     }
 
-    // 指定した年、月を引数に入れると、月曜日からのズレを計算し、
-    // カレンダーの一番左上（日曜日）を添字0とする配列が戻り値となる。
-    function MannnenCalendar(y, m){
+    // 指定した年、月を引数に入れると、月曜日からのズレを計算する。
+    // 戻り値が0の場合は日曜日、1の場合は月曜日、6の場合は土曜日。
+    function ZureCalendar(y, m){
       let dates = [];
-      let zure, i, cnt;
+      let zure, i;
       let monthLen_tmp = monthLen;
 
       zure = (y - 1) * 365;
@@ -827,10 +827,24 @@
 
       zure = Math.floor(zure);
 
-      if (zure != 6) {
-        for (i = 0; i < zure + 1; i++) {
-          dates[dates.length] = "";
-        }
+      //このままでは月曜日基準のzureなので、日曜日基準のzureに変える。
+      zure++;
+      if (zure >= 7){
+        zure = 0;
+      }
+
+      return zure;
+    }
+
+    // ZureCalendar関数によって得たズレを引数に入れると、日付と曜日が一致した、
+    // カレンダーの一番左上のマス（日曜日）を添字0とする配列が戻り値となる。
+    function MannnenCalendar(zure){
+      let dates = [];
+      let i;
+      let monthLen_tmp = monthLen;
+
+      for (i = 0; i < zure; i++) {
+        dates[dates.length] = "";
       }
 
       for (i = 1; i <= monthLen[month - 1]; i++) {
@@ -859,8 +873,10 @@
       });
       let result = await response.text();
       if (result != 'Database Error'){
+
+        let zure = ZureCalendar(year, month);
+
         let data = result.split('@@');
-        
         for (let i = 0; i < data.length-1; i++) {
           let data2 = data[i].split('||');
           let created_at = data2[0];
@@ -870,13 +886,17 @@
           let comment = data2[4];
 
           console.log(sche_start);
-          users[users.length] = user;
-          comments[comments.length] = comment;
-          th1_1.style.backgroundColor = '#bb4444'
+          let temp = sche_start.split('T');
+          let temp2 = temp[0].split('-');
+          let index = Number(temp2[2]) + zure - 1;
+
+          users[index] = user;
+          comments[index] = comment;
+          //th1_1.style.backgroundColor = '#bb4444'
           //th1_2.style.backgroundColor = '#bb4444'
         }
 
-        let dates = MannnenCalendar(year, month);
+        let dates = MannnenCalendar(zure);
 
         output_d(dates);
         output_n(users);
