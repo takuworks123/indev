@@ -1025,7 +1025,7 @@
         console.log(i);
 
         $('#d' + i).click(async function(){
-          let date = document.getElementById("d" + i).textContent;
+          let date = document.getElementById("d24").textContent;
           let day = time + "-" + ('00' + date).slice(-2);
           console.log(day);
           const response = await fetch("/download_day", {
