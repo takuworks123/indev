@@ -1071,10 +1071,10 @@
         let comment = data2[5];
 
         if (i < data.length-1){
-          console.log("A" + document.getElementById(`delete${slot}_${i + 1}`).innerHTML);
+          console.log("A " + document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
           document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
         } else {
-          console.log("B" + document.getElementById(`delete${slot}_${i + 1}`).innerHTML);
+          console.log("B " + document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
           document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = "";
         }
 
