@@ -1061,6 +1061,7 @@
       }
     }
 
+
     async function deleteSche(slot, index){
       console.log(document.getElementById("modalP_" + slot).innerHTML);
       console.log("delete!!!!!!!!");
@@ -1072,7 +1073,7 @@
       $('#d24').click(async function(){ await popup(24); $('#modalArea_24').fadeIn(200); });
       $('#closeModal_24 , #modalBg_24').click(function(){ $('#modalArea_24').fadeOut(200); });
 
-      $('#delete24_1').click(async function(){ await deleteSche(24, 1) });
+      $('#delete24_1').click(async function(){ await deleteSche(24, 1); });
 
       $('#d25').click(async function(){ await popup(25); $('#modalArea_25').fadeIn(200); });
       $('#closeModal_25 , #modalBg_25').click(function(){ $('#modalArea_25').fadeOut(200); });
@@ -1081,10 +1082,11 @@
       $('#closeModal_26 , #modalBg_26').click(function(){ $('#modalArea_26').fadeOut(200); });
 
 
-
-
-
     });
+
+    //document.querySelector("#delete24_1").onclick = async (event) => {
+    //  await deleteSche(24, 1);
+    //}
     
   </script>
 
