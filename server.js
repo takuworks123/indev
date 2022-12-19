@@ -123,6 +123,7 @@ serve(async (req) => {
       let data = '';
       for (let i = 0; i < sp.data.length; i++) {
         if (sp.data[i].sche_start.includes(`${time}`)){
+          data += sp.data[i].id + '||';
           data += sp.data[i].created_at + '||';
           data += sp.data[i].username + '||';
           data += sp.data[i].sche_start + '||';
@@ -149,6 +150,7 @@ serve(async (req) => {
       let data = '';
       for (let i = 0; i < sp.data.length; i++) {
         if (sp.data[i].sche_start.includes(`${day}`)){
+          data += sp.data[i].id + '||';
           data += sp.data[i].created_at + '||';
           data += sp.data[i].username + '||';
           data += sp.data[i].sche_start + '||';
