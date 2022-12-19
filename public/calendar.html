@@ -1076,7 +1076,17 @@
 
     async function deleteSche(slot, index){
       console.log(`delete`);
-      console.log(document.getElementById(`modalP${slot}_${index}`).textContent);
+      let data = document.getElementById(`modalP${slot}_${index}`).textContent
+      let data2 = data.split(' ');
+      let id = data2[0];
+
+      const response = await fetch("/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+      });
+      let result = await response.text();
+      result_op.textContent = result;
     }
 
 

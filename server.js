@@ -164,6 +164,20 @@ serve(async (req) => {
     }
   }
 
+  if (req.method === "POST" && pathname === "/delete") {
+    const requestJson = await req.json();
+    let sp = await supabase // calendarテーブルへ問い合わせ
+      .from('calendar')
+      .delete()
+      .match({ id: `${requestJson.id}` });
+
+    if (sp.error == null) {
+      return new Response('successfully');
+    } else{
+      return new Response('Database Error');
+    }
+  };
+
 
 
 
@@ -189,18 +203,6 @@ serve(async (req) => {
     if (obj.error == null) {
       let max_id = obj.data.length-1;
       return new Response(max_id);
-    }
-  };
-
-  // 投稿を削除
-  if (req.method === "POST" && pathname === "/code_info_del") {
-    const requestJson = await req.json();
-    let id_del = Number(requestJson.id);
-    obj = await supabase.from('calendar').select();
-    if (obj.error == null) {
-      let id = obj.data[id_del].id;
-      obj = await supabase.from('calendar').delete().match({ id });
-      return new Response(id_del-1);
     }
   };
 
