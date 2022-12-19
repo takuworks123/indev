@@ -437,11 +437,11 @@
                 <div class="modalWrapper">
                   <div class="modalContents">
                     <h1 id="modalH24"></h1>
-                    <nobr id="delete24_1_temp"><button id="delete24_1" type="button" value="">削除</button></nobr> <nobr id="modalP24_1"></nobr><br>
-                    <nobr id="delete24_2_temp"><button id="delete24_2" type="button" value="">削除</button></nobr> <nobr id="modalP24_2"></nobr><br>
-                    <nobr id="delete24_3_temp"><button id="delete24_3" type="button" value="">削除</button></nobr> <nobr id="modalP24_3"></nobr><br>
-                    <nobr id="delete24_4_temp"><button id="delete24_4" type="button" value="">削除</button></nobr> <nobr id="modalP24_4"></nobr><br>
-                    <nobr id="delete24_5_temp"><button id="delete24_5" type="button" value="">削除</button></nobr> <nobr id="modalP24_5"></nobr>
+                    <nobr id="delete24_1_temp"><button id="delete24_1" type="button"   >削除</button></nobr> <nobr id="modalP24_1"></nobr><br>
+                    <nobr id="delete24_2_temp"><button id="delete24_2" type="button"   >削除</button></nobr> <nobr id="modalP24_2"></nobr><br>
+                    <nobr id="delete24_3_temp"><button id="delete24_3" type="button"   >削除</button></nobr> <nobr id="modalP24_3"></nobr><br>
+                    <nobr id="delete24_4_temp"><button id="delete24_4" type="button"   >削除</button></nobr> <nobr id="modalP24_4"></nobr><br>
+                    <nobr id="delete24_5_temp"><button id="delete24_5" type="button"   >削除</button></nobr> <nobr id="modalP24_5"></nobr>
                   </div>
                   <div id="closeModal24" class="closeModal">
                     ×
@@ -1059,8 +1059,9 @@
       let result = await response.text();
       document.getElementById("modalH" + slot).innerHTML = `${month}月${date}日の予定一覧`;
 
+      let i;
       let data = result.split('@@');
-      for (let i = 0; i < data.length-1; i++) {
+      for (i = 0; i < data.length-1; i++) {
         let data2 = data[i].split('||');
         let id = data2[0];
         let created_at = data2[1];
@@ -1073,9 +1074,9 @@
         document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`;
       }
 
-      for (let i = data.length - 1; i < ScheAmountPerDay; i++) {
+      for (i = i; i < ScheAmountPerDay; i++) {
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML;
-        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('value=""""', 'hidden');
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('   ', 'hidden');
       }
     }
 
