@@ -1075,6 +1075,7 @@
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
         document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('hidden="">削除', '>削除'); // ボタン全体のhiddenを消し、表示する
         */
+        document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'visible';
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start}: ${comment}`; // 本文を書き、表示する
         
         console.log(document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
@@ -1088,6 +1089,7 @@
         let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
         document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('>削除', 'hidden="">削除'); // ボタンを非表示にする
         */
+        document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'hidden';
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
 
         console.log(document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
@@ -1100,16 +1102,18 @@
       let data = document.getElementById(`modalP${slot}_${index}`).textContent
       let data2 = data.split(' ');
       let id = data2[0];
-
-      const response = await fetch("/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-      });
-      let result = await response.text();
-      result_op.textContent = result;
-      await popup(slot);
-      await reload();
+      
+      if (id != undefined){
+        const response = await fetch("/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id })
+        });
+        let result = await response.text();
+        result_op.textContent = result;
+        await popup(slot);
+        await reload();
+      }
     }
 
 
