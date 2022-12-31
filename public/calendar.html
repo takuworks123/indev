@@ -1069,7 +1069,7 @@
         let comment = data2[5];
 
         let sche_start_time = sche_start.split('T');
-        sche_start_time = sche_start_time[1].slice(0, 6);
+        sche_start_time = sche_start_time[1].slice(0, 5);
 
         document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'visible';
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start_time} ${user}: ${comment}`; // 本文を書き、表示する
