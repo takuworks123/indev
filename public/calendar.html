@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h1>カレンダー</h1>
+  <h1 id = "month_op"></h1>
   <input id="comment_ip" type="text" />
   <input id="sche_start_ip" type="datetime-local" />
   <input id="sche_end_ip" type="datetime-local" />
@@ -972,6 +972,7 @@
         output_d(dates);
         output_n(users);
         output_c(comments);
+        month_op.textContent = month + "月の予定";
         
       }else{
         alert("Database Error");
@@ -1076,7 +1077,7 @@
         }else{
           document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'hidden';
         }
-        
+
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start_time} ${user}: ${comment}`; // 本文を書き、表示する
         
         console.log(document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
