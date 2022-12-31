@@ -1076,8 +1076,8 @@
       }
 
       for (i = i; i < ScheAmountPerDay; i++) {
-        //let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
-        //document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('>削除', 'hidden >削除'); // ボタンを非表示にする
+        let temp = document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML; // ボタン全体をtempに
+        document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML = temp.replace('>削除', 'hidden >削除'); // ボタンを非表示にする
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
 
         //console.log(document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
