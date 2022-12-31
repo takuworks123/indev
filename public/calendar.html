@@ -1069,9 +1069,10 @@
         let comment = data2[5];
 
         let sche_start_time = sche_start.split('T');
+        sche_start_time = sche_start_time.slice(3);
 
         document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'visible';
-        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start_time[1]}: ${comment}`; // 本文を書き、表示する
+        document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_start_time[1]} ${user}: ${comment}`; // 本文を書き、表示する
         
         console.log(document.getElementById(`delete${slot}_${i + 1}_temp`).innerHTML);
       }
