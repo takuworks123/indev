@@ -1035,6 +1035,7 @@
         body: JSON.stringify({ group, username, sche_start, sche_end, comment })
       });
       let amount = await response_check_day_amount.text();
+      result_op.textContent = amount;
 
       if (Number(amount) < 5){
         const response_send = await fetch("/send", {
@@ -1043,7 +1044,6 @@
           body: JSON.stringify({ group, username, sche_start, sche_end, comment })
         });
         let result = await response_send.text();
-        result_op.textContent = result;
         await reload();
       }
     }
