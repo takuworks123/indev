@@ -1029,14 +1029,23 @@
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
 
-      const response = await fetch("/send", {
+      const response_check_day_amount = await fetch("/check_day_amount", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group, username, sche_start, sche_end, comment })
       });
-      let result = await response.text();
-      result_op.textContent = result;
-      await reload();
+      let amount = await response_check_day_amount.Int();
+
+      if (amount <= 5){
+        const response_send = await fetch("/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ group, username, sche_start, sche_end, comment })
+        });
+        let result = await response_send.text();
+        result_op.textContent = result;
+        await reload();
+      }
     }
 
 

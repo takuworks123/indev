@@ -164,6 +164,28 @@ serve(async (req) => {
     }
   }
 
+  if (req.method === "POST" && pathname === "/check_day_amount") {
+    const requestJson = await req.json();
+    let group = requestJson.group;
+    let day = requestJson.day;
+    let sp = await supabase // calendarテーブルへ問い合わせ
+      .from('calendar')
+      .select()
+      .eq('group', group);
+    
+    if (sp.error == null) {
+      let amount = 0;
+      for (let i = 0; i < sp.data.length; i++) {
+        if (sp.data[i].sche_start.includes(`${day}`)){
+          amount++;
+        }
+      }
+      return new Response(amount);
+    } else {
+      return new Response('Database Error');
+    }
+  }
+
   if (req.method === "POST" && pathname === "/delete") {
     const requestJson = await req.json();
     let sp = await supabase // calendarテーブルへ問い合わせ
