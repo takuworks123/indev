@@ -1029,6 +1029,7 @@
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
 
+      let day = time + "-" + ('00' + date).slice(-2);
       const response_check_day_amount = await fetch("/check_day_amount", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
