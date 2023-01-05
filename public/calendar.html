@@ -1034,7 +1034,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group, username, sche_start, sche_end, comment })
       });
-      let amount = await response_check_day_amount.Int();
+      let amount = await response_check_day_amount.text();
 
       if (Number(amount) < 5){
         const response_send = await fetch("/send", {
