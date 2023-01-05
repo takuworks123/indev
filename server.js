@@ -177,7 +177,7 @@ serve(async (req) => {
       let amount = 0;
       for (let i = 0; i < sp.data.length; i++) {
         if (sp.data[i].sche_start.includes(`${day}`)){
-          amount++;
+          amount = amount + 1;
         }
       }
       return new Response(amount);
