@@ -1036,7 +1036,7 @@
       });
       let amount = await response_check_day_amount.Int();
 
-      if (amount < 5){
+      if (Number(amount) < 5){
         const response_send = await fetch("/send", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
