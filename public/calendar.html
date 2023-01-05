@@ -1028,11 +1028,11 @@
       const sche_start = document.querySelector("#sche_start_ip").value;
       const sche_end = document.querySelector("#sche_end_ip").value;
       const comment = document.querySelector("#comment_ip").value;
-
-      const response_check_day_amount = await fetch("/check_day_amount", {
+      
+      const response = await fetch("/check_day_amount", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ group, username, sche_start, sche_end, comment })
+        body: JSON.stringify({ group, day })
       });
       let amount = await response_check_day_amount.text();
       result_op.textContent = amount;
