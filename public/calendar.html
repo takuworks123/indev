@@ -1026,7 +1026,8 @@
 
         let zure = ZureCalendar(year, month);
         let dates = MannnenCalendar(zure);
-        let users = new Array(37).fill(' ');
+        let users_1 = new Array(37).fill(' ');
+        let users_2 = new Array(37).fill(' ');
         let comments_1 = new Array(37).fill(' ');
         let comments_2 = new Array(37).fill(' ');
 
@@ -1047,8 +1048,14 @@
           users[index] = user;
 
           if (comments_1[index] == ' '){
+            users_1[index] = user;
+
             comments_1[index] = comment;
+            
           }else{
+            users_2[index] = users_1[index];
+            users_1[index] = user;
+
             comments_2[index] = comments_1[index];
             comments_1[index] = comment;
           }
@@ -1057,7 +1064,8 @@
         }
 
         output_d(dates);
-        output_n(users);
+        output_n_1(users_1);
+        output_n_2(users_2);
         output_c_1(comments_1);
         output_c_2(comments_2);
         month_op.textContent = year + "年 " + month + "月の予定";
