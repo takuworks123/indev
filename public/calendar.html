@@ -789,7 +789,7 @@
       d37.textContent = `${dates[36]}`;
     }
 
-    function output_n(users){
+    function output_n_1(users){
       n1_1.textContent = `${users[0]}`;
       n2_1.textContent = `${users[1]}`;
       n3_1.textContent = `${users[2]}`;
@@ -827,6 +827,46 @@
       n35_1.textContent = `${users[34]}`;
       n36_1.textContent = `${users[35]}`;
       n37_1.textContent = `${users[36]}`;
+    }
+
+    function output_n_2(users){
+      n1_2.textContent = `${users[0]}`;
+      n2_2.textContent = `${users[1]}`;
+      n3_2.textContent = `${users[2]}`;
+      n4_2.textContent = `${users[3]}`;
+      n5_2.textContent = `${users[4]}`;
+      n6_2.textContent = `${users[5]}`;
+      n7_2.textContent = `${users[6]}`;
+      n8_2.textContent = `${users[7]}`;
+      n9_2.textContent = `${users[8]}`;
+      n10_2.textContent = `${users[9]}`;
+      n11_2.textContent = `${users[10]}`;
+      n12_2.textContent = `${users[11]}`;
+      n13_2.textContent = `${users[12]}`;
+      n14_2.textContent = `${users[13]}`;
+      n15_2.textContent = `${users[14]}`;
+      n16_2.textContent = `${users[15]}`;
+      n17_2.textContent = `${users[16]}`;
+      n18_2.textContent = `${users[17]}`;
+      n19_2.textContent = `${users[18]}`;
+      n20_2.textContent = `${users[19]}`;
+      n21_2.textContent = `${users[20]}`;
+      n22_2.textContent = `${users[21]}`;
+      n23_2.textContent = `${users[22]}`;
+      n24_2.textContent = `${users[23]}`;
+      n25_2.textContent = `${users[24]}`;
+      n26_2.textContent = `${users[25]}`;
+      n27_2.textContent = `${users[26]}`;
+      n28_2.textContent = `${users[27]}`;
+      n29_2.textContent = `${users[28]}`;
+      n30_2.textContent = `${users[29]}`;
+      n31_2.textContent = `${users[30]}`;
+      n32_2.textContent = `${users[31]}`;
+      n33_2.textContent = `${users[32]}`;
+      n34_2.textContent = `${users[33]}`;
+      n35_2.textContent = `${users[34]}`;
+      n36_2.textContent = `${users[35]}`;
+      n37_2.textContent = `${users[36]}`;
     }
     
     function output_c_1(comments){
@@ -1009,7 +1049,8 @@
           if (comments_1[index] == ' '){
             comments_1[index] = comment;
           }else{
-            comments_2[index] = comment;
+            comments_2[index] = comments_1[index];
+            comments_1[index] = comment;
           }
           //th1_1.style.backgroundColor = '#bb4444'
           //th1_2.style.backgroundColor = '#bb4444'
