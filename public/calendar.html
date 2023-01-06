@@ -1165,8 +1165,6 @@
     async function popup(slot){
       let date = document.getElementById("d" + slot).textContent;
       let day = time + "-" + ('00' + date).slice(-2);
-      let sche_start_hour = [];
-      let sche_start_minutes = [];
       const response = await fetch("/download_day", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1177,22 +1175,36 @@
 
       let i;
       let data = result.split('@@');
+      
+      let ids = [];
+      let created_ats = [];
+      let users = [];
+      let sche_starts = [];
+      let sche_start_hours = [];
+      let sche_start_minutes = [];
+      let sche_ends = [];
+      let sche_end_hours = [];
+      let sche_end_minutes = [];
+      let comments = [];
+
       for (i = 0; i < data.length-1; i++) { // データ取得
         let data2 = data[i].split('||');
-        let id = data2[0];
-        let created_at = data2[1];
-        let user = data2[2];
-        let sche_start = data2[3];
-        let sche_end = data2[4];
-        let comment = data2[5];
+        ids[ids.length] = data2[0];
+        created_ats[created_ats.length] = data2[1];
+        users[users.length] = data2[2];
+        sche_starts[sche_starts.length] = data2[3];
+        sche_ends[sche_ends.length] = data2[4];
+        comments[comments.length] = data2[5];
 
-        let temp = sche_start.split('T');
+        let temp = sche_starts.split('T');
         let temp2 = temp[1].split(':');
-        sche_start_hour[sche_start_hour.length] = Number(temp2[0]);
+        sche_start_hours[sche_start_hours.length] = Number(temp2[0]);
         sche_start_minutes[sche_start_minutes.length] = Number(temp2[1]);
       }
 
-      console.log(sche_start_hour);
+      console.log(sche_starts);
+      console.log("-----------");
+      console.log(sche_start_hours);
       console.log("-----------");
       console.log(sche_start_minutes);
 
