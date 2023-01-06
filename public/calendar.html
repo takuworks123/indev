@@ -1045,13 +1045,11 @@
           let temp2 = temp[0].split('-');
           let index = Number(temp2[2]) + zure - 1;
 
-          users[index] = user;
-
           if (comments_1[index] == ' '){
             users_1[index] = user;
 
             comments_1[index] = comment;
-            
+
           }else{
             users_2[index] = users_1[index];
             users_1[index] = user;
