@@ -1025,11 +1025,13 @@
     }
 
     document.querySelector("#submit").onclick = async (event) => {
-      const sche_start = document.querySelector("#sche_start_ip").value;
-      const sche_end = document.querySelector("#sche_end_ip").value;
-      const comment = document.querySelector("#comment_ip").value;
+      let sche_start = document.querySelector("#sche_start_ip").value;
+      let sche_end = document.querySelector("#sche_end_ip").value;
+      let comment = document.querySelector("#comment_ip").value;
 
-      console.log(sche_end);
+      if (sche_end == ""){
+        sche_end = sche_start;
+      }
 
       let temp = sche_start.split('T');
       let temp2 = temp[0].split('-');
