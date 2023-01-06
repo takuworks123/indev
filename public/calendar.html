@@ -1196,7 +1196,7 @@
         sche_ends[sche_ends.length] = data2[4];
         comments[comments.length] = data2[5];
 
-        let temp = sche_starts.split('T');
+        let temp = sche_starts[i].split('T');
         let temp2 = temp[1].split(':');
         sche_start_hours[sche_start_hours.length] = Number(temp2[0]);
         sche_start_minutes[sche_start_minutes.length] = Number(temp2[1]);
