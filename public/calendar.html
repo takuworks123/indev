@@ -1175,7 +1175,7 @@
 
       let i;
       let data = result.split('@@');
-      for (i = 0; i < data.length-1; i++) {
+      for (i = 0; i < data.length-1; i++) { // データ取得
         let data2 = data[i].split('||');
         let id = data2[0];
         let created_at = data2[1];
@@ -1184,9 +1184,19 @@
         let sche_end = data2[4];
         let comment = data2[5];
 
-        let sche_start_time = sche_start.split('T');
-        sche_start_time = sche_start_time[1].slice(0, 5);
+        let temp = sche_start.split('T');
+        let temp2 = temp[1].split(':');
+        let sche_start_hour = [];
+        let sche_start_minutes = [];
+        sche_start_hour[sche_start_hour.length] = Number(temp2[0]);
+        sche_start_minutes[sche_start_minutes.length] = Number(temp2[1]);
+      }
 
+      console.log(sche_start_hour);
+      console.log("-----------");
+      console.log(sche_start_minutes);
+
+      for (i = 0; i < data.length-1; i++) { // データを時間で並び替え
         if (username == user){
           document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'visible';
         }else{
