@@ -1165,6 +1165,8 @@
     async function popup(slot){
       let date = document.getElementById("d" + slot).textContent;
       let day = time + "-" + ('00' + date).slice(-2);
+      let sche_start_hour = [];
+      let sche_start_minutes = [];
       const response = await fetch("/download_day", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1186,8 +1188,6 @@
 
         let temp = sche_start.split('T');
         let temp2 = temp[1].split(':');
-        let sche_start_hour = [];
-        let sche_start_minutes = [];
         sche_start_hour[sche_start_hour.length] = Number(temp2[0]);
         sche_start_minutes[sche_start_minutes.length] = Number(temp2[1]);
       }
