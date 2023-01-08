@@ -1251,7 +1251,8 @@
         // あったら、それ同士を分単位で比較
         }else{
 
-          for (j = 0; j < sameDataIndexes.length; j++){
+          let len = sameDataIndexes.length;
+          for (j = 0; j < len; j++){
             let minMinute = 99, minMinuteIndex = 99, removeIndex = 99;
             for (k = 0; k < sameDataIndexes.length; k++){
               if (minMinute > sche_start_minutes[sameDataIndexes[k]]){
