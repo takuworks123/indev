@@ -1218,10 +1218,10 @@
       // 時間順に整理する機構
       let indexes = [];
 
-      for (i = 0; i < sche_start_hours.length-1; i++){
+      for (i = 0; i < sche_start_hours.length; i++){
         // まずは時単位だけで比較
         let minHour = 99, minHourIndex = 99;
-        for (j = 0; j < sche_start_hours.length-1; j++){
+        for (j = 0; j < sche_start_hours.length; j++){
           if (indexes[indexes.length - 1] < sche_start_hours[j]){
             if (minHour > sche_start_hours[j]){
               minHour = sche_start_hours[j];
@@ -1233,7 +1233,7 @@
 
         // 時単位だけで同じ時間があるか調べる
         let sameDataIndexes = [];
-        for (j = 0; j < sche_start_hours.length-1; j++){
+        for (j = 0; j < sche_start_hours.length; j++){
           if (minHour == sche_start_hours[j]){
             sameDataIndexes[sameDataIndexes.length] = j;
           }
@@ -1247,9 +1247,9 @@
         // あったら、それ同士を分単位で比較
         }else{
 
-          for (j = 0; j < sameDataIndexes.length-1; j++){
+          for (j = 0; j < sameDataIndexes.length; j++){
             let minMinute = 99, minMinuteIndex = 99;
-            for (k = 0; k < sameDataIndexes.length-1; k++){
+            for (k = 0; k < sameDataIndexes.length; k++){
               if (minMinute > sche_start_minutes[sameDataIndexes[j]]){
                 minMinute = sche_start_minutes[sameDataIndexes[j]];
                 minMinuteIndex = sameDataIndexes[j];
@@ -1267,8 +1267,10 @@
         console.log(sche_start_hours[indexes[i]] + ":" + sche_start_minutes[indexes[i]]);
       }
 
+
+      console.log("QQQQQQQQQQQQQQQQQQ");
       let test = ["a", "b", "c"]
-      for (i = 0; i < test.length-1; i++){
+      for (i = 0; i < test.length; i++){
         console.log(test[i]);
       }
 
