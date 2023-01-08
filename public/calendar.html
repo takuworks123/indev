@@ -1262,7 +1262,7 @@
             }
             indexes[indexes.length] = minMinuteIndex;
 
-            let sameDataIndexes = sameDataIndexes.slice(0, removeIndex) + sameDataIndexes.slice(removeIndex + 1);
+            sameDataIndexes = sameDataIndexes.slice(0, removeIndex) + sameDataIndexes.slice(removeIndex + 1);
           }
         }
       }
