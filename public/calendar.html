@@ -1254,9 +1254,9 @@
           for (j = 0; j < sameDataIndexes.length; j++){
             let minMinute = 99, minMinuteIndex = 99;
             for (k = 0; k < sameDataIndexes.length; k++){
-              if (minMinute > sche_start_minutes[sameDataIndexes[j]]){
-                minMinute = sche_start_minutes[sameDataIndexes[j]];
-                minMinuteIndex = sameDataIndexes[j];
+              if (minMinute > sche_start_minutes[sameDataIndexes[k]]){
+                minMinute = sche_start_minutes[sameDataIndexes[k]];
+                minMinuteIndex = sameDataIndexes[k];
               }
             }
             indexes[indexes.length] = minMinuteIndex;
