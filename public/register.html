@@ -9,11 +9,25 @@
 
 <body>
   <h1>アカウント新規登録</h1>
-  <input id="username" type="text" />
-  <input id="password" type="text" />
-  <input id="color" type="color">
-  <button id="register">登録</button>
-  <button id="login_page" class="click" >アカウントをすでにお持ちの方はこちら</button>
+
+
+  
+  <div class="login">
+    <div class="login-triangle"></div>
+    
+    <h2 class="login-header">Log in</h2>
+  
+    <form class="login-container">
+      <p><input id="username" type="username" placeholder="ユーザー名"></p>
+      <p><input id="password" type="password" placeholder="パスワード"></p>
+      <input id="color" type="color">
+      <p><input id="register" value="新規作成"></p>
+      <p><button id="login_page" class="click" >アカウントをすでにお持ちの方はこちら</button></p>
+    </form>
+  </div>
+
+
+
 
   <script src="jquery.js"></script>
   <script src="jquery.md5.js"></script>
