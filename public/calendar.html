@@ -1287,8 +1287,8 @@
         }
 
         document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = `<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`; // 本文を書き、表示する
+      console.log(indexes[i]);
       }
-      console.log(i);
       for (i = i; i < ScheAmountPerDay; i++) {
         //document.getElementById(`delete${slot}_${indexes[i] + 1}_temp`).style.visibility = 'hidden';
         //document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
