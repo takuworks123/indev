@@ -1291,8 +1291,8 @@
         console.log(`<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`);
       }
       for (i = i; i < ScheAmountPerDay; i++) {
-        //document.getElementById(`delete${slot}_${indexes[i] + 1}_temp`).style.visibility = 'hidden';
-        //document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
+        document.getElementById(`delete${slot}_${indexes[i] + 1}_temp`).style.visibility = 'hidden';
+        document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
       }
     }
 
