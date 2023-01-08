@@ -1272,7 +1272,7 @@
           document.getElementById(`delete${slot}_${indexes[i] + 1}_temp`).style.visibility = 'hidden';
         }
 
-        document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = `<nobr hidden>${id}</nobr> ${sche_starts[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`; // 本文を書き、表示する
+        document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = `<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`; // 本文を書き、表示する
       }
 
       for (i = i; i < ScheAmountPerDay; i++) {
