@@ -1262,7 +1262,8 @@
             }
             indexes[indexes.length] = minMinuteIndex;
 
-            console.log(sameDataIndexes.slice(0, removeIndex) + sameDataIndexes.slice(removeIndex + 1));
+            console.log(sameDataIndexes.slice(0, removeIndex));
+            console.log(sameDataIndexes.slice(removeIndex + 1));
             sameDataIndexes = sameDataIndexes.slice(0, removeIndex) + sameDataIndexes.slice(removeIndex + 1);
           }
         }
