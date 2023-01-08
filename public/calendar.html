@@ -1252,14 +1252,17 @@
         }else{
 
           for (j = 0; j < sameDataIndexes.length; j++){
-            let minMinute = 99, minMinuteIndex = 99;
+            let minMinute = 99, minMinuteIndex = 99, removeIndex = 99;
             for (k = 0; k < sameDataIndexes.length; k++){
               if (minMinute > sche_start_minutes[sameDataIndexes[k]]){
                 minMinute = sche_start_minutes[sameDataIndexes[k]];
                 minMinuteIndex = sameDataIndexes[k];
+                removeIndex = k
               }
             }
             indexes[indexes.length] = minMinuteIndex;
+
+            let sameDataIndexes = sameDataIndexes.slice(0, removeIndex) + sameDataIndexes.slice(removeIndex + 1);
           }
         }
       }
