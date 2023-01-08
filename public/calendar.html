@@ -1265,10 +1265,10 @@
             console.log(sameDataIndexes.slice(0, removeIndex));
             console.log(sameDataIndexes.slice(removeIndex + 1));
             let temp1 = sameDataIndexes, temp2 = sameDataIndexes;
-            // .contactで配列同士を結合
+            // .concatで配列同士を結合
             temp1.slice(0, removeIndex);
             temp2.slice(removeIndex + 1);
-            sameDataIndexes = temp1.contact(temp2);
+            sameDataIndexes = temp1.concat(temp2);
             console.log(sameDataIndexes);
           }
         }
