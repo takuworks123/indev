@@ -1205,14 +1205,6 @@
         sche_starts_op[sche_starts_op.length] = temp2[0] + ":" + temp2[1];
       }
 
-      console.log(comments);
-      console.log("-----------");
-      console.log(sche_starts);
-      console.log("-----------");
-      console.log(sche_start_hours);
-      console.log("-----------");
-      console.log(sche_start_minutes);
-
       
 
 
@@ -1242,7 +1234,6 @@
             sameDataIndexes[sameDataIndexes.length] = j;
           }
         }
-        console.log(sameDataIndexes);
 
         // 時単位だけで同じ時間がなかったら、次の時間へGO
         if (sameDataIndexes.length == 1){
@@ -1265,19 +1256,13 @@
             let temp1 = sameDataIndexes, temp2 = sameDataIndexes;
             temp1 = temp1.slice(0, removeIndex);
             temp2 = temp2.slice(removeIndex + 1);
-            console.log(removeIndex);
-
-            console.log(temp1);
-            console.log(temp2);
             sameDataIndexes = temp1.concat(temp2);
-            console.log(sameDataIndexes);
           }
         }
       }
 
 
 
-      console.log(indexes);
 
       for (i = 0; i < data.length-1; i++) {
         if (username == users[indexes[i]]){
@@ -1287,9 +1272,8 @@
         }
 
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = `<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`; // 本文を書き、表示する
-        console.log(`modalP${slot}_${i + 1}`);
-        console.log(`<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`);
       }
+
       for (i = i; i < ScheAmountPerDay; i++) {
         document.getElementById(`delete${slot}_${i + 1}_temp`).style.visibility = 'hidden';
         document.getElementById(`modalP${slot}_${i + 1}`).innerHTML = ""; // 本文を初期化し、非表示にする
