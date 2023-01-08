@@ -1216,14 +1216,14 @@
 
 
       // 時間順に整理する機構
-      let indexes = [-1];
+      let indexes = [];
 
       for (i = 0; i < sche_start_hours.length; i++){
 
         // まずは時単位だけで比較
         let minHour = 99, minHourIndex = 99;
         for (j = 0; j < sche_start_hours.length; j++){
-          if (sche_start_hours[indexes[indexes.length - 1]] < sche_start_hours[j]){
+          if (indexes.length == 0 || sche_start_hours[indexes[indexes.length - 1]] < sche_start_hours[j]){
             if (minHour > sche_start_hours[j]){
               minHour = sche_start_hours[j];
               minHourIndex = j;
@@ -1263,7 +1263,7 @@
 
 
       console.log(indexes);
-      for (i = 1; i < indexes.length; i++){
+      for (i = 0; i < indexes.length; i++){
         console.log("^^^^^^^^");
         console.log(sche_start_hours[indexes[i]] + ":" + sche_start_minutes[indexes[i]]);
       }
