@@ -1223,7 +1223,7 @@
         // まずは時単位だけで比較
         let minHour = 99, minHourIndex = 99;
         for (j = 0; j < sche_start_hours.length; j++){
-          if (indexes[indexes.length - 1] < sche_start_hours[j]){
+          if (sche_start_hours[indexes[indexes.length - 1]] < sche_start_hours[j]){
             if (minHour > sche_start_hours[j]){
               minHour = sche_start_hours[j];
               minHourIndex = j;
