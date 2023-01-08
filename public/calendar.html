@@ -1287,7 +1287,7 @@
         }
 
         document.getElementById(`modalP${slot}_${indexes[i] + 1}`).innerHTML = `<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`; // 本文を書き、表示する
-        console.log(`delete${slot}_${indexes[i] + 1}_temp`);
+        console.log(`modalP${slot}_${indexes[i] + 1}`);
         console.log(`<nobr hidden>${ids[indexes[i]]}</nobr> ${sche_starts_op[indexes[i]]} ${users[indexes[i]]}: ${comments[indexes[i]]}`);
       }
       for (i = i; i < ScheAmountPerDay; i++) {
