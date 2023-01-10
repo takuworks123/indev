@@ -98,7 +98,7 @@ serve(async (req) => {
     } else {
       sp = await supabase
         .from('calendar')
-        .insert({ group: `${requestJson.group}`, username: `${requestJson.username}`, color: `${requestJson.color}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
+        .insert({ group: `${requestJson.group}`, username: `${requestJson.username}`, color: `${requestJson.colorID}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
     }
 
     if (sp.error == null) {
