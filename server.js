@@ -59,16 +59,16 @@ serve(async (req) => {
     if (sp.error == null) { // エラーがないとき
       if (sp.data.length == 1){ // データベースに、対応するアカウントが１つある場合
         if (login_check.length == 0) {
-          login_check.push(sp.data[0].username + "@@" + sp.data[0].group);
+          login_check.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
     
         } else {
           while (login_check.length != 0) {
             setTimeout( ()=>{}, 1000 );
           }
-          login_check.push(sp.data[0].username + "@@" + sp.data[0].group);
+          login_check.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
         }
 
-        return new Response(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color); // userカラムとgroupカラムを返す
+        return new Response('0'); // userカラムとgroupカラムを返す
 
 
       }else if (sp.data.length < 1){ // データベースに、対応するアカウントがない場合
