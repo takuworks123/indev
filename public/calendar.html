@@ -1072,8 +1072,8 @@
           }
         }
 
-        for (let slot = 1; i <= dates.length; slot++) {
-          document.getElementById(`d${slot}`).textContent = dates
+        for (let slot = 1; slot <= dates.length; slot++) {
+          document.getElementById(`d${slot}`).textContent = dates[slot]
         }
 
         //output_d(dates);
