@@ -1026,10 +1026,7 @@
 
         let zure = ZureCalendar(year, month);
         let dates = MannnenCalendar(zure);
-        let users_1 = new Array(37).fill(' ');
-        let users_2 = new Array(37).fill(' ');
-        let comments_1 = new Array(37).fill(' ');
-        let comments_2 = new Array(37).fill(' ');
+        let flags = new Array(37).fill(0);
 
         let data = result.split('@@');
         for (let i = 0; i < data.length-1; i++) {
@@ -1048,10 +1045,12 @@
 
           console.log(color);
 
-          if (document.getElementById(`n${slot}_1`).textContent == ""){
+          if (flags[slot] == 0){
             document.getElementById(`n${slot}_1`).textContent = user
             document.getElementById(`th${slot}_1`).style.backgroundColor = `${color}`
             document.getElementById(`c${slot}_1`).textContent = comment
+            flags[slot] = 1;
+            
           }else{
             document.getElementById(`n${slot}_2`).textContent = document.getElementById(`n${slot}_1`).textContent
             document.getElementById(`n${slot}_1`).textContent = user
