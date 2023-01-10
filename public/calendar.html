@@ -1048,14 +1048,14 @@
 
           if (document.getElementById(`n${slot}_1`).textContent == ""){
             document.getElementById(`n${slot}_1`).textContent = user
-            document.getElementById(`th${slot}_1`).textContent = color
+            document.getElementById(`th${slot}_1`).style.backgroundColor = color
             document.getElementById(`c${slot}_1`).textContent = comment
           }else{
             document.getElementById(`n${slot}_2`).textContent = document.getElementById(`n${slot}_1`).textContent
             document.getElementById(`n${slot}_1`).textContent = user
             
-            document.getElementById(`th${slot}_2`).textContent = document.getElementById(`th${slot}_1`).textContent
-            document.getElementById(`th${slot}_1`).textContent = user
+            document.getElementById(`th${slot}_2`).style.backgroundColor = document.getElementById(`th${slot}_1`).style.backgroundColor
+            document.getElementById(`th${slot}_1`).style.backgroundColor = color
 
             document.getElementById(`c${slot}_2`).textContent = document.getElementById(`c${slot}_1`).textContent
             document.getElementById(`c${slot}_1`).textContent = comment
