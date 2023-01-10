@@ -38,15 +38,9 @@
       let data = result.split('@@');
       let username = data[0];
       let group = data[1];
+      let color = data[2];
 
       if (group >= 1) { // ログイン成功した場合
-
-        const response = await fetch("/login_add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, group })
-        });
-
         location.href = 'calendar.html';
 
       }else{ // ログイン失敗（またはエラーが発生）した場合

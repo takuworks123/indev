@@ -58,7 +58,18 @@ serve(async (req) => {
     
     if (sp.error == null) { // エラーがないとき
       if (sp.data.length == 1){ // データベースに、対応するアカウントが１つある場合
-        return new Response(sp.data[0].username + "@@" + sp.data[0].group); // userカラムとgroupカラムを返す
+        if (login_check.length == 0) {
+          login_check.push(sp.data[0].username + "@@" + sp.data[0].group);
+    
+        } else {
+          while (login_check.length != 0) {
+            setTimeout( ()=>{}, 1000 );
+          }
+          login_check.push(sp.data[0].username + "@@" + sp.data[0].group);
+        }
+
+        return new Response(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color); // userカラムとgroupカラムを返す
+
 
       }else if (sp.data.length < 1){ // データベースに、対応するアカウントがない場合
         return new Response('-1'); // ログイン失敗（エラー）と返す
@@ -72,21 +83,7 @@ serve(async (req) => {
     }
   }
 
-  if (req.method === "POST" && pathname === "/login_add") {
-    const requestJson = await req.json();
-
-    if (login_check.length == 0) {
-      login_check.push(requestJson.username + "@@" + requestJson.group);
-
-    } else {
-      while (login_check.length != 0) {
-        setTimeout( ()=>{}, 1000 );
-      }
-      login_check.push(requestJson.username + "@@" + requestJson.group);
-    }
-  }
-
-  if (req.method === "POST" && pathname === "/login_remove") {
+  if (req.method === "GET" && pathname === "/login") {
     let data = login_check.pop();
     login_check = [];
     return new Response(data);
