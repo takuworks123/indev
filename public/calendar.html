@@ -757,6 +757,8 @@
     let month_str = ('00' + month).slice(-2);
     let time = `${year}-${month_str}`;
     let monthLen = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+    const MAXSLOT = 37;
+    const DEF_COLOR = "#d4ff5f";
 
     function output_d(dates){
       d1.textContent = `${dates[0]}`;
@@ -1012,7 +1014,7 @@
         dates[dates.length] = i;
       }
 
-      if (dates.length != 37){
+      if (dates.length != MAXSLOT){
         i = 36;
         while (dates[i] === undefined){
           dates[i] = "";
@@ -1033,9 +1035,19 @@
       let result = await response.text();
       if (result != 'Database Error'){
 
+        // 初期化
+        for (let i = 0; i < MAXSLOT; i++) {
+          document.getElementById(`n${i + 1}_1`).textContent = "";
+          document.getElementById(`n${i + 1}_2`).textContent = "";
+          document.getElementById(`th${i + 1}_1`).style.backgroundColor = DEF_COLOR;
+          document.getElementById(`th${i + 1}_2`).style.backgroundColor = DEF_COLOR;
+          document.getElementById(`c${i + 1}_1`).textContent = ""
+          document.getElementById(`c${i + 1}_2`).textContent = ""
+        }
+
         let zure = ZureCalendar(year, month);
         let dates = MannnenCalendar(zure);
-        let flags = new Array(37).fill(true);
+        let flags = new Array(MAXSLOT).fill(true);
 
         let data = result.split('@@');
         for (let i = 0; i < data.length-1; i++) {
