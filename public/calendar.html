@@ -1123,7 +1123,7 @@
       let sche_end = document.querySelector("#sche_end_ip").value;
       let comment = document.querySelector("#comment_ip").value;
 
-      if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
+      if (comment.includes('||') || comment.includes('@@')){
         alert('使用できない記号が含まれています');
       }else{
 
