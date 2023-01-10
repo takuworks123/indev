@@ -33,6 +33,7 @@
     document.querySelector("#register").onclick = async (event) => {
       const username = document.querySelector("#username").value;
       const original_pass = document.querySelector("#password").value;
+      const color = document.querySelector("#color").value;
 
       if (username.length >= 1 && original_pass.length >= 1){ // ユーザー名、パスワードが１文字以上入力されている場合
         const password = $.md5(original_pass); // MD5でパスワードをハッシュ値に変換
@@ -40,7 +41,7 @@
         const response = await fetch("/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password })
+          body: JSON.stringify({ username, password, color})
         });
         let result = await response.text();
         alert(result);
@@ -55,9 +56,7 @@
     }
 
     document.querySelector("#login_page").onclick = async (event) => {
-      //location.href = 'login.html';
-      console.log(document.querySelector("#color").value);
-      register.style.backgroundColor = document.querySelector("#color").value
+      location.href = 'login.html';
     }
   </script>
 

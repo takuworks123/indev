@@ -16,34 +16,41 @@ serve(async (req) => {
 
   if (req.method === "POST" && pathname === "/register") {
     const requestJson = await req.json();
-    let sp = await supabase // userテーブルへ問い合わせ
-      .from('user')
-      .select()
-      .eq( 'username', requestJson.username );
 
-    if (sp.data.length == 0){
-      let rdm_group;
-      let sp1;
-      do{
-        rdm_group = Math.floor(Math.random() * 1000000000000000);
-        sp1 = await supabase // userテーブルへ問い合わせ
-          .from('user')
-          .select()
-          .eq( 'group', rdm_group );
-      }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+    if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
+      return new Response('使用できない記号が含まれています');
 
-      let sp2 = await supabase // userテーブルへ問い合わせ
-        .from('user')
-        .insert({ group: `${rdm_group}`, username: `${requestJson.username}`, password: `${requestJson.password}` });
-      
-      if (sp2.error == null) {
-        return new Response('0'); // 新規登録成功と返す
-      }else{
-        return new Response('internal error'); // 内部エラーと返す
-      }
-      
     }else{
-      return new Response('同じユーザー名がすでに登録されています'); // ユーザー名被りエラーと返す
+      
+      let sp = await supabase // userテーブルへ問い合わせ
+        .from('user')
+        .select()
+        .eq( 'username', requestJson.username );
+
+      if (sp.data.length == 0){
+        let rdm_group;
+        let sp1;
+        do{
+          rdm_group = Math.floor(Math.random() * 1000000000000000);
+          sp1 = await supabase // userテーブルへ問い合わせ
+            .from('user')
+            .select()
+            .eq( 'group', rdm_group );
+        }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+
+        let sp2 = await supabase // userテーブルへ問い合わせ
+          .from('user')
+          .insert({ group: `${rdm_group}`, username: `${requestJson.username}`, password: `${requestJson.password}`, color: `${requestJson.color}` });
+        
+        if (sp2.error == null) {
+          return new Response('0'); // 新規登録成功と返す
+        }else{
+          return new Response('internal error'); // 内部エラーと返す
+        }
+        
+      }else{
+        return new Response('同じユーザー名がすでに登録されています'); // ユーザー名被りエラーと返す
+      }
     }
   }
 
@@ -96,7 +103,7 @@ serve(async (req) => {
     let sp;
 
     if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
-      return new Response('');
+      return new Response('-1');
     } else {
       sp = await supabase
         .from('calendar')
