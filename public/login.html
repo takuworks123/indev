@@ -35,7 +35,7 @@
         body: JSON.stringify({ user, pass })
       });
       let result = await response.text();
-
+      console.log(result);
       if (result == 0) { // ログイン成功した場合
         location.href = 'calendar.html';
 

@@ -68,7 +68,7 @@ serve(async (req) => {
           login_check.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
         }
 
-        return new Response('0'); // userカラムとgroupカラムを返す
+        return new Response('0'); // 0を返す
 
 
       }else if (sp.data.length < 1){ // データベースに、対応するアカウントがない場合
