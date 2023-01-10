@@ -1123,39 +1123,39 @@
       let sche_end = document.querySelector("#sche_end_ip").value;
       let comment = document.querySelector("#comment_ip").value;
 
-      if (sche_start == ""){
-        alert("日付を設定してください");
+      if (requestJson.comment.includes('||') || requestJson.comment.includes('@@')){
+        alert('使用できない記号が含まれています');
       }else{
 
-        if (sche_end == ""){
-          sche_end = sche_start;
-        }
+        if (sche_start == ""){
+          alert("日付を設定してください");
+        }else{
 
-        let temp = sche_start.split('T');
-        let temp2 = temp[0].split('-');
-        let day = time + "-" + temp2[2];
-        const response_check_day_amount = await fetch("/check_day_amount", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ group, day })
-        });
-        let amount = await response_check_day_amount.text();
-        result_op.textContent = amount;
-
-        if (Number(amount) < 5){
-          const response_send = await fetch("/send", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ group, username, sche_start, sche_end, comment })
-          });
-          let result = await response_send.text();
-
-          if (result == -1){
-            alert('使用できない記号が含まれています');
-          }else{
-          await reload();
+          if (sche_end == ""){
+            sche_end = sche_start;
           }
 
+          let temp = sche_start.split('T');
+          let temp2 = temp[0].split('-');
+          let day = time + "-" + temp2[2];
+          const response_check_day_amount = await fetch("/check_day_amount", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ group, day })
+          });
+          let amount = await response_check_day_amount.text();
+          result_op.textContent = amount;
+
+          if (Number(amount) < 5){
+            const response_send = await fetch("/send", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ group, username, sche_start, sche_end, comment })
+            });
+            let result = await response_send.text();
+            await reload();
+
+          }
         }
       }
     }
