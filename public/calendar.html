@@ -1037,13 +1037,29 @@
           let id = data2[0];
           let created_at = data2[1];
           let user = data2[2];
-          let sche_start = data2[3];
-          let sche_end = data2[4];
-          let comment = data2[5];
+          let color = data2[3];
+          let sche_start = data2[4];
+          let sche_end = data2[5];
+          let comment = data2[6];
 
           let temp = sche_start.split('T');
           let temp2 = temp[0].split('-');
-          let index = Number(temp2[2]) + zure - 1;
+          let slot = Number(temp2[2]) + zure;
+
+          if (document.getElementById(`n${slot}_1`).textContent == ""){
+            document.getElementById(`n${slot}_1`).textContent = user
+            document.getElementById(`th${slot}_1`).textContent = color
+            document.getElementById(`c${slot}_1`).textContent = comment
+          }else{
+            document.getElementById(`n${slot}_2`).textContent = document.getElementById(`n${slot}_1`).textContent
+            document.getElementById(`n${slot}_1`).textContent = user
+            
+            document.getElementById(`th${slot}_2`).textContent = document.getElementById(`th${slot}_1`).textContent
+            document.getElementById(`th${slot}_1`).textContent = user
+
+            document.getElementById(`c${slot}_2`).textContent = document.getElementById(`c${slot}_1`).textContent
+            document.getElementById(`c${slot}_1`).textContent = comment
+          }
 
           if (comments_1[index] == ' '){
             users_1[index] = user;
@@ -1061,11 +1077,15 @@
           //th1_2.style.backgroundColor = '#bb4444'
         }
 
-        output_d(dates);
-        output_n_1(users_1);
-        output_n_2(users_2);
-        output_c_1(comments_1);
-        output_c_2(comments_2);
+        for (let slot = 1; i <= dates.length; slot++) {
+          document.getElementById(`d${slot}`).textContent = dates
+        }
+
+        //output_d(dates);
+        //output_n_1(users_1);
+        //output_n_2(users_2);
+        //output_c_1(comments_1);
+        //output_c_2(comments_2);
         month_op.textContent = year + "年 " + month + "月の予定";
         
       }else{
@@ -1184,6 +1204,7 @@
       let ids = [];
       let created_ats = [];
       let users = [];
+      let colors = [];
       let sche_starts = [];
       let sche_start_hours = [];
       let sche_start_minutes = [];
@@ -1199,9 +1220,10 @@
         ids[ids.length] = data2[0];
         created_ats[created_ats.length] = data2[1];
         users[users.length] = data2[2];
-        sche_starts[sche_starts.length] = data2[3];
-        sche_ends[sche_ends.length] = data2[4];
-        comments[comments.length] = data2[5];
+        colors[users.length] = data2[3];
+        sche_starts[sche_starts.length] = data2[4];
+        sche_ends[sche_ends.length] = data2[5];
+        comments[comments.length] = data2[6];
 
         let temp = sche_starts[i].split('T');
         let temp2 = temp[1].split(':');

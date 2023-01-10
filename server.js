@@ -101,7 +101,7 @@ serve(async (req) => {
     } else {
       sp = await supabase
         .from('calendar')
-        .insert({ group: `${requestJson.group}`, username: `${requestJson.username}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
+        .insert({ group: `${requestJson.group}`, username: `${requestJson.username}`, color: `${requestJson.color}`, sche_start: `${requestJson.sche_start}`, sche_end: `${requestJson.sche_end}`, comment: `${requestJson.comment}` }); // calendarへデータ挿入
     }
 
     if (sp.error == null) {
@@ -127,6 +127,7 @@ serve(async (req) => {
           data += sp.data[i].id + '||';
           data += sp.data[i].created_at + '||';
           data += sp.data[i].username + '||';
+          data += sp.data[i].color + '||';
           data += sp.data[i].sche_start + '||';
           data += sp.data[i].sche_end + '||';
           data += sp.data[i].comment + '@@';
@@ -154,6 +155,7 @@ serve(async (req) => {
           data += sp.data[i].id + '||';
           data += sp.data[i].created_at + '||';
           data += sp.data[i].username + '||';
+          data += sp.data[i].color + '||';
           data += sp.data[i].sche_start + '||';
           data += sp.data[i].sche_end + '||';
           data += sp.data[i].comment + '@@';
