@@ -1062,21 +1062,6 @@
             document.getElementById(`c${slot}_2`).textContent = document.getElementById(`c${slot}_1`).textContent
             document.getElementById(`c${slot}_1`).textContent = comment
           }
-
-          if (comments_1[index] == ' '){
-            users_1[index] = user;
-
-            comments_1[index] = comment;
-
-          }else{
-            users_2[index] = users_1[index];
-            users_1[index] = user;
-
-            comments_2[index] = comments_1[index];
-            comments_1[index] = comment;
-          }
-          //th1_1.style.backgroundColor = '#bb4444'
-          //th1_2.style.backgroundColor = '#bb4444'
         }
 
         for (let slot = 1; i <= dates.length; slot++) {
