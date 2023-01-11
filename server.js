@@ -56,7 +56,7 @@ serve(async (req) => {
     if (sp.data.length == 0){
       let sp1 = await supabase // userテーブルへ問い合わせ
         .from('user')
-        .update({ group: `${requestJson.rdm_group}`})
+        .update({ group: `${rdm_group}`})
         .eq( 'username', requestJson.username );
 
       return new Response(rdm_group);
