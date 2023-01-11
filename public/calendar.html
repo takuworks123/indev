@@ -1009,7 +1009,7 @@
     }
 
     document.querySelector("#invite_toggle").onclick = async (event) => {
-      if (invite_toggle.textContent == "無効にする"){
+      if (invite_toggle.textContent == "有効にする"){
         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let rand_str = '';
         for ( var i = 0; i < 8; i++ ) {
@@ -1022,18 +1022,19 @@
           body: JSON.stringify({ rand_str, group })
         });
 
-        invite_code.textContent = rand_str
+        invite_code_op.textContent = rand_str
         invite_toggle.textContent = "無効にする"
       
 
       }else{
-        const response_send = await fetch("/invite_enable", {
+        const response_send = await fetch("/invite_disable", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ rand_str, group })
         });
 
-        invite_toggle.textContent = "有効にするにする"
+        invite_code_op.textContent = ""
+        invite_toggle.textContent = "有効にする"
       }
     }
 
