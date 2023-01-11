@@ -1022,15 +1022,17 @@
           body: JSON.stringify({ rand_str, group })
         });
         let result = await response.text();
+        console.log(result);
 
         if (result == 0){
           invite_code_op.textContent = rand_str
         }else{
           invite_code_op.textContent = result
         }
-        
-          invite_toggle.textContent = "無効にする"
+
+        invite_toggle.textContent = "無効にする"
       
+
 
       }else{
         const response = await fetch("/invite_disable", {
