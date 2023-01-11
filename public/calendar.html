@@ -945,6 +945,7 @@
         let result_invite = await response_invite.text();
 
         if (result_invite == -1){
+          invite_code_op.textContent = ""
           invite_toggle.textContent = "有効にする"
         }else{
           invite_code_op.textContent = result_invite
