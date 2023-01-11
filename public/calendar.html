@@ -9,8 +9,9 @@
 <body>
   <h1 id = "month_op"></h1>
 
-  <div style="text-align: right">
-    <p>招待コード：</p>
+  <div class="invite">
+    招待コード： <div id="invite_code"></div>
+    <button id="invite_toggle">有効にする</button>
   </div>
 
   <input id="comment_ip" type="text" />
@@ -982,6 +983,37 @@
         }
       }
     }
+
+    document.querySelector("#invite_toggle").onclick = async (event) => {
+      if (invite_toggle.textContent == "無効にする"){
+        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let rand_str = '';
+        for ( var i = 0; i < 8; i++ ) {
+          rand_str += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        const response_send = await fetch("/invite_enable", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rand_str, group })
+        });
+
+        invite_code.textContent = rand_str
+        invite_toggle.textContent = "無効にする"
+      
+        
+      }else{
+        const response_send = await fetch("/invite_enable", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rand_str, group })
+        });
+
+        invite_toggle.textContent = "有効にするにする"
+      }
+    }
+
+
 
 
 

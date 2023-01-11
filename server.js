@@ -9,6 +9,7 @@ let obj;
 let main_obj;
 
 let login_check = [];
+let invite_code = [];
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -199,6 +200,28 @@ serve(async (req) => {
       return new Response('Database Error');
     }
   };
+
+  if (req.method === "POST" && pathname === "/invite_enable") {
+    const requestJson = await req.json();
+    invite_code.push(requestJson.group + "@@" + requestJson.rand_str);
+    return new Response();
+  }
+
+  if (req.method === "POST" && pathname === "/invite_disable") {
+    const requestJson = await req.json();
+    for (let i = 0; i < invite_code.length; i++){
+      let data = invite_code[i].split('@@');
+
+      if (data[0] == requestJson.group){
+        let temp1 = invite_code, temp2 = invite_code;
+        temp1 = temp1.slice(0, i);
+        temp2 = temp2.slice(i + 1);
+        invite_code = temp1.concat(temp2);
+      }
+    }
+
+    return new Response();
+  }
 
 
 
