@@ -70,7 +70,7 @@ serve(async (req) => {
 
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
-      if (data[1] == requestJson.invite_codes){
+      if (data[1] == requestJson.invite_code){
 
         let sp = await supabase // userテーブルへ問い合わせ
           .from('user')
