@@ -201,6 +201,17 @@ serve(async (req) => {
     }
   };
 
+  if (req.method === "POST" && pathname === "/invite_check") {
+    const requestJson = await req.json();
+    for (let i = 0; i < invite_code.length; i++){
+      let data = invite_code[i].split('@@');
+      if (data[0] == requestJson.group){
+        return new Response(data[1]);
+      }
+    }
+    return new Response('-1');
+  }
+
   if (req.method === "POST" && pathname === "/invite_enable") {
     const requestJson = await req.json();
     for (let i = 0; i < invite_code.length; i++){
