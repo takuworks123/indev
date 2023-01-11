@@ -997,7 +997,7 @@
     }
 
     document.querySelector("#join_calendar").onclick = async (event) => {
-      const invite_code = invite_code_ip.value;
+      let invite_code = invite_code_ip.value;
       const response_invite = await fetch("/join_calendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
