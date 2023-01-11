@@ -937,7 +937,13 @@
       group = data[1];
       colorID = data[2];
 
-      const response_invite = await fetch("/invite_check", {
+      if (group == undefined){
+        $('#modalArea_group').fadeIn(200); // ポップアップを表示
+
+
+      }else{
+
+        const response_invite = await fetch("/invite_check", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ group })
@@ -952,7 +958,8 @@
           invite_toggle.textContent = "リセット＆無効にする"
         }
 
-      await reload();
+        await reload();
+      }
     }
 
     document.querySelector("#update").onclick = async (event) => {
@@ -1080,7 +1087,7 @@
 
     
 
-    async function popup(slot){
+    async function popup_day(slot){
       let date = document.getElementById("d" + slot).textContent;
       let day = time + "-" + ('00' + date).slice(-2);
       const response = await fetch("/download_day", {
@@ -1214,7 +1221,7 @@
         });
         let result = await response.text();
         result_op.textContent = result;
-        await popup(slot);
+        await popup_day(slot);
         await reload();
       }
     }
@@ -1222,13 +1229,15 @@
 
     // 日付をクリックでpopup関数が起動
     $(function () {      
-      $('#d24').click(async function(){ await popup(24); $('#modalArea24').fadeIn(200); });
+      $('#closeModal_group , #modalBg_group').click(function(){ });
+
+      $('#d24').click(async function(){ await popup_day(24); $('#modalArea24').fadeIn(200); });
       $('#closeModal24 , #modalBg24').click(function(){ $('#modalArea24').fadeOut(200); });
 
-      $('#d25').click(async function(){ await popup(25); $('#modalArea25').fadeIn(200); });
+      $('#d25').click(async function(){ await popup_day(25); $('#modalArea25').fadeIn(200); });
       $('#closeModal25 , #modalBg25').click(function(){ $('#modalArea25').fadeOut(200); });
       
-      $('#d26').click(async function(){ await popup(26); $('#modalArea26').fadeIn(200); });
+      $('#d26').click(async function(){ await popup_day(26); $('#modalArea26').fadeIn(200); });
       $('#closeModal26 , #modalBg26').click(function(){ $('#modalArea26').fadeOut(200); });
 
 
