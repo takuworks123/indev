@@ -25,11 +25,11 @@
 
         <button id="create_calendar">新しくカレンダーを作る</button>
 
-        <p>―――――――――――――――――――――――――</p>
+        <p>―――――――――――――――――――</p>
 
         <p>招待コードで参加する</p>
         <input id="invite_code_ip" type="text" />
-        <button id="invite_calendar">参加する</button>
+        <button id="invite_code_calendar">参加する</button>
       </div>
     </div>
   </section>
@@ -933,6 +933,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
     window.onload = async (event) => {
       const response = await fetch("/login"); // GET
       let result = await response.text();
@@ -966,6 +975,26 @@
 
         await reload();
       }
+    }
+
+    document.querySelector("#create_calendar").onclick = async (event) => {
+      const response_invite = await fetch("/create_calendar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username })
+      });
+      let result = await response_invite.text();
+
+      if (result == -1){
+        alert("新しくカレンダーを作れませんでした。運営に相談してください");
+      }else{
+        group = result;
+        $('#modalArea_group').fadeOut(200);
+      }
+    }
+
+    document.querySelector("#invite_code_calendar").onclick = async (event) => {
+      
     }
 
     document.querySelector("#update").onclick = async (event) => {
@@ -1091,7 +1120,9 @@
 
 
 
-    
+
+
+
 
     async function popup_day(slot){
       let date = document.getElementById("d" + slot).textContent;

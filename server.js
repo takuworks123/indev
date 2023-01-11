@@ -24,21 +24,12 @@ serve(async (req) => {
       .eq( 'username', requestJson.username );
 
     if (sp.data.length == 0){
-      let rdm_group;
-      let sp1;
-      do{
-        rdm_group = Math.floor(Math.random() * 1000000000000000);
-        sp1 = await supabase // userテーブルへ問い合わせ
-          .from('user')
-          .select()
-          .eq( 'group', rdm_group );
-      }while(sp1.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
 
-      let sp2 = await supabase // userテーブルへ問い合わせ
+      let sp1 = await supabase // userテーブルへ問い合わせ
         .from('user')
-        .insert({ group: `${rdm_group}`, username: `${requestJson.username}`, password: `${requestJson.password}`, color: `${requestJson.color}` });
+        .insert({ username: `${requestJson.username}`, password: `${requestJson.password}`, color: `${requestJson.color}` });
       
-      if (sp2.error == null) {
+      if (sp1.error == null) {
         return new Response('0'); // 新規登録成功と返す
       }else{
         return new Response('internal error'); // 内部エラーと返す
@@ -46,6 +37,31 @@ serve(async (req) => {
       
     }else{
       return new Response('同じユーザー名がすでに登録されています'); // ユーザー名被りエラーと返す
+    }
+  }
+
+  if (req.method === "POST" && pathname === "/create_calendar") {
+    const requestJson = await req.json();
+    
+    let rdm_group;
+    let sp;
+    do{
+      rdm_group = Math.floor(Math.random() * 1000000000000000);
+      sp = await supabase // userテーブルへ問い合わせ
+        .from('user')
+        .select()
+        .eq( 'group', rdm_group );
+    }while(sp.data.length != 0); // rdm_groupに生成したランダムの整数が被っていない場合、ループから抜ける
+
+    if (sp.data.length == 0){
+      let sp1 = await supabase // userテーブルへ問い合わせ
+        .from('user')
+        .update({ group: `${requestJson.rdm_group}`})
+        .eq( 'username', requestJson.username );
+
+      return new Response(rdm_group);
+    }else{
+      return new Response('-1');
     }
   }
 
