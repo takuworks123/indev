@@ -10,9 +10,33 @@
   <h1 id = "month_op"></h1>
 
   <div class="invite">
-    招待コード： <div id="invite_code"></div>
+    招待コード： <div id="invite_code_op"></div>
     <button id="invite_toggle">有効にする</button>
   </div>
+
+
+
+  <!-- モーダルエリアここから -->
+  <section id="modalArea_group" class="modalArea">
+    <div id="modalBg_group" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1 id="modalH_group">初期設定</h1>
+        <button id="create_calendar">新しくカレンダーを作る</button>
+        招待コードで参加する
+        <input id="invite_code_ip" type="text" />
+      </div>
+      <div id="closeModal_group" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
+  <!-- モーダルエリアここまで -->
+
+  <!-- ↓body閉じタグ直前でjQueryを読み込む -->
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 
   <input id="comment_ip" type="text" />
   <input id="sche_start_ip" type="datetime-local" />
@@ -1001,7 +1025,7 @@
         invite_code.textContent = rand_str
         invite_toggle.textContent = "無効にする"
       
-        
+
       }else{
         const response_send = await fetch("/invite_enable", {
           method: "POST",
