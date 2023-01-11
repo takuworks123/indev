@@ -26,9 +26,6 @@
         招待コードで参加する
         <input id="invite_code_ip" type="text" />
       </div>
-      <div id="closeModal_group" class="closeModal">
-        ×
-      </div>
     </div>
   </section>
   <!-- モーダルエリアここまで -->
@@ -1232,9 +1229,7 @@
 
 
     // 日付をクリックでpopup関数が起動
-    $(function () {      
-      $('#closeModal_group , #modalBg_group').click(function(){ });
-
+    $(function () {
       $('#d24').click(async function(){ await popup_day(24); $('#modalArea24').fadeIn(200); });
       $('#closeModal24 , #modalBg24').click(function(){ $('#modalArea24').fadeOut(200); });
 
