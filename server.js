@@ -211,6 +211,7 @@ serve(async (req) => {
     }
 
     invite_code.push(requestJson.group + "@@" + requestJson.rand_str);
+    console.log(invite_code);
     return new Response();
   }
 
@@ -224,6 +225,7 @@ serve(async (req) => {
         temp1 = temp1.slice(0, i);
         temp2 = temp2.slice(i + 1);
         invite_code = temp1.concat(temp2);
+        console.log(invite_code);
         return new Response();
       }
     }
