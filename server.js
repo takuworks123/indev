@@ -77,10 +77,10 @@ serve(async (req) => {
           .update({ group: `${data[0]}`})
           .eq( 'username', requestJson.username );
 
-        return new Response();
+        return new Response('0');
       }
     }
-    
+
     return new Response('-1');
   }
 

@@ -997,7 +997,7 @@
     }
 
     document.querySelector("#join_calendar").onclick = async (event) => {
-      const invite_code = invite_code_ip.textContent;
+      const invite_code = invite_code_ip.value;
       const response_invite = await fetch("/join_calendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1005,7 +1005,7 @@
       });
       let result = await response_invite.text();
       
-      if (result == -1){
+      if (result != 0){
         alert("招待コードが無効です");
       }
     }
