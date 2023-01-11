@@ -920,9 +920,11 @@
         }
         
         month_op.textContent = year + "年 " + month + "月の予定";
+
+        return true;
         
       }else{
-        alert("Database Error");
+        return false;
       }
     }
 
@@ -936,8 +938,10 @@
       username = data[0];
       group = data[1];
       colorID = data[2];
+
+      let result_reload = await reload();
       
-      if (group == null){
+      if (result_reload == false){
         $('#modalArea_group').fadeIn(200); // ポップアップを表示
 
 
