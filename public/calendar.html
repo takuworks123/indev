@@ -937,7 +937,7 @@
       group = data[1];
       colorID = data[2];
 
-      const response_invite = await fetch("/invite_enable", {
+      const response_invite = await fetch("/invite_check", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ group })
