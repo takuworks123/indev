@@ -989,6 +989,7 @@
 
       if (result == -1){
         alert("新しくカレンダーを作れませんでした。運営に相談してください");
+        
       }else{
         group = result;
         await reload();
@@ -1005,8 +1006,13 @@
       });
       let result = await response_invite.text();
       
-      if (result != 0){
+      if (result == -1){
         alert("招待コードが無効です");
+
+      }else{
+        group = result;
+        await reload();
+        $('#modalArea_group').fadeOut(200);
       }
     }
 
