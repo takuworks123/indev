@@ -40,9 +40,9 @@
 
 
 
-  <input id="comment_ip" type="text" placeholder="予定" />
+  <input id="comment_ip" type="text" placeholder="予定の内容" />
   <input id="sche_start_ip" type="datetime-local" />
-  <!-- <input id="sche_end_ip" type="datetime-local" /> -->
+  <input id="sche_end_ip" type="datetime-local" />
   <button id="submit">送信</button>
   <button id="update">更新</button>
   <button id="back"><前の月</button>
@@ -962,6 +962,9 @@
 
 
     window.onload = async (event) => {
+      // これ消すかも。ｗ
+      sche_end_ip.style.visibility = 'hidden';
+
       const response = await fetch("/login"); // GET
       let result = await response.text();
       let data = result.split('@@');
