@@ -29,7 +29,7 @@
 
         <p>招待コードで参加する</p>
         <input id="invite_code_ip" type="text" />
-        <button id="invite_code_calendar">参加する</button>
+        <button id="join_calendar">参加する</button>
       </div>
     </div>
   </section>
@@ -996,8 +996,18 @@
       }
     }
 
-    document.querySelector("#invite_code_calendar").onclick = async (event) => {
+    document.querySelector("#join_calendar").onclick = async (event) => {
+      const invite_code = invite_code_ip.textContent;
+      const response_invite = await fetch("/join_calendar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, invite_code })
+      });
+      let result = await response_invite.text();
       
+      if (result == -1){
+        alert("招待コードが無効です");
+      }
     }
 
     document.querySelector("#update").onclick = async (event) => {

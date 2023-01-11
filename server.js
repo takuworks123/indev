@@ -8,8 +8,8 @@ const supabase = createClient(url, anon_key);
 let obj;
 let main_obj;
 
-let login_check = [];
-let invite_code = [];
+let login_checks = [];
+let invite_codes = [];
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -65,6 +65,25 @@ serve(async (req) => {
     }
   }
 
+  if (req.method === "POST" && pathname === "/join_calendar") {
+    const requestJson = await req.json();
+
+    for (let i = 0; i < invite_codes.length; i++){
+      let data = invite_codes[i].split('@@');
+      if (data[1] == requestJson.invite_codes){
+
+        let sp = await supabase // userテーブルへ問い合わせ
+          .from('user')
+          .update({ group: `${data[0]}`})
+          .eq( 'username', requestJson.username );
+
+        return new Response();
+      }
+    }
+    
+    return new Response('-1');
+  }
+
   if (req.method === "POST" && pathname === "/login") {
     const requestJson = await req.json();
     let sp = await supabase // userテーブルへ問い合わせ
@@ -75,14 +94,14 @@ serve(async (req) => {
     
     if (sp.error == null) { // エラーがないとき
       if (sp.data.length == 1){ // データベースに、対応するアカウントが１つある場合
-        if (login_check.length == 0) {
-          login_check.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
+        if (login_checks.length == 0) {
+          login_checks.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
     
         } else {
-          while (login_check.length != 0) {
+          while (login_checks.length != 0) {
             setTimeout( ()=>{}, 1000 );
           }
-          login_check.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
+          login_checks.push(sp.data[0].username + "@@" + sp.data[0].group + "@@" + sp.data[0].color);
         }
 
         return new Response('0'); // 0を返す
@@ -101,8 +120,8 @@ serve(async (req) => {
   }
 
   if (req.method === "GET" && pathname === "/login") {
-    let data = login_check.pop();
-    login_check = [];
+    let data = login_checks.pop();
+    login_checks = [];
     return new Response(data);
   }
 
@@ -219,8 +238,8 @@ serve(async (req) => {
 
   if (req.method === "POST" && pathname === "/invite_check") {
     const requestJson = await req.json();
-    for (let i = 0; i < invite_code.length; i++){
-      let data = invite_code[i].split('@@');
+    for (let i = 0; i < invite_codes.length; i++){
+      let data = invite_codes[i].split('@@');
       if (data[0] == requestJson.group){
         return new Response(data[1]);
       }
@@ -230,29 +249,29 @@ serve(async (req) => {
 
   if (req.method === "POST" && pathname === "/invite_enable") {
     const requestJson = await req.json();
-    for (let i = 0; i < invite_code.length; i++){
-      let data = invite_code[i].split('@@');
+    for (let i = 0; i < invite_codes.length; i++){
+      let data = invite_codes[i].split('@@');
       if (data[0] == requestJson.group){
         return new Response(data[1]);
       }
     }
 
-    invite_code.push(requestJson.group + "@@" + requestJson.rand_str);
-    console.log(invite_code);
+    invite_codes.push(requestJson.group + "@@" + requestJson.rand_str);
+    console.log(invite_codes);
     return new Response('0');
   }
 
   if (req.method === "POST" && pathname === "/invite_disable") {
     const requestJson = await req.json();
-    for (let i = 0; i < invite_code.length; i++){
-      let data = invite_code[i].split('@@');
+    for (let i = 0; i < invite_codes.length; i++){
+      let data = invite_codes[i].split('@@');
 
       if (data[0] == requestJson.group){
-        let temp1 = invite_code, temp2 = invite_code;
+        let temp1 = invite_codes, temp2 = invite_codes;
         temp1 = temp1.slice(0, i);
         temp2 = temp2.slice(i + 1);
-        invite_code = temp1.concat(temp2);
-        console.log(invite_code);
+        invite_codes = temp1.concat(temp2);
+        console.log(invite_codes);
         return new Response();
       }
     }
