@@ -11,7 +11,7 @@
 
   <div class="invite">
     招待コード： <div id="invite_code_op"></div>
-    <button id="invite_toggle">有効にする</button>
+    <button id="invite_toggle"></button>
   </div>
 
 
@@ -937,6 +937,7 @@
       group = data[1];
       colorID = data[2];
 
+      invite_enable();
       await reload();
     }
 
@@ -1010,29 +1011,7 @@
 
     document.querySelector("#invite_toggle").onclick = async (event) => {
       if (invite_toggle.textContent == "有効にする"){
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let rand_str = '';
-        for ( var i = 0; i < 8; i++ ) {
-          rand_str += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        const response = await fetch("/invite_enable", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rand_str, group })
-        });
-        let result = await response.text();
-        console.log(result);
-
-        if (result == 0){
-          invite_code_op.textContent = rand_str
-        }else{
-          invite_code_op.textContent = result
-        }
-
-        invite_toggle.textContent = "リセット＆無効にする"
-      
-
+        invite_enable();
 
       }else{
         const response = await fetch("/invite_disable", {
@@ -1055,6 +1034,36 @@
 
 
 
+
+
+
+
+
+
+
+    async function invite_enable(){
+      let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let rand_str = '';
+        for ( var i = 0; i < 8; i++ ) {
+          rand_str += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        const response = await fetch("/invite_enable", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rand_str, group })
+        });
+        let result = await response.text();
+        console.log(result);
+
+        if (result == 0){
+          invite_code_op.textContent = rand_str
+        }else{
+          invite_code_op.textContent = result
+        }
+
+        invite_toggle.textContent = "リセット＆無効にする"
+    }
 
     async function popup(slot){
       let date = document.getElementById("d" + slot).textContent;
