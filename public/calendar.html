@@ -1030,7 +1030,7 @@
         const response_send = await fetch("/invite_disable", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rand_str, group })
+          body: JSON.stringify({ group })
         });
 
         invite_code_op.textContent = ""
