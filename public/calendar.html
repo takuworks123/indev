@@ -1016,18 +1016,24 @@
           rand_str += chars.charAt(Math.floor(Math.random() * chars.length));
         }
 
-        const response_send = await fetch("/invite_enable", {
+        const response = await fetch("/invite_enable", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ rand_str, group })
         });
+        let result = await response.text();
 
-        invite_code_op.textContent = rand_str
-        invite_toggle.textContent = "無効にする"
+        if (result == 0){
+          invite_code_op.textContent = rand_str
+        }else{
+          invite_code_op.textContent = result
+        }
+        
+          invite_toggle.textContent = "無効にする"
       
 
       }else{
-        const response_send = await fetch("/invite_disable", {
+        const response = await fetch("/invite_disable", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ group })

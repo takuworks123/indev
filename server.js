@@ -206,13 +206,13 @@ serve(async (req) => {
     for (let i = 0; i < invite_code.length; i++){
       let data = invite_code[i].split('@@');
       if (data[0] == requestJson.group){
-        return new Response();
+        return new Response(data[1]);
       }
     }
 
     invite_code.push(requestJson.group + "@@" + requestJson.rand_str);
     console.log(invite_code);
-    return new Response();
+    return new Response('0');
   }
 
   if (req.method === "POST" && pathname === "/invite_disable") {
