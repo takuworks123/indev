@@ -923,6 +923,25 @@
         
         month_op.textContent = year + "年 " + month + "月の予定";
 
+
+
+
+
+        const response_invite = await fetch("/invite_check", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ group })
+        });
+        let result_invite = await response_invite.text();
+
+        if (result_invite == -1){
+          invite_code_op.textContent = ""
+          invite_toggle.textContent = "有効にする"
+        }else{
+          invite_code_op.textContent = result_invite
+          invite_toggle.textContent = "リセット＆無効にする"
+        }
+
         return true;
         
       }else{
@@ -955,24 +974,7 @@
       if (result_reload == false){
         $('#modalArea_group').fadeIn(200); // ポップアップを表示
 
-
       }else{
-
-        const response_invite = await fetch("/invite_check", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ group })
-        });
-        let result_invite = await response_invite.text();
-
-        if (result_invite == -1){
-          invite_code_op.textContent = ""
-          invite_toggle.textContent = "有効にする"
-        }else{
-          invite_code_op.textContent = result_invite
-          invite_toggle.textContent = "リセット＆無効にする"
-        }
-
         await reload();
       }
     }
@@ -989,6 +991,7 @@
         alert("新しくカレンダーを作れませんでした。運営に相談してください");
       }else{
         group = result;
+        await reload();
         $('#modalArea_group').fadeOut(200);
       }
     }
