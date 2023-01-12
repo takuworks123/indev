@@ -17,10 +17,10 @@
   height: 100px;
 }
 
-.calendar tr *:first-child{
+.sunday{
   color: #ff69b4;
 }
-.calendar tr *:last-child{
+.saturday{
   color: #0ba9ea;
 }
 
