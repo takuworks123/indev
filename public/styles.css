@@ -310,7 +310,7 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  right: 2em;
+  left: 2em;
   transform: translateY(-50%);
   width: 40px;
   height: 2px;
