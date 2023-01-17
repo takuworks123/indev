@@ -113,22 +113,6 @@ th.other {
   padding-top: 0px;
 }
 
-button#back{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: 95px;
-  float: right;
-}
-
-button#next{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
 
 h1{
   font-family: "Yu Mincho";
@@ -424,6 +408,14 @@ button{
 
 
 
+
+button#next{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .next {
   display: block;
   position: relative;
@@ -478,10 +470,17 @@ button{
 
 
 
+button#back{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .back {
   display: block;
   position: relative;
-  
+
   padding: 1em 2em;
   width: 300px;
   color: #333;
