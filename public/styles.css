@@ -446,7 +446,7 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  right: 2em;
+  left: 2em;
   transform: translateY(-50%);
   width: 40px;
   height: 2px;
@@ -458,7 +458,7 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  right: calc(2em - 2px);
+  left: calc(2em - 2px);
   transform: translateY(-50%);
   width: 0;
   height: 0;
@@ -475,7 +475,7 @@ button{
 
 .next:hover::before,
 .next:hover::after {
-  right: 1.7em;
+  left: 1.7em;
 }
 
 
