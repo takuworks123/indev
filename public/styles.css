@@ -189,12 +189,10 @@ button#next{
 
   .subject {
     text-align: left;
-    display: inline-block;
   }
 
   .invite {
     text-align: right;
-    display: inline-block;
   }
   
   .titlebar {
