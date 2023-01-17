@@ -275,8 +275,8 @@ button{
   cursor: pointer;
   outline: 0;
   color: #fff;
-  background-color: #6aff56;
-  border-color: #6aff56;
+  background-color: #ff4848;
+  border-color: #ff4848;
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
@@ -290,8 +290,8 @@ button{
 
 .reload:hover {
   color: #fff;
-  background-color: #42cf2f;
-  border-color: #42cf2f;
+  background-color: #b13131;
+  border-color: #b13131;
 }
 
 
