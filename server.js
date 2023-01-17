@@ -67,21 +67,23 @@ serve(async (req) => {
 
   if (req.method === "POST" && pathname === "/join_calendar") {
     const requestJson = await req.json();
+    let sp;
+    sp = await supabase // invite_codeテーブルへ問い合わせ
+      .from('invite_code')
+      .select()
+      .eq( 'code', requestJson.invite_code );
 
-    for (let i = 0; i < invite_codes.length; i++){
-      let data = invite_codes[i].split('@@');
-      if (data[1] == requestJson.invite_code){
+    if (sp.data.length == 1){
+      sp = await supabase // userテーブルへ問い合わせ
+        .from('user')
+        .update({ group: `${sp.data[0].group}`})
+        .eq( 'username', requestJson.username );
 
-        let sp = await supabase // userテーブルへ問い合わせ
-          .from('user')
-          .update({ group: `${data[0]}`})
-          .eq( 'username', requestJson.username );
+      return new Response(sp.data[0].group);
 
-        return new Response(data[0]);
-      }
+    }else{
+      return new Response('-1');
     }
-
-    return new Response('-1');
   }
 
   if (req.method === "POST" && pathname === "/login") {
@@ -237,60 +239,43 @@ serve(async (req) => {
   };
 
   if (req.method === "POST" && pathname === "/invite_check") {
-    console.log("------- CHECK -------");
-    console.log(invite_codes);
     const requestJson = await req.json();
-    for (let i = 0; i < invite_codes.length; i++){
-      let data = invite_codes[i].split('@@');
-      if (data[0] == requestJson.group){
-        console.log(invite_codes);
-        console.log("------- CHECK EXIST -------");
-        return new Response(data[1]);
-      }
+    let sp = await supabase // invite_codeテーブルへ問い合わせ
+      .from('invite_code')
+      .select()
+      .eq('group', requestJson.group);
+
+    if (sp.data.length != 0){
+      return new Response(sp.data[0].code);
+
+    }else{
+      return new Response('-1');
     }
-    console.log(invite_codes);
-    console.log("------- CHECK NOT EXIST -------");
-    return new Response('-1');
   }
 
   if (req.method === "POST" && pathname === "/invite_enable") {
-    console.log("------- ENABLE -------");
-    console.log(invite_codes);
     const requestJson = await req.json();
-    for (let i = 0; i < invite_codes.length; i++){
-      let data = invite_codes[i].split('@@');
-      if (data[0] == requestJson.group){
-        console.log(invite_codes);
-        console.log("------- ENABLE AUREADY -------");
-        return new Response(data[1]);
-      }
-    }
+    let sp = await supabase // invite_codeテーブルへ問い合わせ
+      .from('invite_code')
+      .select()
+      .eq('group', requestJson.group);
 
-    invite_codes[invite_codes.length] = requestJson.group + "@@" + requestJson.rand_str;
-    console.log(invite_codes);
-    console.log("------- ENABLE PUSH -------");
-    return new Response('0');
+    if (sp.data.length != 0){
+      return new Response(sp.data[0].code);
+
+    }else{
+      invite_codes[invite_codes.length] = requestJson.group + "@@" + requestJson.rand_str;
+      return new Response('0');
+    }
   }
 
   if (req.method === "POST" && pathname === "/invite_disable") {
-    console.log("------- DISABLE -------");
-    console.log(invite_codes);
     const requestJson = await req.json();
-    for (let i = 0; i < invite_codes.length; i++){
-      let data = invite_codes[i].split('@@');
+    let sp = await supabase // invite_codeテーブルへ問い合わせ
+      .from('invite_code')
+      .delete()
+      .match({ group: `${requestJson.group}` });
 
-      if (data[0] == requestJson.group){
-        let temp1 = invite_codes, temp2 = invite_codes;
-        temp1 = temp1.slice(0, i);
-        temp2 = temp2.slice(i + 1);
-        invite_codes = temp1.concat(temp2);
-        console.log(invite_codes);
-        console.log("------- DISABLE SUCCESS -------");
-        return new Response();
-      }
-    }
-    console.log(invite_codes);
-    console.log("------- DISABLE ERROR -------");
     return new Response();
   }
 
