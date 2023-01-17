@@ -51,13 +51,14 @@
 
 .cp_iptxt {
 	position: relative;
-	width: 200px;
+	width: 300px;
 	margin: 40px 3%;
 }
 .cp_iptxt input[type='text'] {
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
-	width: 200px;
+	width: 300px;
+  right: 50px;
 	letter-spacing: 1px;
 	padding-left: 4em;
 }
@@ -82,7 +83,7 @@
 }
 .ef:focus ~ .focus_line,
 .cp_iptxt.ef ~ .focus_line {
-	width: 100%;
+	width: 300px;
 	transition: 0.4s;
 }
 .ef ~ label {
@@ -90,7 +91,7 @@
 	z-index: -1;
 	top: 4px;
 	left: 0;
-	width: 100%;
+	width: 300px;
 	transition: 0.3s;
 	letter-spacing: 0.5px;
 	color: #aaaaaa;
