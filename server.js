@@ -237,33 +237,44 @@ serve(async (req) => {
   };
 
   if (req.method === "POST" && pathname === "/invite_check") {
+    console.log("------- CHECK -------");
     console.log(invite_codes);
     const requestJson = await req.json();
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
       if (data[0] == requestJson.group){
+        console.log(invite_codes);
+        console.log("------- CHECK EXIST -------");
         return new Response(data[1]);
       }
     }
+    console.log(invite_codes);
+    console.log("------- CHECK NOT EXIST -------");
     return new Response('-1');
   }
 
   if (req.method === "POST" && pathname === "/invite_enable") {
+    console.log("------- ENABLE -------");
     console.log(invite_codes);
     const requestJson = await req.json();
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
       if (data[0] == requestJson.group){
+        console.log(invite_codes);
+        console.log("------- ENABLE AUREADY -------");
         return new Response(data[1]);
       }
     }
 
-    invite_codes.push(requestJson.group + "@@" + requestJson.rand_str);
+    invite_codes[invite_codes.length] = requestJson.group + "@@" + requestJson.rand_str;
     console.log(invite_codes);
+    console.log("------- ENABLE PUSH -------");
     return new Response('0');
   }
 
   if (req.method === "POST" && pathname === "/invite_disable") {
+    console.log("------- DISABLE -------");
+    console.log(invite_codes);
     const requestJson = await req.json();
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
@@ -274,10 +285,12 @@ serve(async (req) => {
         temp2 = temp2.slice(i + 1);
         invite_codes = temp1.concat(temp2);
         console.log(invite_codes);
+        console.log("------- DISABLE SUCCESS -------");
         return new Response();
       }
     }
-
+    console.log(invite_codes);
+    console.log("------- DISABLE ERROR -------");
     return new Response();
   }
 
