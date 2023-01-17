@@ -26,16 +26,16 @@
 
 th.sunday {
   font-size: 20px;
-  background-color: rgba(215,0,58,0.5);
+  background-color: rgba(215,0,58);
 }
 th.saturday {
   font-size: 20px;
-  background-color: rgba(130,119,255,0.5);
+  background-color: rgba(130,119,255);
 }
 th.other {
   color: #fff;
   font-size: 20px;
-  background-color: rgba(0, 0, 0);
+  background-color: rgb(27, 27, 27);
 }
 
 .day {
