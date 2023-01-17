@@ -114,8 +114,8 @@ body {
 
 .invite{
   position:absolute;	
-  bottom:0px;
-  right:0px;
+  top: 50px;
+  right: 50px;
 }
 
 .invite button{
