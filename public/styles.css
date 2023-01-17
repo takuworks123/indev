@@ -4,6 +4,8 @@
   margin-top: 5px;
   margin-left: 20px;
   margin-right: 20px;
+  width: auto;
+  float: right;
 }
 .calendar th {
   border: 1px solid #000000;
@@ -118,7 +120,7 @@ header{
 .invite{
   position: relative;
   bottom: 50px;
-  
+  margin-right: 50px;
   float: right;
   text-align: right;
   padding-bottom: 0px;
@@ -136,6 +138,7 @@ button#back{
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 95px;
+  float: right;
 }
 .nextmonth{
 display:inline-block;
