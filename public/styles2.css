@@ -57,7 +57,7 @@
 .cp_iptxt input[type='text'] {
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
-	width: 100%;
+	width: 150px;
 	letter-spacing: 1px;
 	padding-left: 4em;
 }
