@@ -30,6 +30,9 @@ th.sunday {
 th.saturday {
   background-color: rgba(130,119,255,0.5);
 }
+th.other {
+  background-color: rgba(170, 170, 170, 0.5);
+}
 
 .day {
   border-collapse: collapse;
