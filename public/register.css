@@ -65,7 +65,7 @@
   }
 
   .input_color {
-    padding: 20px 20px; /*ボックスを大きくする*/
+    border-radius: 3px; /*ボックス角の丸み*/
   }
 
 
