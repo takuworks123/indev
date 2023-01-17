@@ -58,7 +58,6 @@
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
 	width: 300px;
-  right: 50px;
 	letter-spacing: 1px;
 	padding-left: 4em;
 }
@@ -76,7 +75,7 @@
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 0;
+	width: 300px;
 	height: 2px;
 	transition: 0.4s;
 	background-color: #da3c41;
