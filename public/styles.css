@@ -225,6 +225,99 @@ button{
 
 
 
+
+
+
+
+
+
+
+.create_calendar {
+  background: #eee;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 240px;
+  padding: 10px 25px;
+  color: #313131;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+.create_calendar::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border: 2px solid #6bb6ff;
+  transition: 0.2s;
+}
+
+.create_calendar::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+  transform: rotate(45deg);
+}
+
+.create_calendar:hover::before {
+  top: 0;
+  left: 0;
+}
+
+.create_calendar:hover {
+  text-decoration: none;
+  background-color: #b3d9ff;
+}
+
+
+
+
+
+
+
+.join_calendar {
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+	text-align: center;
+	text-decoration: none;
+	width: 120px;
+	margin: auto;
+	padding: 1rem 4rem 1rem 3rem;
+	font-weight: bold;
+	background: #27acd9;
+	color: #fff;
+	border-radius: 100vh;
+	position: relative;
+	transition: 0.5s;
+}
+.join_calendar::before {
+	content: '';
+	width: 7px;
+	height: 7px;
+	border-top: 2px solid #fff;
+	border-right: 2px solid #fff;
+	transform: rotate(45deg);
+}
+.join_calendar:hover {
+	background: #44c6f2;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
 .invite_toggle {
   color: #fff;
   background-color: #eb6100;
@@ -240,7 +333,7 @@ button{
 
 
 
-.comment_ip {
+.textbox {
   width: 300px; /*親要素いっぱい広げる*/
   padding: 8px 0px; /*ボックスを大きくする*/
   font-size: 16px;
