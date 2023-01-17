@@ -58,6 +58,11 @@
   .header{
     margin: auto;
   }
+
+
+  img{
+    background-color: #a9ffe970;
+  }
   
   
   .input_text {
