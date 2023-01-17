@@ -237,6 +237,7 @@ serve(async (req) => {
   };
 
   if (req.method === "POST" && pathname === "/invite_check") {
+    console.log(invite_codes);
     const requestJson = await req.json();
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
@@ -248,6 +249,7 @@ serve(async (req) => {
   }
 
   if (req.method === "POST" && pathname === "/invite_enable") {
+    console.log(invite_codes);
     const requestJson = await req.json();
     for (let i = 0; i < invite_codes.length; i++){
       let data = invite_codes[i].split('@@');
