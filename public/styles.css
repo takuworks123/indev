@@ -485,6 +485,7 @@ button{
 
 
 .back {
+  text-align: left;
   display: block;
   position: relative;
   margin: 0 auto;
