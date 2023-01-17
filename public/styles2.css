@@ -62,7 +62,7 @@
   border: 2px solid #d90429;
   background: #d90429;
 }
-.login {
+.login:hover {
   background: #fff;
   color: #d90429
 }
