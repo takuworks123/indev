@@ -193,7 +193,7 @@ button#next{
     float: right;
   }
   .titlebar {
-    position: fixed;
+    position: relative;
     background-color: #b9fff3; /* 背景を赤色に */
     color:white;               /* 文字を白色に */
     font-weight: bold;          /* 太字にする */
