@@ -55,7 +55,7 @@
   }
   
   
-  input {
+  .input_text {
     width: 50%; /*親要素いっぱい広げる*/
     padding: 10px 15px; /*ボックスを大きくする*/
     font-size: 16px;
