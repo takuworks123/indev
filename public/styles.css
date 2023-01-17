@@ -432,8 +432,8 @@ button{
 .next {
   display: block;
   position: relative;
-  margin: 0 0 0 auto;
-  padding: 1em 2em;
+  margin: 0 auto;
+  padding: 1em 1em;
   width: 300px;
   color: #333;
   font-size: 18px;
@@ -486,8 +486,8 @@ button{
 .back {
   display: block;
   position: relative;
-  margin: 2em auto;
-  padding: 1em 2em;
+  margin: 0 auto;
+  padding: 1em 1em;
   width: 300px;
   color: #333;
   font-size: 18px;
