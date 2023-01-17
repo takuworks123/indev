@@ -322,14 +322,14 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  left: calc(2em + 2px);
+  left: calc(2em - 2px);
   transform: translateY(-50%);
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 6px 0 6px 10px;
   border-color: transparent transparent transparent #333333;
-  transition: -0.3s;
+  transition: 0.3s;
 }
 
 .back:hover {
