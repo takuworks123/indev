@@ -191,12 +191,9 @@ button#next{
     display: inline-block;
   }
   
-  .subject {
-    margin-right: auto;
-  }
-  
   .titlebar {
     display: flex;
+    justify-content: space-between;
   }
   
   
