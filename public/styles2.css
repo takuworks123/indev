@@ -51,7 +51,7 @@
 
 .cp_iptxt {
 	position: relative;
-	width: 80%;
+	width: 50%;
 	margin: 40px 3%;
 }
 .cp_iptxt input[type='text'] {
@@ -67,7 +67,7 @@
 .ef {
 	padding: 4px 0;
 	border: 0;
-	border-bottom: 0px solid #1b2538;
+	border-bottom: 1px solid #1b2538;
 	background-color: transparent;
 }
 .ef ~ .focus_line {
