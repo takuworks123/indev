@@ -327,7 +327,7 @@ button{
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 6px 0 6px 10px;
+  border-width: 6px 10px 6px 0;
   border-color: transparent transparent transparent #333333;
   transition: 0.3s;
 }
