@@ -51,13 +51,13 @@
 
 .cp_iptxt {
 	position: relative;
-	width: 150px;
+	width: 200px;
 	margin: 40px 3%;
 }
 .cp_iptxt input[type='text'] {
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
-	width: 150px;
+	width: 200px;
 	letter-spacing: 1px;
 	padding-left: 4em;
 }
