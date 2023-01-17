@@ -48,23 +48,23 @@
 
 
 .login {
-  border-radius: 3px;
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
   position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 220px;
-  padding: 10px 25px;
-  color: #FFF;
-  transition: 0.3s ease-in-out;
-  font-weight: 600;
-  background: rgb(149,202,252);
-  background: linear-gradient(270deg, rgba(149,202,252,1) 0%, rgba(107,182,255,1) 100%);
+  display: inline-block;
+  outline: none;
+  border-radius: 20px;
+  border: 2px solid #d90429;
+  background: #d90429;
 }
-.login:hover {
-  background: rgb(117,188,255);
-  background: linear-gradient(270deg, rgba(117,188,255,1) 0%, rgba(62,159,252,1) 100%);
+.login {
+  background: #fff;
+  color: #d90429
 }
 
 
