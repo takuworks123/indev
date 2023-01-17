@@ -121,11 +121,6 @@ button#back{
   margin-left: 95px;
   float: right;
 }
-.nextmonth{
-  display: inline-block;
-  display: flex;
-  justify-content: space-around;
-}
 
 button#next{
   padding-top: 5px;
@@ -432,7 +427,7 @@ button{
 .next {
   display: block;
   position: relative;
-  margin: 0 auto;
+  margin: 0 0 0 auto;
   padding: 1em 2em;
   width: 300px;
   color: #333;
