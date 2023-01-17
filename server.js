@@ -264,7 +264,10 @@ serve(async (req) => {
       return new Response(sp.data[0].code);
 
     }else{
-      invite_codes[invite_codes.length] = requestJson.group + "@@" + requestJson.rand_str;
+      let sp1 = await supabase // invite_codeへデータ挿入
+        .from('invite_code')
+        .insert({ group: `${requestJson.group}`, code: `${requestJson.rand_str}` });
+        
       return new Response('0');
     }
   }
