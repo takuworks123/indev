@@ -58,6 +58,7 @@
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
 	width: 100%;
+	border: 0;
 	letter-spacing: 1px;
 	padding-left: 4em;
 }
