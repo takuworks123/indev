@@ -33,8 +33,9 @@ th.saturday {
   background-color: rgba(130,119,255,0.5);
 }
 th.other {
+  color: #fff;
   font-size: 20px;
-  background-color: rgba(170, 170, 170, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .day {
