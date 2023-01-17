@@ -339,5 +339,5 @@ button{
 
 .back:hover::before,
 .back:hover::after {
-  right: 1.7em;
+  left: 1.7em;
 }
