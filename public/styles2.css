@@ -54,6 +54,11 @@ body{
 }
 
 
+header{
+  text-align: center;
+}
+
+
 input {
   width: 50%; /*親要素いっぱい広げる*/
   padding: 10px 15px; /*ボックスを大きくする*/

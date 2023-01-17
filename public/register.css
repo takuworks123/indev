@@ -53,6 +53,11 @@
     width: 1000px;
     margin: auto;
   }
+
+
+  header{
+    text-align: center;
+  }
   
   
   .input_text {
