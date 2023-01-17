@@ -409,6 +409,11 @@ button{
 
 
 
+.change_month{
+  display: flex;
+  justify-content: space-around;
+}
+
 button#next{
   padding-top: 5px;
   padding-bottom: 5px;
