@@ -432,7 +432,7 @@ button{
 .next {
   display: block;
   position: relative;
-  margin: 0 0 0 auto;
+  margin: 0 0 2em auto;
   padding: 1em 2em;
   width: 300px;
   color: #333;
