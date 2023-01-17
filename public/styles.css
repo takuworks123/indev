@@ -187,16 +187,15 @@ button#next{
   }
   
   .subject {
-    text-align: left;  /* 文章を左寄せする(※) */
-    float: left;     /* 左端に寄せて、後続を右側へ回り込ませる */
+    float: left;
   }
   .invite {
-    text-align: right; /* 文章を右寄せする */
+    float: right;
   }
   .titlebar {
     background-color: #b9fff3; /* 背景を赤色に */
     color:white;               /* 文字を白色に */
-    font-weight:bold;          /* 太字にする */
+    font-weight: bold;          /* 太字にする */
   }
   
   
