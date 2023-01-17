@@ -1948,10 +1948,12 @@
 
       if (comment.includes('||') || comment.includes('@@')){
         alert('使用できない記号が含まれています');
+      }else if (comment == ""){
+        alert('予定の内容を記入してください');
       }else{
 
         if (sche_start == ""){
-          alert("日付を設定してください");
+          alert("日付を記入してください");
         }else{
 
           if (sche_end == ""){
