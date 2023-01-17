@@ -48,8 +48,8 @@
   <input class="comment_ip" id="comment_ip" type="text" placeholder="予定の内容" />
   <input class="sche_start_ip" id="sche_start_ip" type="datetime-local" />
   <!-- <input id="sche_end_ip" type="datetime-local" /> -->
-  <button id="submit">送信</button>
-  <button id="update">更新</button>
+  <button class="submit" id="submit">送信</button>
+  <button class="reload" id="reload">更新</button>
   </div>
   <div class="nextmonth">
     <button class="back" id="back">前の月</button>
@@ -1908,7 +1908,7 @@
       }
     }
 
-    document.querySelector("#update").onclick = async (event) => {
+    document.querySelector("#reload").onclick = async (event) => {
       await reload();
     }
 
