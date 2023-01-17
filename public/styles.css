@@ -430,9 +430,10 @@ button{
 
 
 .next {
+  text-align: right;
   display: block;
   position: relative;
-  margin: auto 0;
+  margin: 0 auto;
   padding: 1em 2em;
   width: 300px;
   color: #333;
@@ -487,7 +488,7 @@ button{
   display: block;
   position: relative;
   margin: 0 auto;
-  padding: 0em 2em;
+  padding: 1em 2em;
   width: 300px;
   color: #333;
   font-size: 18px;
