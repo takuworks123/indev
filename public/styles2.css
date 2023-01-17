@@ -68,6 +68,7 @@
   outline: none;
 	padding: 4px 0;
 	border: 0;
+  width: 300px;
 	border-bottom: 1px solid #1b2538;
 	background-color: transparent;
 }
@@ -75,7 +76,7 @@
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 300px;
+	width: 0;
 	height: 2px;
 	transition: 0.4s;
 	background-color: #da3c41;
