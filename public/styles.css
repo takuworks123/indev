@@ -434,7 +434,7 @@ button{
   position: relative;
   margin: 0 auto;
   padding: 1em 2em;
-  left: 300px;
+  width: 300px;
   color: #333;
   font-size: 18px;
   font-weight: 700;
@@ -446,7 +446,7 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  left: 2em;
+  right: 2em;
   transform: translateY(-50%);
   width: 40px;
   height: 2px;
@@ -458,7 +458,7 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  left: calc(2em - 2px);
+  right: calc(2em - 2px);
   transform: translateY(-50%);
   width: 0;
   height: 0;
@@ -475,7 +475,7 @@ button{
 
 .next:hover::before,
 .next:hover::after {
-  left: 1.7em;
+  right: 1.7em;
 }
 
 
