@@ -1321,6 +1321,9 @@
 
     // 日付をクリックでpopup関数が起動
     $(function () {
+      $('#d24').click(async function(){ await popup_day(24); $('#modalArea23').fadeIn(200); });
+      $('#closeModal23 , #modalBg23').click(function(){ $('#modalArea23').fadeOut(200); });
+
       $('#d24').click(async function(){ await popup_day(24); $('#modalArea24').fadeIn(200); });
       $('#closeModal24 , #modalBg24').click(function(){ $('#modalArea24').fadeOut(200); });
 
@@ -1336,6 +1339,12 @@
 
 
     // ポップアップの削除ボタンを押すとdeleteSche関数が起動
+    document.querySelector("#delete23_1").onclick = async (event) => { await deleteSche(24, 1) };
+    document.querySelector("#delete23_2").onclick = async (event) => { await deleteSche(24, 2) };
+    document.querySelector("#delete23_3").onclick = async (event) => { await deleteSche(24, 3) };
+    document.querySelector("#delete23_4").onclick = async (event) => { await deleteSche(24, 4) };
+    document.querySelector("#delete23_5").onclick = async (event) => { await deleteSche(24, 5) };
+
     document.querySelector("#delete24_1").onclick = async (event) => { await deleteSche(24, 1) };
     document.querySelector("#delete24_2").onclick = async (event) => { await deleteSche(24, 2) };
     document.querySelector("#delete24_3").onclick = async (event) => { await deleteSche(24, 3) };
