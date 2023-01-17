@@ -1869,13 +1869,18 @@
       group = data[1];
       colorID = data[2];
 
-      let result_reload = await reload();
-      
-      if (result_reload == false){
-        $('#modalArea_group').fadeIn(200); // ポップアップを表示
+      if (group == undefined){
+        location.href = 'login.html';
 
       }else{
-        await reload();
+        let result_reload = await reload();
+        
+        if (result_reload == false){
+          $('#modalArea_group').fadeIn(200); // ポップアップを表示
+
+        }else{
+          await reload();
+        }
       }
     }
 
