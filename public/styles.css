@@ -224,6 +224,24 @@ button{
 
 
 
+.invite_toggle {
+  color: #fff;
+  background-color: #eb6100;
+}
+.invite_toggle:hover {
+  color: #fff;
+  background: #f56500;
+}
+
+invite_toggle {
+  border-radius: 100vh;
+}
+
+
+
+
+
+
 .comment_ip {
   width: 300px; /*親要素いっぱい広げる*/
   padding: 8px 0px; /*ボックスを大きくする*/
