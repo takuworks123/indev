@@ -322,8 +322,8 @@ button{
   content: '';
   position: absolute;
   top: 50%;
-  right: calc(2em - 2px);
-  transform: translateY(50%);
+  right: calc(2px);
+  transform: translateY(-50%);
   width: 0;
   height: 0;
   border-style: solid;
