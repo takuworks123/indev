@@ -50,13 +50,13 @@
 
   body{
     padding: 0px 15px;
-    width: 1300px;
+    width: 1500px;
     margin: auto;
   }
 
 
   .header{
-    text-align: center;
+    padding: 0px 300px;
   }
   
   
