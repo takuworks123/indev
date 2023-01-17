@@ -290,8 +290,8 @@ button{
   border-radius: 5px;
   border: none;
   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
-  background: #212529;
-    z-index: 1;
+  background: #4433ff;
+ z-index: 1;
 }
 .join_calendar:hover:after {
   width: 100%;
@@ -307,7 +307,7 @@ button{
   z-index: -1;
   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
   transition: all 0.3s ease;
-  background-color: #343a40;
+  background-color: #3a86ff;
   right: 0;
 }
 .join_calendar:active {
