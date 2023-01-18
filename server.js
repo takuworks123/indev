@@ -5,11 +5,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@1.34.0';
 let url = 'https://ekzwclcfheomwmnteywk.supabase.co';
 let anon_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVrendjbGNmaGVvbXdtbnRleXdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njc1NzE2NjQsImV4cCI6MTk4MzE0NzY2NH0.5ZeHJT23ZrIzOWJQtP4AncFpqCMp-lB2xbxXF592zpg';
 const supabase = createClient(url, anon_key);
-let obj;
-let main_obj;
 
 let login_checks = [];
-let invite_codes = [];
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -281,34 +278,6 @@ serve(async (req) => {
 
     return new Response();
   }
-
-
-
-
-
-
-
-
-
-  //　コーディネート初期化
-  if (req.method === "GET" && pathname === "/reset_obj") {
-    main_obj = await supabase.from('calendar').select().rangeGt('sche_start', '[2022-11-01 00:00, 2022-11-01 00:00)');
-  }
-
-  // データベース更新確認
-  async function base_select() {
-    main_obj = await supabase.from('calendar').select().rangeGt('sche_start', '[2022-11-01 00:00, 2022-11-01 00:00)');
-    return main_obj;
-  };
-
-  // 現在の投稿数を確認
-  if (req.method === "GET" && pathname === "/code_info") {
-    obj = await base_select();
-    if (obj.error == null) {
-      let max_id = obj.data.length-1;
-      return new Response(max_id);
-    }
-  };
 
 
 
